@@ -1,0 +1,561 @@
+---
+title: "Diskursanalyse"
+subtitle: "Metode 3"
+author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
+institute: Institut for Statskundskab<br>Københavns Universitet
+date: "Uge 8"
+output:
+  xaringan::moon_reader:
+    css: "style.css"
+    self_contained: true
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countincrementalSlides: false
+---
+
+```{r, include=F}
+uge_nr <- 8
+
+pacman::p_load(tidyverse, ggdag)
+knitr::opts_chunk$set(echo = FALSE, fig.align = "center", fig.retina = 3, fig.height = knitr::opts_chunk$get("fig.width")/2)
+
+pacman::p_load(tidyverse, lubridate, kableExtra)
+Sys.setlocale(locale = "da_DK.UTF-8")
+```
+
+# I dag
+
+- Velkommen - hvem er vi og hvad skal vi?
+
+- Snakke lidt om forelæsningerne og diskursanalyse helt bredt
+
+- Øvelsesopgaver
+
+---
+
+# Holdtimerne
+
+```{r plan}
+
+start_date <- ymd("2021-02-11")
+a_dates <- start_date+7*0:14
+b_dates <- (start_date+1)+7*0:14
+
+tibble(Uge = 6:20, 
+       `Dato (holdtimer)` = tolower(paste0(day(a_dates),
+                                           "-", 
+                                           day(b_dates),
+                                           " ", 
+                                           format(a_dates, "%B %Y"))), 
+       Emne = c("Kvantitativ indholdsanalyse",
+                "Diskursanalyse I",
+                "Diskursanalyse II",
+                "interaktioner og modelspecifikation",
+                "Logistisk regression",
+                "Multilevel analyse",
+                "Kausal inferens I: Designbaseret inferens",
+                "Kausal inferens II: Paneldata",
+                "Påskeferie",
+                "Kausal inferens III: Eksperimentelle designs",
+                "Kausal inferens IIII: Regression Discontinuity (RD)",
+                "Social Data Science: Big Data",
+                "Process tracing",
+                "Kriterier for god videnskab",
+                "Opsamling/spørgetime"), 
+       `Øvelsesopgave` = c(1:8, "", 9:14)) %>%
+  mutate(`Dato (holdtimer)` = ifelse(Uge %in% c(6,7,12,14,16,17,19,20), "", `Dato (holdtimer)`)) %>% 
+  kable("html", 
+        align = c("c", "c", "l", "c"),
+        escape = F,
+        table.attr = "style=\"line-height: 100%;\"") %>% 
+  kable_styling(font_size = 16,
+                bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>% 
+  row_spec(9, bold = F, color = "grey") %>% 
+  row_spec(uge_nr-5, bold = T, color = "white", background = "#8b2325")
+```
+
+---
+
+# Præsentation
+
+**Mig**
+
+- Søren Damsbo-Svendsen
+
+- Startede på ifs i 2013
+
+- Ph.d.-studerende siden 2020
+
+- Forskning: Holdningsdannelse på klimaområdet med fokus på personlige klima- og vejrerfaringer
+
+- Faglige interesser: Politisk adfærd og holdningsdannelse, kvantitative metoder, data science og kausal inferens
+
+- Skriv til mig med spørgsmål på [sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
+
+---
+
+# Præsentation
+
+**Jer**
+
+- Hurtig runde:
+
+    - Navn
+
+    - Yndlingsfag på uni hidtil
+
+    - Evt. random fact, der siger alt om hvem I er
+
+--
+    
+- Hvad har I lært tidligere på de andre metodefag? 
+
+---
+
+# Hvad skal holdundervisningen?
+
+1. Recap af de vigtigste pointer fra forelæsning og pensum
+
+2. Mere anvendelse: Øvelsesopgaver, diskussioner og mere praktiske overvejelser.
+
+3. Mere frit rum til at diskutere, reflektere, hjælpe hinanden og stille de dumme spørgsmål (som i virkeligheden er de gode spørgsmål)
+
+---
+
+# Undervisningsform
+
+- Zoom med break-out rooms og hele baduljen (forhåbentlig fysisk/kombineret senere)
+
+- Live sessions! (video på som hovedregel, især fra start og i grupper, forståelse for undtagelser)
+
+- Forsøg på mindre bidder med flere pauser
+
+- Klart formål både med hver lektion og med timerne (vi er her for at lære, ikke teste hinandens viden)
+
+- Recap
+
+- Diskussion og øvelse
+
+---
+
+# Lad os snakke lidt om forventninger
+
+Hvad forventer jeg af jer?
+
+- At I er her for jeres egen skyld: 
+
+    - Generelt er forberedte mht. læsning og øvelsesopgaver
+    - Deltager i undervisningen
+
+Hvad er jeres forventninger til faget, holdtimerne og mig?
+
+---
+
+---
+class: title-slide, center, middle
+
+# Diskursanalyse
+
+---
+
+# Pensum
+
+- Hansen, L. (2006). Security as practice: Discourse analysis and the Bosnian war. Routledge. Kapitel 2+3.
+
+- Mik-Meyer, N. (2016). Othering, ableism and disability: A discursive analysis of co-workers’ construction of colleagues with visible impairments. human relations, 69(6), 1341-1363.
+
+---
+
+# Formålet med i dag
+
+- At forstå hvad en diskurs og diskursanalyse er
+
+- At forstå hvilket fundamantet (ontologi og andre grundantagelser), diskursanalyse hviler på og dermed også, hvordan det adskiller sig fra andre metoder
+
+- At have en idé om, hvor man kan begynde i praksis
+
+---
+
+# Forelæsningen
+
+- Hvad var det vigtigste, I lærte til forelæsningerne? 
+
+- Hvad er en diskurs?
+
+- 5 min. 
+
+---
+
+# Hvad er en diskurs?
+
+- ”*a discursive formation can be defined as ’a system of dispersion [whenever] between objects, types of statement, concepts, or thematic choices’, which form ’a regularity’ (an order, correlations, positions and functionings, transformations)*” -Foucault, citeret i Hansen (2006: 17)
+
+- ”*Language is, argues Derrida, a system of differential signs, and meaning is established not by the essence of a thing itself but through a series of juxtapositions, where one element is valued over its opposite*” (Hansen 2006: 17)
+
+- Diskurser skaber mening via sproglige differentieringer (strukturer), der i større eller mindre grad bliver taget for givet som sande og objektive og dermed får karakter af fakta.
+
+---
+
+# Ontologi
+
+**Hvad betyder ontologi?**
+- Ontologi: Læren om det værende, dvs. hvad 'virkeligheden' består af. 
+
+Diskursanalyse hviler på en række grundlæggende **antagelser** - ligesom alt andet forskning.
+
+**Den centrale ontologiske antagelse i diskursanalyse:**
+- Politik og identitet er gensidigt konstituerende ... gennem diskursive processer (sproget, billeder, lyd, film).
+
+---
+layout: true
+
+# Sprogets ontologi - antagelser
+
+---
+
+1. **Det er gennem sproget at ’ting’ opnår mening - og dermed identitet**
+- ingen objektiv eller sand mening, som ligger uden for en ’tings’ sproglige repræsentation
+- ideer og materialitet har ingen meningsfuld forekomst uafhængigt af hinanden.
+
+---
+
+1. Det er gennem sproget at ’ting’ opnår mening - og dermed identitet
+
+2. **Sproget er ikke et neutralt redskab - det er intrinsisk socialt og politisk**
+- Socialt: Sproget er indlejret i et specifikt fællesskab og en historie, der former det.
+- Dvs. et system af historisk specifikke kollektive koder og konventioner - som individer socialiseres ind i og anvender for at gøre sig forst˚ aelige.
+- Politisk: Sproget producerer og reproducerer bestemte identiteter - disse muliggør og umuliggør forskellige handlinger (og dermed politiker).
+
+3. Sproget er strukturerende og ustabilt på en og samme tid.
+- Diskurser vil altid forsøge at etablerer/stabiliserer sig - men der er altid mulighed for at deres sproglige konstitution udfordres.
+
+---
+
+1. Det er gennem sproget at ’ting’ opnår mening - og dermed identitet
+
+2. Sproget er ikke et neutralt redskab - det er intrinsisk socialt og politisk
+
+3. **Sproget er strukturerende og ustabilt på en og samme tid**
+- Diskurser vil altid forsøge at etablerer/stabiliserer sig, men der er altid mulighed for at deres sproglige konstitution udfordres.
+
+---
+layout: false
+
+# identitet
+
+**Hvad er identitet?**
+
+- ”To say that meaning is constructed through the discursive juxtaposition between a privileged sign on the one hand and a devaluated sign one on the other leads to a conceptualization of identity in relational terms and as being constructed along two dimensions” Hansen (2006: 17)
+
+- ”Although the two processes can be seperated analytically, it is important to stress that they are both part and parcel of the process of identity construction and enacted simultaneously” (Hansen 2006: 17).
+
+- **identitet er relationelt**: Skabes af simultan positiv og negativ afgrænsning af identitet
+
+---
+layout: true
+
+# Linking og differentiering
+
+---
+
+.pull-left[
+Forklar disse figurer til din sidemakker. Hvad er forskellen? 
+
+- Brug gerne begreberne **linking** og **differentiering**
+
+```{r, echo=F, out.width="100%", fig.align="center"}
+knitr::include_graphics("media/discourse_linkdiff2.png")
+```
+]
+
+.pull-right[
+```{r, echo=F, out.height="80%", out.width="80%", fig.align="center"}
+knitr::include_graphics("media/discourse_linkdiff1.png")
+```
+]
+
+---
+
+.pull-left[
+Forklar disse figurer til din sidemakker. Hvad er forskellen? 
+
+- Pointe: Sproget skaber identiteter gennem linking og differentiering
+
+- Positiv og negativ afgrænsning
+
+- Skal positiv og negativ her forstås i deskriptiv eller normativ forstand?
+
+]
+
+.pull-right[
+```{r, echo=F, out.height="80%", out.width="80%", fig.align="center"}
+knitr::include_graphics("media/discourse_linkdiff1.png")
+```
+]
+
+---
+layout: false
+
+# Diskursiv epistemologi
+
+Epistemologi (erkendelseslære): Hvordan opnår vi viden om verden?
+
+En diskursanalytikers svar ville være:
+
+- Ved at studere, hvordan identiteter både konstituerer og er et produkt af politik i en specifik historisk kontekst 
+
+--
+
+Hvorledes?
+
+--
+
+- Læsning af tekster i bred forstand (her bevæger vi os ind på metodologiens område)
+
+- Vi skal rette opmærksomheden mod hvordan identitet og politik artikuleres - verbalt som non-verbalt
+
+---
+layout: true
+
+# Diskurser og kausalitet
+
+Snak sammen:
+
+1. Kan vi sammenligne diskursers forklaringskraft med andre forklaringer?
+
+2. Kan vi estimere effekten af en given diskursivt konstrueret identitet på gennemført politik? 
+
+3. Hvad ville Lene Hansen mon sige?
+
+***
+
+---
+---
+
+Ad 1: Der er ikke noget uden for diskursen. Derfor giver det ikke mening at sondre mellem diskursiv forklaring og andre forklaringer.
+
+---
+
+Ad 2: Politik og diskurs er gensidigt konstituerende og hænger altså sammen i et system. Derfor er det ikke muligt at opdele i uafhængig og afhængig variabel og estimere effekt af den første på den anden.
+
+---
+
+Diskursanalyse er generelt kritisk over kausalitet – men: der forudsættes agens og intentionalitet ved produktion af diskurser (der er aktører med intentioner om at koble identitet og politik for at kunne handle på en bestemt måde). Poststrukturalisme vil dog ikke adskille aktøren og dennes artikulation (”hvorfor” versus ”hvad muliggør”).
+
+---
+
+Det hele falder tilbage til ontologien: ”*Causal epistemology cannot, however, establish its privilege through reference to any objective truth as its own criterion for truth is enshrined within a historically situated discourse of knowledge, not in a trans-historical, trans-discursive universal objectivity*” Hansen (2006: 25).
+
+---
+layout: false
+
+# Methodology of reading
+
+- Vi læser og fortolker tekster kvalitativt – ingen kvantificering (surprise).
+
+- Det vigtige er konteksten og dens konnotative indhold.
+
+---
+layout: true
+
+# Fremgangsmåde (1-6)
+
+---
+
+## Trin 1: Hvilket emne/problemfelt og relaterede ”key events” ønsker du at undersøge?
+
+- Tabel 4.2 fra Hansen (2006) kap. 4 er god inspiration. 
+
+Eksempler:
+
+- Global krig mod terror
+
+- Fremstilling af muslimske kvinder
+
+- Opfattelse af personer med handicap på arbejdspladsen
+
+---
+
+## Trin 2: Orientér dig bredt i relevant litteratur
+
+- Giver overblik over diskursivt felt, de centrale modsætninger og etablerede forståelser (feltets common sense).
+
+- På baggrund af den indledende læsning, kan basisdiskurser danne grundlag for yderligere tekstudvælgelse
+
+---
+
+## Trin 3: Udvælg dernæst nogle centrale tekster,som analyseres grundigt
+
+- Figur 5.1 fra Hansen (2006) kap. 5 er god inspiration.
+
+---
+
+## Trin 4: Spørg dig selv: Hvilke og hvor mange forskellige modsætninger mellem ”os” og ”dem” (diskursive dikotomier) artikuleres i materialet?
+
+- Tænk i linking og differentiering.
+
+- Der kan være ﬂere ”os” og ”dem” på spil.
+
+- Linking og differentiering er ikke altid eksplicit
+
+- Graden af ”anderledeshed” varierer (f.eks. nordisk identitet).
+
+- Stærkt rodfæstede diskurser overﬂødiggør konstruktion af identitet.
+
+- Hav blik for dynamikker: identiteter kan få og miste betydning over tid (dis/appearance).
+
+---
+
+## Trin 5: På hvilke dimensioner konstitueres repræsentationer af ”os” og ”dem”?
+
+- Spatial: Grænsedragning i rum - også abstrakte rum.
+
+- Temporal: Differentiering mht. potentiale, udvikling, progression, stagnation mv.
+
+- Etisk: Hvor placeres ansvaret for at handle?
+
+- F.eks. konstruktion af nationalstaten.
+
+---
+
+## Trin 6: Hvilke ”revner” og ”sprækker” i diskurserne kan identifieres?:
+
+- Hvordan udfordres og testes eksisterende forståelser af virkeligheden?
+
+- Hvilke politiske reaktioner afføder oppositionen: afvisning eller tilpasning?
+
+---
+layout: false
+
+# Anything goes? Nej.
+
+Hvad er en god diskursanalyse?
+
+- ikke ”anything goes”: Tekster kan fejllæses, og analysers kvalitet kan diskuteres.
+- Men: Tekster kan læses på mange måder (”The multiple readability of texts”).
+
+Lidt a la positivisters sondring mellem systematiske og tilfældige målefejl.
+
+---
+
+# Så lad os da øve
+
+Lad os kigge på øvelsesopgaverne
+
+- Først denne uges øvelsesopgave vedr. asyl til homoseksuelle (øvelsesopgave 4)
+
+Og hvis der er tid:
+
+- Sidste uges øvelsesopgave vedr. CP Danmark (øvelsesopgave 3).
+
+---
+
+# Øvelsesopgave 4
+
+Læs “Dianas” debatindlæg og snak sammen om følgende spørgsmål:
+
+1. Hvilke sproglige betegnere er væsentlige for hendes identitet? Hvilke tidslige rum placeres disse betegnere inden for?
+
+2. Hvilke “forskelsrelationer” har “Diana” oplevet, at hendes identitet er blevet konstitueret igennem i Uganda?
+
+3. Hvilke handlinger har disse forskelsrelationer udløst?
+
+4. Hvorledes beskrives mødet med LGBT Asylum?
+
+5. Hvorfor har “Diana” ikke fået asyl?
+
+---
+
+# Øvelsesopgave 4
+
+Læs afgørelsen fra Flygtningenævnet og snak sammen om følgende spørgsmål:
+
+1. Hvilken identitet har “Diana” ifølge Flygtningenævnet?
+
+2. Hvilke konsekvenser har “Dianas” identitet haft, da hun levede i Uganda?
+
+3. Hvorfor tilkendes “Diana” ikke asyl?
+
+4. De to tekster artikulerer henholdsvis en personlig og en juridisk diskurs, hvilken af dem giver det mest korrekte billede af de trusler, “Diana” står overfor, hvis hun vender tilbage til Uganda?
+
+---
+
+# Øvelsesopgave 3
+
+i 2019 skiftede spastikerforeningen navn til "CP Danmark". Baggrunden er beskrevet på foreningens hjemmeside.
+
+1. Hvorfor er det ifølge foreningen selv vigtigt at skifte navnet? Besvar spørgsmålet med inddragelsen af begreberne “sproglig betegner” (“sign”) og “linking” og “differentiering” (Hansen 2).
+
+2. Hvorfor har der også været modstand mod beslutningen?
+
+3. Mik-Meyer analyserer også den diskursive konstituering af kollegaer med CP: 
+– Hvilke metodiske/analytiske valg træffer Mik-Meyer i designet af sin diskursanalyse (s. 1346-48)?
+- Er der nogle af disse, som det kunne være interessant at få uddybet?
+
+---
+
+# Refleksioner
+
+Et ontologisk paradoks?
+
+- Hvis intet er ”sandt i sig selv”, er dette vel en universel kendsgerning i sig selv?
+
+instrumentalisme?
+
+- Københavnerskolen (og Lene for så vidt) har en instrumentel opfattelse af diskurser.
+
+Replikerbarhed?
+
+- Kan man genskabe en diskursanalyse, eller er resultaterne altid ”analytikerafhængige”? &rarr; klare krav om transparans
+
+---
+
+# Antagelser generelt
+
+Det er altid væsentligt at vurdere antagelserne bag forskning. Det er meget ofte ”the soft spot”, men husk:
+
+- Forskere ved godt, at de gør sig antagelser
+
+- Antagelser er nødvendige for at bedrive forskning.
+
+- Derfor: Glem ikke, at vurdere en metode på baggrund af dens præmisser
+
+- Herudover: Tænk over, hvad metoden har til formål
+
+---
+
+# Opsummering
+
+- Diskurser er et system af tegn, der konstituerer identiteter via linking og differentiering.
+
+- Identitet og politik er gensidigt konstituerende: Diskurser muliggør politik, der reproducerer diskurser.
+
+- Vi studerer diskurser gennem kvalitative data i bred forstand.
+
+- Diskursanalyse afdækker, hvordan diskurser konstituerer identiteter og dermed legitimerer politik i en given kontekst, og hvordan modfortælllinger udfordrer de dominerende repræsentationer.
+
+- Diskursanalyse er baseret på poststrukturalismens dobbeltpointe: at sprog skaber virkelighed, men at enhver sproglig konstruktion altid er foreløbig og ustabil.
+
+---
+
+# Hvis man har fået blod på tanden 
+
+Hansen, Lene. (2006). Security as practice: Discourse analysis and the Bosnian war. Routledge.
+
+- Lidt af en koran/tora/bibel ift. diskursanalyse – særligt indenfor iP (dog ikke eksklusivt)
+
+- Kapitel 4 og 5 handler specifikt om udvælgelse af tekster og design af diskursanalyse.
+
+Adler-Nissen, Rebecca, Katrine Emilie Andersen og Lene Hansen. (2020). images, emotions, and international politics: the death of Alan Kurdi. Review of international Studies, Vol. 46(1), s. 75-95 
+
+- Omhandler billeders betydning i international politik
+
+---
+
+# Næste gang
+
+---
+
+# Tak for i dag!

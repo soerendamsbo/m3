@@ -1,0 +1,91 @@
+---
+title: "Kausal inferens III: Eksperimentelle designs"
+subtitle: "Metode 3"
+author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
+institute: Institut for Statskundskab<br>Københavns Universitet
+date: "Uge 15"
+output:
+  xaringan::moon_reader:
+    css: "style.css"
+    self_contained: true
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countincrementalSlides: false
+---
+
+```{r, include=F}
+uge_nr <- 15
+
+pacman::p_load(tidyverse, ggdag)
+knitr::opts_chunk$set(echo = FALSE, fig.align = "center", fig.retina = 3, fig.height = knitr::opts_chunk$get("fig.width")/2)
+
+pacman::p_load(tidyverse, lubridate, kableExtra)
+Sys.setlocale(locale = "da_DK.UTF-8")
+```
+
+# I dag
+
+
+---
+
+# Holdtimerne
+
+```{r plan}
+
+start_date <- ymd("2021-02-11")
+a_dates <- start_date+7*0:14
+b_dates <- (start_date+1)+7*0:14
+
+tibble(Uge = 6:20, 
+       `Dato (holdtimer)` = tolower(paste0(day(a_dates),
+                                           "-", 
+                                           day(b_dates),
+                                           " ", 
+                                           format(a_dates, "%B %Y"))), 
+       Emne = c("Kvantitativ indholdsanalyse",
+                "Diskursanalyse I",
+                "Diskursanalyse II",
+                "interaktioner og modelspecifikation",
+                "Logistisk regression",
+                "Multilevel analyse",
+                "Kausal inferens I: Designbaseret inferens",
+                "Kausal inferens II: Paneldata",
+                "Påskeferie",
+                "Kausal inferens III: Eksperimentelle designs",
+                "Kausal inferens IIII: Regression Discontinuity (RD)",
+                "Social Data Science: Big Data",
+                "Process tracing",
+                "Kriterier for god videnskab",
+                "Opsamling/spørgetime"), 
+       `Øvelsesopgave` = c(1:8, "", 9:14)) %>%
+  mutate(`Dato (holdtimer)` = ifelse(Uge %in% c(6,7,12,14,16,17,19,20), "", `Dato (holdtimer)`)) %>% 
+  kable("html", 
+        align = c("c", "c", "l", "c"),
+        escape = F,
+        table.attr = "style=\"line-height: 100%;\"") %>% 
+  kable_styling(font_size = 16,
+                bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>% 
+  row_spec(9, bold = F, color = "grey") %>% 
+  row_spec(uge_nr-5, bold = T, color = "white", background = "#8b2325")
+```
+
+---
+
+---
+
+# Opsummering
+
+
+---
+
+# Hvis man har fået blod på tanden 
+
+---
+
+# Næste gang
+
+---
+
+# Tak for i dag!
