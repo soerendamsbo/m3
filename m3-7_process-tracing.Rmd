@@ -1,6 +1,8 @@
 ---
 title: "Process tracing"
-subtitle: "Metode 3"
+subtitle: |
+  | Metode 3
+  | [.white[Link til slides: kortlink.dk/2acdv]](https://soerendamsbo.github.io/m3/m3-7_process-tracing.html)
 author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
 institute: Institut for Statskundskab<br>Københavns Universitet
 date: "Uge 18"
@@ -25,12 +27,8 @@ pacman::p_load(tidyverse, lubridate, kableExtra)
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
 
-# I dag
 
-
----
-
-# Holdtimerne
+# Overblik
 
 ```{r plan}
 
@@ -73,14 +71,31 @@ tibble(Uge = 6:20,
 
 ---
 
----
-
-# Opsummering
-
+# Recap fra sidste gang
 
 ---
 
-# Hvis man har fået blod på tanden 
+# Dagens program
+
+---
+
+# Dagens formål
+
+---
+
+# Pensum
+
+Beach, Derek og Rasmus Brun Pedersen. (2012). Process tracing: metode, design og forskningslogik. I: Lotte Bøgh Andersen, Kasper Møller Hansen og Robert Klemmensen (red.): *Metoder i statskundskab* (2. udgave, s. 235-257). København: Hans Reitzels Forlag.
+
+Bennett, Andrew. (2008). Process Tracing: a Bayesian Perspective. I: Janet M. Box-Steﬀensmeier, Henry Brady og David Collier (red.): *The Oxford Handbook of Political Methodology* (s. 702-721). New York: Oxford University Press.
+
+---
+
+
+---
+---
+
+# Dagens pointer
 
 ---
 

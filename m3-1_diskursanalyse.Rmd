@@ -1,6 +1,8 @@
 ---
 title: "Diskursanalyse"
-subtitle: "Metode 3"
+subtitle: |
+  | Metode 3
+  | [.white[Link til slides: kortlink.dk/2acdq]](https://soerendamsbo.github.io/m3/m3-1_diskursanalyse.html)
 author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
 institute: Institut for Statskundskab<br>Københavns Universitet
 date: "Uge 8"
@@ -18,10 +20,12 @@ output:
 ```{r, include=F}
 uge_nr <- 8
 
-pacman::p_load(tidyverse, ggdag)
-knitr::opts_chunk$set(echo = FALSE, fig.align = "center", fig.retina = 3, fig.height = knitr::opts_chunk$get("fig.width")/2)
+pacman::p_load(tidyverse, knitr, ggdag, lubridate, kableExtra)
 
-pacman::p_load(tidyverse, lubridate, kableExtra)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align = "center", 
+                      fig.height=12)
+
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
 
@@ -32,6 +36,42 @@ Sys.setlocale(locale = "da_DK.UTF-8")
 - Snakke lidt om forelæsningerne og diskursanalyse helt bredt
 
 - Øvelsesopgaver
+
+---
+
+# Præsentation
+
+**Mig**
+
+- Søren Damsbo-Svendsen
+
+- Startede på ifs i 2013
+
+- Ph.d.-studerende siden 2020
+
+- Forskning: Holdningsdannelse på klimaområdet med fokus på personlige klima- og vejrerfaringer
+
+- Faglige interesser: Politisk adfærd og holdningsdannelse, kvantitative metoder, data science og kausal inferens
+
+- Skriv til mig med spørgsmål på [sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
+
+---
+
+# Præsentation
+
+**Jer**
+
+- Hurtig runde:
+
+    - Navn
+
+    - Yndlingsfag på uni hidtil
+
+    - Evt. random fact, der siger alt om hvem I er
+
+--
+    
+- Hvad har I lært tidligere på de andre metodefag? 
 
 ---
 
@@ -78,49 +118,15 @@ tibble(Uge = 6:20,
 
 ---
 
-# Præsentation
-
-**Mig**
-
-- Søren Damsbo-Svendsen
-
-- Startede på ifs i 2013
-
-- Ph.d.-studerende siden 2020
-
-- Forskning: Holdningsdannelse på klimaområdet med fokus på personlige klima- og vejrerfaringer
-
-- Faglige interesser: Politisk adfærd og holdningsdannelse, kvantitative metoder, data science og kausal inferens
-
-- Skriv til mig med spørgsmål på [sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
-
----
-
-# Præsentation
-
-**Jer**
-
-- Hurtig runde:
-
-    - Navn
-
-    - Yndlingsfag på uni hidtil
-
-    - Evt. random fact, der siger alt om hvem I er
-
---
-    
-- Hvad har I lært tidligere på de andre metodefag? 
-
----
-
 # Hvad skal holdundervisningen?
 
 1. Recap af de vigtigste pointer fra forelæsning og pensum
 
-2. Mere anvendelse: Øvelsesopgaver, diskussioner og mere praktiske overvejelser.
+2. Mere anvendelse: Øvelsesopgaver, diskussioner og praktiske overvejelser
 
-3. Mere frit rum til at diskutere, reflektere, hjælpe hinanden og stille de dumme spørgsmål (som i virkeligheden er de gode spørgsmål)
+3. Friere rum til at diskutere, reflektere, hjælpe hinanden og stille de dumme spørgsmål (= de gode spørgsmål)
+
+  - Vi er her for at lære, ikke for at teste hinandens viden
 
 ---
 
@@ -130,13 +136,13 @@ tibble(Uge = 6:20,
 
 - Live sessions! (video på som hovedregel, især fra start og i grupper, forståelse for undtagelser)
 
-- Forsøg på mindre bidder med flere pauser
+- Forsøg på mindre bidder og flere pauser (mind mig gerne om behov for pause)
 
-- Klart formål både med hver lektion og med timerne (vi er her for at lære, ikke teste hinandens viden)
+- Klart formål med hver lektion 
 
-- Recap
+- Gentagelser
 
-- Diskussion og øvelse
+- Diskussion og øvelser
 
 ---
 

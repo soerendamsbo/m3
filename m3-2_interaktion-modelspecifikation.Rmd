@@ -1,6 +1,8 @@
 ---
 title: "Interaktioner og modelspecifikation"
-subtitle: "Metode 3"
+subtitle: |
+  | Metode 3
+  | [.white[Link til slides: kortlink.dk/2acdr]](https://soerendamsbo.github.io/m3/m3-2_interaktion-modelspecifikation.html)
 author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
 institute: Institut for Statskundskab<br>Københavns Universitet
 date: "Uge 9"
@@ -18,19 +20,16 @@ output:
 ```{r, include=F}
 uge_nr <- 9
 
-pacman::p_load(tidyverse, ggdag)
-knitr::opts_chunk$set(echo = FALSE, fig.align = "center", fig.retina = 3, fig.height = knitr::opts_chunk$get("fig.width")/2)
+pacman::p_load(tidyverse, knitr, ggdag, lubridate, kableExtra)
 
-pacman::p_load(tidyverse, lubridate, kableExtra)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align = "center", 
+                      fig.height=12)
+
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
 
-# I dag
-
-
----
-
-# Plan
+# Overblik
 
 ```{r plan}
 
@@ -73,6 +72,20 @@ tibble(Uge = 6:20,
 
 ---
 
+# Recap fra sidste gang
+
+---
+
+# Dagens program
+
+---
+
+# Dagens formål
+
+- At forstå, hvordan man laver og fortolker en interaktionsmodel (i Stata)
+
+---
+
 # Pensum
 
 - Kellstedt, P. M., Whitten, G. D. (2018). The Fundamentals of Political Science Research. 3rd edition. Cambridge University Press. Kapitel 11.3 
@@ -80,13 +93,6 @@ tibble(Uge = 6:20,
 - Sønderskov, Kim Mannemar (2014). Stata – en praktisk introduktion (2. udg.). København: Hans Reitzels forlag. Kap. 10
 
 ---
-
-# Formålet med i dag
-
-- At forstå, hvordan man laver og fortolker en interaktionsmodel (i Stata)
-
----
-
 
 # Vigtige begreber
 
@@ -138,7 +144,7 @@ En metapointe i dag er: Interaktionen kan kaste nyt lys på vores observationer 
 
 - Men når effekten af X på Y afhænger af en tredjevariabel Z kan de gennemsnitlige effekter blive misvisende.
 
-- Her vil en interaktion være den korrekte modelspeciﬁkation. Altså en interaktiv model.
+- Her vil en interaktion være den korrekte modelspecifikation. Altså en interaktiv model.
 
 Sønderskov skriver på side 233:
 
@@ -150,7 +156,7 @@ Sønderskov skriver på side 233:
 
 # Lidt begrebsafklaring
 
-Der ﬁndes en del begreber, som dækker over dagens tema:
+Der findes en del begreber, som dækker over dagens tema:
 
 - Interaktion: X interagere med Z
 
@@ -302,7 +308,7 @@ Når vi estimerer skal vi blot lægge interaktionsleddet til eller fra vores hov
 
 - Interaktionsleddet er den gennemsnitlige interaktion. Altså om Z i gennemsnit modererer X’s effet på Y.
 
-- Dvs: Der kan givetvis være niveauer på Z moderationen ikke er signiﬁkant!
+- Dvs: Der kan givetvis være niveauer på Z moderationen ikke er signifikant!
 
 ---
 
@@ -394,7 +400,7 @@ knitr::include_graphics("media/stata7.2d.png")
 
 # Øvelsesopgave 7.3 (I)
 
-Lad os visualisere! (altid en god id´e med interaktioner). Men først denne:
+Lad os visualisere! (altid en god idé med interaktioner). Men først denne:
 
 ```{r}
 knitr::include_graphics("media/stata7.3.png")
@@ -468,7 +474,7 @@ Fordi det netop udelader hovedleddene. I den forbindelse vil vi komme til at ant
 
 - ... og dette er tilmed estimeret uden statistisk usikkerhed!
 
-Bl.a. fordi hovedleddene nærmest pr. deﬁnition er korreleret med interaktionsleddet, betyder det noget for estimatet af interaktionsleddet. Det betyder, at vi meget ofte vil få et biased interaktionsestimat, hvis man kun bruger #.
+Bl.a. fordi hovedleddene nærmest pr. definition er korreleret med interaktionsleddet, betyder det noget for estimatet af interaktionsleddet. Det betyder, at vi meget ofte vil få et biased interaktionsestimat, hvis man kun bruger #.
 
 ---
 
@@ -492,7 +498,7 @@ I sidste ende kan interaktive modeller dog:
 
 - Nuancere kausale påstande - ”prisen” er selvfølgeligt en mere kompliceret model som er sværere at tolke (og større risiko for *p-hacking*).
 
-- Give en bedre id´e om den kausale mekanismen
+- Give en bedre idé om den kausale mekanismen
 
 ---
 

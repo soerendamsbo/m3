@@ -1,6 +1,8 @@
 ---
 title: "Kausal inferens III: Eksperimentelle designs"
-subtitle: "Metode 3"
+subtitle: |
+  | Metode 3
+  | [.white[Link til slides: kortlink.dk/2acdu]](https://soerendamsbo.github.io/m3/m3-6_eksperimentelle-designs.html)
 author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
 institute: Institut for Statskundskab<br>Københavns Universitet
 date: "Uge 15"
@@ -25,12 +27,7 @@ pacman::p_load(tidyverse, lubridate, kableExtra)
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
 
-# I dag
-
-
----
-
-# Holdtimerne
+# Overblik
 
 ```{r plan}
 
@@ -73,14 +70,35 @@ tibble(Uge = 6:20,
 
 ---
 
----
-
-# Opsummering
-
+# Recap fra sidste gang
 
 ---
 
-# Hvis man har fået blod på tanden 
+# Dagens program
+
+---
+
+# Dagens formål
+
+---
+
+# Pensum
+
+Gerber, A. S., Green, D. P. (2012). Field experiments: Design, analysis, and interpretation. WW Norton.
+
+• Kapitel 1: Introduktion
+
+• Kapitel 2: Kausal inferens og eksperimentering
+
+&rarr; Bogen er en grundsten i moderne eksperimentel politologi og socialvidenskab. Eksperiment-interesserede (og kvant-interesserede mere generelt) kan med fordel kigge nærmere p˚a bogen.
+
+---
+
+
+---
+---
+
+# Dagens pointer
 
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: "Multilevel analyse"
-subtitle: "Metode 3"
+subtitle: |
+  | Metode 3
+  | [.white[Link til slides: kortlink.dk/2acds]](https://soerendamsbo.github.io/m3/m3-4_multilevel-analyse.html)
 author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
 institute: Institut for Statskundskab<br>Københavns Universitet
 date: "Uge 11"
@@ -25,12 +27,7 @@ pacman::p_load(tidyverse, lubridate, kableExtra)
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
 
-# I dag
-
-
----
-
-# Holdtimerne
+# Overblik
 
 ```{r plan}
 
@@ -75,12 +72,29 @@ tibble(Uge = 6:20,
 
 ---
 
-# Opsummering
-
+# Recap fra sidste gang
 
 ---
 
-# Hvis man har fået blod på tanden 
+# Dagens program
+
+---
+
+# Dagens formål
+
+---
+
+# Pensum
+
+Hox, J. J. (2010). *Multilevel analysis: techniques and applications* (2. edition). Routledge. **Kapitel 1**
+
+Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a guide for the social sciences*. Sage. **Kapitel 9**.
+
+---
+---
+---
+
+# Dagens pointer
 
 ---
 

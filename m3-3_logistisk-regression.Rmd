@@ -29,7 +29,7 @@ knitr::opts_chunk$set(echo = FALSE,
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
 
-# Oversigt
+# Overblik
 
 ```{r plan}
 
@@ -72,11 +72,11 @@ tibble(Uge = 6:20,
 
 ---
 
-#  Sidste gang 
+# Recap fra sidste gang
 
 ---
 
-# Dagens program (dagsorden)
+# Dagens program
 
 ---
 
@@ -96,7 +96,7 @@ tibble(Uge = 6:20,
 
 Når vores afhængige variable har et dikotomt udfaldsrum. Visuelt: Alle observationerne ligger vandret enten ud for y=0 eller ud for y=1.
 
-Husk at med en regression forsøger vi, at ﬁnde den model som bedst beskriver data.
+Husk at med en regression forsøger vi, at finde den model som bedst beskriver data.
 
 - ”Den bedste linje”
 
@@ -108,7 +108,7 @@ include_graphics("media/logit1.png")
 
 # Hvad vil vi med regressioner?
 
-Husk: med en regression forsøger vi, at ﬁnde den model som bedst beskriver forholdet mellem X og Y.
+Husk: med en regression forsøger vi, at finde den model som bedst beskriver forholdet mellem X og Y.
 
 - ”Den bedste linje”
 - OLS estimerer den bedste rette linje - som minimerer det kvadrerede residual. En ret linje - udtrykker linearitet
@@ -165,7 +165,7 @@ Med en dummy (dikotom/binær) som afhængig variabel, kan y kun antage værdiern
 
 - Eksempel: Observationerne (0,0,1,1,1,1) har gennemsnittet 4/6 – svarende til andelen af 1-taller.
 
-- Det betyder, at vi estimerer, at der er 66,7% sandsynlighed for at ﬁnde observationen 1-tal i populationen.
+- Det betyder, at vi estimerer, at der er 66,7% sandsynlighed for at finde observationen 1-tal i populationen.
 
 - Vores regression, når Y er en dummy, beskriver derfor sandsynligheden for at y=1, givet vores uafhængige variable.
 
@@ -231,7 +231,7 @@ Og fordi den rette linje potentielt løber fra −∞ til +∞
 
 - Vores model kan forudsige udfald med sandsynligheder større end 1 eller mindre end 0
 
-- R 2 er ikke informativ fordi den rette linje potentielt løber fra −∞ til +∞ og igennem alle punkter mellem y=0 og y=1 – hvor der ikke er nogen observationer
+- $R^2$ er ikke informativ fordi den rette linje potentielt løber fra −∞ til +∞ og igennem alle punkter mellem y=0 og y=1 – hvor der ikke er nogen observationer
 
 ---
 
@@ -255,7 +255,7 @@ include_graphics("media/logit4.png")
 
 Den generelle logistiske funktion ser matematisk således ud: $G(z) = \frac{e^z}{1+e^z}$ (der kunne også have stået F(x) i stedet for G(z). 
 
-Det ser graﬁsk således ud:
+Det ser grafisk således ud:
 
 ```{r, out.width="20%"}
 include_graphics("media/logit5.png")
@@ -302,7 +302,7 @@ OLS estimerer ved at minimere det kvadrerede residual.
 
 Logit estimerer ved hjælp af det, som man kalder maximum likelihood.
 
-- Formål: ﬁnde den koeﬃcient, der er mest sandsynlig, givet det data, man har.
+- Formål: finde den koeﬃcient, der er mest sandsynlig, givet det data, man har.
 
 - Intuition: Vi har noget data – baseret på det: hvilken sammenhæng mellem x og y er så mest sandsynlig i populationen?
 
@@ -312,7 +312,7 @@ Logit estimerer ved hjælp af det, som man kalder maximum likelihood.
 
 - Og en måde at estimere en sammenhæng på, fx Cov(x,y)/var(x).
 
-- Forsøger Stata sig med en række værdier for b, indtil den ﬁnder den b, der har den laveste log likelihood.
+- Forsøger Stata sig med en række værdier for b, indtil den finder den b, der har den laveste log likelihood.
 
 ---
 
@@ -350,9 +350,9 @@ class: title-slide, center, middle
 
 Alder og indkomst stærkt positivt korreleret med at stemme personligt. Uddannelse har ingen selvstændig effekt
 
-- Likelihood Ratio: Kollektiv signiﬁkans (ligesom F-statistikken i OLS).
+- Likelihood Ratio: Kollektiv signifikans (ligesom F-statistikken i OLS).
 
-- Pseudo R 2 : 1.51% forbedret log-likelihood sammenlignet med en model uder X’er
+- Pseudo $R^2$ : 1.51% forbedret log-likelihood sammenlignet med en model uder X’er
 
 ]
 
@@ -440,13 +440,13 @@ Nu skal vi kigge på to alternative måder, at opsummere de heterogene effekter 
 
 - Gennemsnitlige marginale effekter
 
-- ”At ﬁnde den gennemsnitlige hældning for den s-formede kurve”
+- ”At finde den gennemsnitlige hældning for den s-formede kurve”
 
 **Marginal Effect at the Mean (MEM)**
 
 - Marginale effekter ved gennemsnittet (eller en anden væsentlig niveau på x).
 
-- At vælge et speciﬁk punkt, og ﬁnde hældningen her.
+- At vælge et specifik punkt, og finde hældningen her.
 
 ---
 
@@ -683,7 +683,7 @@ Det er komplekst at beregne korrekte standardfejl for interaktioner i ikke-line�
 
 Tips:
 
-- Tolk på interaktionsleddet ved at regne marginale effekter. Men husk på at marginale effekter ikke siger noget om hele interaktionens signiﬁkans ved OLS-regression.
+- Tolk på interaktionsleddet ved at regne marginale effekter. Men husk på at marginale effekter ikke siger noget om hele interaktionens signifikans ved OLS-regression.
 
 - Lav interaktionsmodeller med LPM (OLS)
 
@@ -693,7 +693,7 @@ Tips:
 
 Mange af de samme som OLS, men sværere at tjekke.
 
-- Modellen er korrekt speciﬁceret (altså ikke udeladt variabel bias etc.)
+- Modellen er korrekt specificeret (altså ikke udeladt variabel bias etc.)
 
 - Fravær af alvorlig multikollinearitet (tjek VIF i LPM)
 
