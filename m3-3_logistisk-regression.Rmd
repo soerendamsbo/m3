@@ -1,5 +1,5 @@
 ---
-title: "Logistisk regression"
+title: "Logistisk regression test"
 subtitle: |
   | Metode 3
   | [.white[Link til slides: kortlink.dk/2ab58]](https://soerendamsbo.github.io/m3/m3-3_logistisk-regression.html)
