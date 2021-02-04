@@ -167,7 +167,7 @@ class: title-slide, center, middle
 
 - Diskurser skaber mening via sproglige differentieringer (strukturer), der i større eller mindre grad bliver taget for givet som sande og objektive og dermed får karakter af fakta.
 
---- 
+---
 
 # Hvad er en diskurs?
 
@@ -179,7 +179,9 @@ class: title-slide, center, middle
 
 - Diskurser er analytiske konstruktion snarere end empirisk observerbare objekter 
 
-- Det er eksplicitte artikulationer (ikke ekstra-tekstuelle)
+- Det er eksplicitte artikulationer (ikke ekstra-tekstuelle), vi kigger på
+
+- Og det er **politiske** diskurser
 
 ---
 
