@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F)
 pacman::p_load(tidyverse, kableExtra, lubridate)
+Sys.setlocale("LC_ALL", "da_DK.UTF-8")
 ```
 
 ```{r plan}
