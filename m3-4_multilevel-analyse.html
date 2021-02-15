@@ -25,18 +25,13 @@ class: center, middle, inverse, title-slide
 
 
 
-# I dag
-
-
----
-
-# Holdtimerne
+# Oversigt
 
 &lt;table style=&quot;line-height: 100%; font-size: 16px; margin-left: auto; margin-right: auto;&quot; class=&quot;table table-striped table-hover table-condensed table-responsive&quot;&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style=&quot;text-align:center;&quot;&gt; Uge &lt;/th&gt;
-   &lt;th style=&quot;text-align:center;&quot;&gt; Dato (holdtimer) &lt;/th&gt;
+   &lt;th style=&quot;text-align:center;&quot;&gt; Holdtime &lt;/th&gt;
    &lt;th style=&quot;text-align:left;&quot;&gt; Emne &lt;/th&gt;
    &lt;th style=&quot;text-align:center;&quot;&gt; Øvelsesopgave &lt;/th&gt;
   &lt;/tr&gt;
@@ -63,7 +58,7 @@ class: center, middle, inverse, title-slide
   &lt;tr&gt;
    &lt;td style=&quot;text-align:center;&quot;&gt; 9 &lt;/td&gt;
    &lt;td style=&quot;text-align:center;&quot;&gt; 4-5 marts 2021 &lt;/td&gt;
-   &lt;td style=&quot;text-align:left;&quot;&gt; interaktioner og modelspecifikation &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Interaktioner og modelspecifikation &lt;/td&gt;
    &lt;td style=&quot;text-align:center;&quot;&gt; 4 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
@@ -137,14 +132,132 @@ class: center, middle, inverse, title-slide
 
 ---
 
----
-
-# Opsummering
-
+# Recap fra sidste gang
 
 ---
 
-# Hvis man har fået blod på tanden 
+# Dagens program
+
+---
+
+# Dagens formål
+
+- Forstå hvad multilevel problemer og -analyse er
+- Være bevidst om, hvilke problemer multilevel analyse afhjælper
+-    
+
+---
+
+# Pensum
+
+Hox, J. J. (2010). *Multilevel analysis: techniques and applications* (2. edition). Routledge. **Kapitel 1**
+
+Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a guide for the social sciences*. Sage. **Kapitel 9**.
+
+---
+
+# Hvad er multilevel analyse?
+
+--
+
+**Multilevel forskning**
+
+&gt; &quot;individuals and the social groups are conceptualized as a __hierarchical system of individuals nested within groups__, with individuals and groups defined at separate levels of this hierarchical system. Naturally, such systems can be observed at different hierarchical levels, and variables may be defined at each level. This leads to research into the relationships between __variables characterizing individuals and variables characterizing groups__, a kind of research that is generally referred to as __multilevel research__&quot; .right[(Hox, 2010, p. 1)]
+
+--
+
+**Multilevel problem**
+
+&gt; &quot;A multilevel problem is a problem that concerns the __relationships between variables that are measured at a number of different hierarchical levels__&quot; .right[(Hox, 2010, p. 4)] 
+
+---
+
+# Hvad er multilevel analyse? 
+
+- Hvordan adskiller det sig fra andre typer kvantitativ analyse, vi kender?
+- Giv et eksempel på data med multilevel-struktur
+
+- Mere end udbygning af (unilevel) regressionsanalyse 
+- Flere niveauer
+- Hierarki af enheder, &quot;nested within...&quot;&quot;
+- Kendte eksempler: Individer inden for grupper (f.eks. lande/kommuner) og tidslige observationer inden for enheder (fx lande-år = paneldata)
+- The lowest level (level 1) is usually deﬁned by the individuals. 
+- Level 1 (laveste), 2, 3, ... (teoretisk er der ingen grænse, men i praksis bliver det hurtigt vanskelligt. Der skal være en god grund til at arbejde med mere end to niveauer). 
+
+**Find på mindst et eksempel på et multilevel problem (tænk på den virkelige verden). Behøver ikke være praktisk muligt.**
+
+??? Husk paneldata
+
+---
+
+# (Dis)aggregation
+
+- Flytte variable mellem niveauer (målt på et niveau &amp;rarr; repræsenteret/analyseret på et andet niveau)
+- **Aggregation**: variables at a lower level are moved to a higher level, for instance by assigning to the schools the school mean of the pupils’ intelligence scores. 
+- **Disaggregation** means moving variables to a lower level, for instance by assigning to all pupils in the schools a variable that indicates the denomination of the school they belong to.
+- På hvilket niveau &quot;står&quot; vi? På hvilket niveau er variablen målt?
+
+- Variabel-typologi fra Hox (2010):
+    - Globale variable (same-level, e.g., pupil intelligence)
+    - Strukturelle variable (from sub-level, e.g., mean intelligence assigned to schools)
+    - Kontekstuelle variable (from super-level, e.g., mean intelligence assigned to pupils)
+    - Afhænger af, hvilket niveau vi &quot;står&quot; på. 
+    
+**Eksempler -- øvelse... Tag jeres eksempel fra før (eller et nyt) og prøv at komme med et eksempel på en relevant global, strukturel og kontekstuel variabel. Hvis det er for svært, så giv et abstrakt svar (&quot;det kunne fx være en variabel, som...&quot;)**
+
+---
+
+# Den klassiske (dårlige) tilgang til multilevel analyse
+
+1. Find ud af, på hvilket niveau vi er interesserede i at forklare et outcome. Typisk eksempel: Individ (fx hvem stemmer vil individet stemme på)
+2. Flyt alle relevante variable med disaggregation (eller aggregation) til dette niveau. 
+3. Lav almindelig multivariat regressionsanalyse med brug af alle variable
+    - Antager (som regel) at alle individer er uafhængige
+    - Antager derfor også at at den disaggregerede data faktisk er målt (uafhængigt) for det pågældende individ
+    
+---
+
+# Problemer ved den klassiske (dårlige) tilgang
+
+- Når variable disaggregeres, så der er en værdi per individ (laveste niveau), bliver disse værdier, som jo stammer fra et mindre antal &quot;super-units&quot; (overenheder), **blæst op** i den forstand, at det ligner, der er mange flere observationer.
+- Og omvendt: Når man aggregerer mister man en masse information (variation) og dermed power (svagere tests &amp;rarr; mindre sandsynlighed for at finde effekter, der ellers i virkeligheden er der)
+- Når man bruger den klassiske (dårlige) tilgang, vil almindelige statistiske tests tro, det er uafhængig information og derfor give en kunstigt høj sandsynlighed for (fejlagtig) statistisk signifikans. 
+
+## Derudover fortolkning/konklusioner/inferens:
+
+- &quot;the fallacy of the wrong level&quot;: Når man analysere data på et niveau og drager konklusioner på et andet 
+    - Ecological fallacy: Analysere et højere niveau og fortolke på lavere niveau (fx når man analyserer landedata og konkluderer om enkeltindividerne).
+    - Atomistic fallacy: Når man formulerer konklusioner på et højere niveau end det analyserede
+    - Relateret til Simpson&#39;s paradoks: Når man &quot;pooler&quot; (samler) data fra (substantielt) forskellige populationer og analyserer dem, som om de var en stor samlet population. 
+- Detaljerne er komplicerede og har mest af alt noget at gøre med korrelation vs. kausalitet, spuriøsitet osv.
+- Take-away: Pas på med at konkludere på andre niveauer end det målte/analyserede
+    
+---
+    
+# En bedre tilgang
+
+- Når man har et reelt **multilevel problem**, er alle niveauer vigtige
+- (Dog: Ofte en afvejning af kompleksitet og korrekthed. Kan det forsimples til et single-level problem uden større tab?)
+- Derfor &amp;rarr; eksplicit modellering af flere niveauer
+- Bemærk: Typisk er der empirisk set fokus på en afhængig variabel på det niveau (fx individet). 
+- To logikker (grunde til at tænke i multilevels):
+    1. Vi vil gerne kvantificere indflydelsen fra andre niveauer
+    2. Vi vil gerne kontrollere for de andre niveauer, så vores analyse på dette niveau bliver bedst mulig
+
+---
+
+# Multilevel regressionsanalyse
+
+---
+
+# Fixed effects ...
+
+- Eksempel fra egen forskning
+- Meget klar parallel til paneldata, som vi kommer til om to uger
+
+---
+
+# Dagens pointer
 
 ---
 

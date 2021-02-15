@@ -11,55 +11,56 @@ pacman::p_load(tidyverse, kableExtra, lubridate)
 Sys.setlocale("LC_ALL", "da_DK.UTF-8")
 ```
 
-```{r plan}
-start_date <- ymd("2021-02-11")
-a_dates <- start_date+7*0:14
-b_dates <- (start_date+1)+7*0:14
 
-tibble(Uge = 6:20, 
-       Holdtime = tolower(paste0(day(a_dates),
-                                 "-", 
-                                 day(b_dates),
-                                 " ", 
-                                 format(a_dates, "%B %Y"))), 
-       Emne = c("Kvantitativ indholdsanalyse",
-                "Diskursanalyse I",
-                "Diskursanalyse II",
-                "Interaktioner og modelspecifikation",
-                "Logistisk regression",
-                "Multilevel analyse",
-                "Kausal inferens I: Designbaseret inferens",
-                "Kausal inferens II: Paneldata",
-                "Påskeferie",
-                "Kausal inferens III: Eksperimentelle designs",
-                "Kausal inferens IIII: Regression Discontinuity (RD)",
-                "Social Data Science: Big Data",
-                "Process tracing",
-                "Kriterier for god videnskab",
-                "Opsamling/spørgetime"), 
-       `Øvelsesopgave` = c(1:8, "", 9:14),
-       Link = c("", 
-                "", 
-                "[Link](https://soerendamsbo.github.io/m3/m3-1_diskursanalyse.html)",
-                "[Link](https://soerendamsbo.github.io/m3/m3-2_interaktion-modelspecifikation.html)",
-                "[Link](https://soerendamsbo.github.io/m3/m3-3_logistisk-regression.html)",
-                "[Link](https://soerendamsbo.github.io/m3/m3-4_multilevel-analyse.html)",
-                "",
-                "[Link](https://soerendamsbo.github.io/m3/m3-5_paneldata.html)",
-                "",
-                "[Link](https://soerendamsbo.github.io/m3/m3-6_eksperimentelle-designs.html)",
-                "",
-                "",
-                "[Link](https://soerendamsbo.github.io/m3/m3-7_process-tracing.html)",
-                "",
-                "")) %>%
-         mutate(Holdtime = ifelse(Uge %in% c(6,7,12,14,16,17,19,20), "", Holdtime)) %>% 
-         kable("html", 
-               align = c("c", "c", "l", "c"),
-               escape = F,
-               table.attr = "style=\"line-height: 100%;\"") %>% 
-         kable_styling(font_size = 16,
-                       bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>% 
-         row_spec(9, bold = F, color = "grey")
-       
-```
+<!-- ```{r plan} -->
+<!-- start_date <- ymd("2021-02-11") -->
+<!-- a_dates <- start_date+7*0:14 -->
+<!-- b_dates <- (start_date+1)+7*0:14 -->
+
+<!-- tibble(Uge = 6:20,  -->
+<!--        Holdtime = tolower(paste0(day(a_dates), -->
+<!--                                  "-",  -->
+<!--                                  day(b_dates), -->
+<!--                                  " ",  -->
+<!--                                  format(a_dates, "%B %Y"))),  -->
+<!--        Emne = c("Kvantitativ indholdsanalyse", -->
+<!--                 "Diskursanalyse I", -->
+<!--                 "Diskursanalyse II", -->
+<!--                 "Interaktioner og modelspecifikation", -->
+<!--                 "Logistisk regression", -->
+<!--                 "Multilevel analyse", -->
+<!--                 "Kausal inferens I: Designbaseret inferens", -->
+<!--                 "Kausal inferens II: Paneldata", -->
+<!--                 "Påskeferie", -->
+<!--                 "Kausal inferens III: Eksperimentelle designs", -->
+<!--                 "Kausal inferens IIII: Regression Discontinuity (RD)", -->
+<!--                 "Social Data Science: Big Data", -->
+<!--                 "Process tracing", -->
+<!--                 "Kriterier for god videnskab", -->
+<!--                 "Opsamling/spørgetime"),  -->
+<!--        `Øvelsesopgave` = c(1:8, "", 9:14), -->
+<!--        Link = c("",  -->
+<!--                 "",  -->
+<!--                 "[Link](https://soerendamsbo.github.io/m3/m3-1_diskursanalyse.html)", -->
+<!--                 "[Link](https://soerendamsbo.github.io/m3/m3-2_interaktion-modelspecifikation.html)", -->
+<!--                 "[Link](https://soerendamsbo.github.io/m3/m3-3_logistisk-regression.html)", -->
+<!--                 "[Link](https://soerendamsbo.github.io/m3/m3-4_multilevel-analyse.html)", -->
+<!--                 "", -->
+<!--                 "[Link](https://soerendamsbo.github.io/m3/m3-5_paneldata.html)", -->
+<!--                 "", -->
+<!--                 "[Link](https://soerendamsbo.github.io/m3/m3-6_eksperimentelle-designs.html)", -->
+<!--                 "", -->
+<!--                 "", -->
+<!--                 "[Link](https://soerendamsbo.github.io/m3/m3-7_process-tracing.html)", -->
+<!--                 "", -->
+<!--                 "")) %>% -->
+<!--          mutate(Holdtime = ifelse(Uge %in% c(6,7,12,14,16,17,19,20), "", Holdtime)) %>%  -->
+<!--          kable("html",  -->
+<!--                align = c("c", "c", "l", "c"), -->
+<!--                escape = F, -->
+<!--                table.attr = "style=\"line-height: 100%;\"") %>%  -->
+<!--          kable_styling(font_size = 16, -->
+<!--                        bootstrap_options = c("striped", "hover", "condensed", "responsive")) %>%  -->
+<!--          row_spec(9, bold = F, color = "grey") -->
+
+<!-- ``` -->
