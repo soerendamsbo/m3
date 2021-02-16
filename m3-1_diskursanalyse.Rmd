@@ -59,9 +59,18 @@ Sys.setlocale(locale = "da_DK.UTF-8")
 
 **Jer**
 
-- I kender hinanden ret godt og har en god, solid metodebaggrund med jer?
+- Hvad bør jeg vide om holdet?
 
-- I stedet for hurtig navnerunde, laver vi en poll.
+- I stedet for "hurtig navnerunde", laver vi lige en poll.
+
+---
+
+# Mit take på Metode 3
+
+- Sjovt at lave sin egen empiriske analyse (så bliver det til forskning)! 
+- Hvis det kun havde været de mere kvantitative (regressions-relaterede) emner, kunne faget have været rent teknisk. 
+    - Men sundt at bl.a. diskursanalyse tvinger os til at være bevidste om videnskabsteoretisk fundament og metodernes grundlæggende muligheder og begrænsninger
+- Ret hurtig overflyvning -- man bliver først ekspert i en metode, når man har anvendt den (hjemmeopgaven er en unik mulighed for at blive ekspert!)
 
 ---
 
@@ -73,11 +82,18 @@ source("../print_plan.R")
 print_plan(8)
 ```
 
+??? 
+
+- Struktur
+- Kvantitativ indholdsanalyse
+- Ekstra time / vejledning
+- Eksamen
+
 ---
 
 # Hvad skal holdundervisningen?
 
-1. Recap af de vigtigste pointer fra forelæsning og pensum
+1. Recap af vigtige pointer fra forelæsning og pensum &rarr; så sætter det sig mere fast
 
 2. Mere anvendelse: Øvelsesopgaver, praktiske overvejelser og diskussion
 
@@ -89,17 +105,19 @@ print_plan(8)
 
 # Undervisningsform
 
-- Live sessions! (7 stk.)
+- Zoom (...)
+    - hyppige, korte break-outs (tilfældige grupper til hver time)
+    - spørgsmål og kommentarer mundtligt (marker med x) eller direkte i chatten
+    - hele baduljen
 
-- Zoom med mange korte break-outs og hele baduljen
+- Live sessions
+    - Optages ikke
+    - I får meget mere ud af det, hvis I deltager (det kan man gøre på mange måder, intet pres)
+    - Video på som hovedregel (især fra start og i grupper -- fuld forståelse for undtagelser)
 
-- Video på som hovedregel (især fra start og i grupper -- fuld forståelse for undtagelser)
-
-- Forsøg på mindre bidder og flere pauser (mind mig gerne om behov for pause)
-
-- Klart formål med hver lektion 
-
-- Diskussion, øvelser og gentagelse
+- Klart formål med hver lektion
+- På den ene side lidt "forelæsning", recap og slides
+- På den anden side diskussion og øvelser
 
 ---
 
@@ -107,20 +125,21 @@ print_plan(8)
 
 **Hvad forventer jeg af jer?**
 
-- At I er her for jeres egen skyld: 
+- At I er her for jeres egen skyld:
 
     - Generelt er forberedte mht. læsning og øvelsesopgaver
     - Deltager i undervisningen
-    - Siger til undervejs, hvis der er noget, der ikke fungerer eller fungerer særlig godt
+    - Siger til undervejs, hvis der er noget, der mangler, der ikke fungerer eller fungerer særlig godt
+    
+- Har en del metodeviden med jer fra tidligere, som vi kan bygge videre på (og siger til, når der er særligt behov for at sætte det i relation til tidligere metode-ting)
 
-- Har en del metodeviden med jer fra tidligere, som vi kan bygge videre på (og siger til, når der er særligt behov for recap)
+**Hvad er jeres forventninger/håb til Metode 3, til holdtimerne, til mig?**
 
-
-**Hvad er jeres forventninger til Metode 3, til holdtimerne og til mig?**
+- Brug 30 sekunder på at skrive en enkelt ting i chatten
 
 --
 
-- Lad os komme i gang! 
+- **Lad os komme i gang!**
 
 ---
 class: title-slide, center, middle
@@ -131,7 +150,7 @@ class: title-slide, center, middle
 
 # Pensum
 
-- Hansen, L. (2006). Security as practice: Discourse analysis and the Bosnian war. Routledge. Kapitel 2+3.
+- Hansen, L. (2006). Security as practice: Discourse analysis and the Bosnian war. Routledge. Kapitel 2-3.
 
 - Mik-Meyer, N. (2016). Othering, ableism and disability: A discursive analysis of co-workers’ construction of colleagues with visible impairments. human relations, 69(6), 1341-1363.
 
@@ -139,23 +158,23 @@ class: title-slide, center, middle
 
 # Formålet med i dag
 
-- At forstå hvad en politisk diskurs og diskursanalyse er
+- At få en endnu bedre forståelse af hvad en politisk diskurs og diskursanalyse er
 
 - At forstå fundamantetet, diskursanalyse hviler på (ontologi og andre grundantagelser) 
 
-- At kunne anvende kernebegreber som identitet, linking og differentiering
+- At kunne anvende kernebegreber som repræsentation, identitet, linking og differentiering
 
-- At have en idé om, hvordan man kan begynde på diskursanalyse i praksis
+- At have en idé om, hvor man kan starte i praksis
 
 ---
 
 # Forelæsningen
 
-- Hvad var det vigtigste, der blev sagt, eller det I husker tydeligst fra forelæsningerne? 
+- Hvad husker I tydeligst fra Lene Hansens to forelæsninger? 
 
 - Hvad er en (politisk) diskurs?
 
-- 5 min. 
+- 5 min.
 
 ---
 
@@ -163,25 +182,26 @@ class: title-slide, center, middle
 
 - ”*a discursive formation can be defined as ’a system of dispersion [whenever] between objects, types of statement, concepts, or thematic choices’, which form ’a regularity’ (an order, correlations, positions and functionings, transformations)*” -Foucault, citeret i Hansen (2006: 17)
 
+    - Eller helt kort (fra forelæsning I og Foucault): *a system for the formation of statements*
+
 - ”*Language is, argues Derrida, a system of differential signs, and meaning is established not by the essence of a thing itself but through a series of juxtapositions, where one element is valued over its opposite*” (Hansen 2006: 17)
 
-- Diskurser skaber mening via sproglige differentieringer (strukturer), der i større eller mindre grad bliver taget for givet som sande og objektive og dermed får karakter af fakta.
+- Diskurser er strukturer, der skaber mening via sproglige differentieringer, der i større eller mindre grad bliver taget for givet (eller udfordres) som sande og objektive
 
 ---
 
-# Hvad er en diskurs?
+# Lidt mere lavpraktiske pointer 
 
-## Desuden - lidt mere lavpraktisk: 
+- **Politiske** diskurser
 
-- Tekster (i bred forstand) er ikke lig med diskurser. Men de artikulerer hver især unikke varianter (og er vores indgangsvinkel)
+- Diskurser er analytiske konstruktioner snarere end empirisk observerbare objekter
 
-- På en måde er der en diskurs per tekst. Men der er også (langt færre) "basisdiskurser", der strukturer politiske debatter. Teksterne konvergerer altså "*around common themes, around certain constructions of identity and sets of policies considered viable, desirable or necessary ... bound together by a smaller number of discourses*"
+- Tekster (i bred forstand) er ikke lig med diskurser. Men de artikulerer hver især unikke varianter/udtryk af en diskurs -- og er vores indgangsvinkel til diskursen
 
-- Diskurser er analytiske konstruktion snarere end empirisk observerbare objekter 
+    - På en måde er der en diskurs per tekst, men der er også (langt færre) "**basisdiskurser**", der strukturer politiske debatter. Tekster konvergerer "*around common themes, around certain constructions of identity and sets of policies considered viable, desirable or necessary ... bound together by a smaller number of discourses*" (Hansen, 2013, p. 46)
 
 - Det er eksplicitte artikulationer (ikke ekstra-tekstuelle), vi kigger på
 
-- Og det er **politiske** diskurser
 
 ---
 
@@ -194,38 +214,33 @@ Diskursanalyse hviler på en række grundlæggende **antagelser** - ligesom alt 
 
 **Den centrale ontologiske antagelse i diskursanalyse:**
 - Politik og identitet er gensidigt konstituerende ... gennem diskursive processer (sproget, billeder, lyd, film).
+- Ingen idealistisk-filosofiske pointer om, hvorvidt noget eksisterer. Kommunehospitalet. 
 
 ---
-layout: true
 
 # Sprogets ontologi - antagelser
 
----
+1. Sproget er socialt (mellem personer, bundet til tid og sted)
 
-1. **Det er gennem sproget at ’ting’ opnår mening - og dermed identitet**
+--
+
+2. **Det er gennem sproget at ’ting’ opnår mening - og dermed identitet**
 - ingen objektiv eller sand mening, som ligger uden for en ’tings’ sproglige repræsentation
 - ideer og materialitet har ingen meningsfuld forekomst uafhængigt af hinanden.
 
----
+--
 
-1. Det er gennem sproget at ’ting’ opnår mening - og dermed identitet
-
-2. **Sproget er ikke et neutralt redskab - det er intrinsisk socialt og politisk**
+3. **Sproget er ikke et neutralt redskab - det er intrinsisk socialt og politisk**
 - Socialt: Sproget er indlejret i et specifikt fællesskab og en historie, der former det.
 - Dvs. et system af historisk specifikke kollektive koder og konventioner - som individer socialiseres ind i og anvender for at gøre sig forst˚ aelige.
 - Politisk: Sproget producerer og reproducerer bestemte identiteter - disse muliggør og umuliggør forskellige handlinger (og dermed politiker).
 
----
+--
 
-1. Det er gennem sproget at ’ting’ opnår mening - og dermed identitet
-
-2. Sproget er ikke et neutralt redskab - det er intrinsisk socialt og politisk
-
-3. **Sproget er strukturerende og ustabilt på en og samme tid**
+4. **Sproget er strukturerende, stabilt og ustabilt på en og samme tid**
 - Diskurser vil altid forsøge at etablerer/stabiliserer sig, men der er altid mulighed for at deres sproglige konstitution udfordres.
 
 ---
-layout: false
 
 # Hvad er identitet?
 
@@ -349,9 +364,11 @@ layout: true
 
 ---
 
-## Trin 1: Hvilket emne/problemfelt og relaterede ”key events” ønsker du at undersøge?
+## Trin 1: Hvilket emne/problemfelt/politikområde og relaterede ”key events” ønsker du at undersøge?
 
 - Tabel 4.2 fra Hansen (2006) kap. 4 er god inspiration. 
+
+- Alt andet lige nemmere at analysere et område med tekster og med markante repræsentationer, fænomener og (mod)diskurser  
 
 Eksempler:
 
@@ -361,51 +378,58 @@ Eksempler:
 
 - Opfattelse af personer med handicap på arbejdspladsen
 
+- Storm på kongressen, QAnon, konspirationsteoretikere
+
 - Klimakrise: Klimatosser og klimavenlige vs. klimaskurke og klimasyndere (virksomheder, stater, individer)
 
 ---
 
-## Trin 2: Orientér dig bredt i relevant litteratur
+## Trin 2: Opstil problemformulering
 
-- Giver overblik over diskursivt felt, de centrale modsætninger og etablerede forståelser (feltets common sense).
-
-- På baggrund af den indledende læsning, kan *basisdiskurser* danne grundlag for tekstudvælgelse
-
----
-
-## Trin 3: Opstil problemformulering
-
-- Hvad er det, vi vil undersøge? 
+- Hvad er det, vi vil undersøge?
 
 - Afgørende i al empirisk videnskab uafhængigt af metode
+    - Gælder i højeste grad også diskursanalyse (relevante diskurser på et område afhænger direkte af problemet)
 
 - Styrer analysen og læsningen
 
 ---
 
-## Trin 4: Udvælg nogle centrale tekster,som analyseres grundigt
+## Trin 3: Orientér dig bredt i relevant litteratur
 
-- Figur 5.1 fra Hansen (2006) kap. 5 er god inspiration.
+- Giver overblik over diskursivt felt, de centrale modsætninger og etablerede forståelser (feltets common sense).
+
+- Giver overblik over konteksten
+
+- Indledende læsning kan danne grundlag for systematisk tekstudvælgelse
 
 ---
 
-## Trin 5: Hvilke identiteter og modsætninger artikuleres i materialet?
+## Trin 4: Udvælg nogle centrale tekster, som analyseres grundigt
 
-- Tænk i linking og differentiering
+- Interessante, illustrative, centrale, vigtige
 
-- Linking og differentiering er ikke altid eksplicit, men skal være tydelig i konteksten
+- Systematisk &rarr; argumenter for valg
+
+---
+
+## Trin 5: Analyse: Hvilke identiteter artikuleres i materialet?
+
+- Start eventuelt med en "overfladisk" analyse a la Lene Hansen til første forelæsning (Forsvaret og Styrelseschefen)
+
+- Led efter en eller flere sæt af ”os” og ”dem” (diskursive dikotomier) 
+
+- Tænk i nodalpunkter og positiv og negativ definition af identitet &rarr; linking og differentiering
 
 - Hvor stærke/svage er de forskellige positive/negative links (graden af ”anderledeshed” varierer)
 
-- Stærkt rodfæstede diskurser overﬂødiggør eksplicit konstruktion af identitet.
+- Stærkt rodfæstede diskurser og "signs" overﬂødiggør eksplicit konstruktion (opmærksomhed på relaterede tekster)
 
 - Hav blik for dynamikker: Identiteter kan få og miste betydning over tid (dis/appearance). De kan også konstrueres ift. sig selv over tid (eksempel: EU)
 
-- Der kan være ﬂere ”os” og ”dem” (diskursive dikotomier) på spil.
-
 ---
 
-## Trin 6: På hvilke dimensioner konstrueres identiteter, links og differentieringer?
+## Trin 6: På hvilke dimensioner konstrueres identiteter gennem links og differentiering?
 
 - **Spatial**: Grænsedragning i rum - også abstrakte rum.
 
@@ -413,17 +437,21 @@ Eksempler:
 
 - **Etisk** (responsibility): Hvor placeres ansvaret for at handle?
 
-Gode begreber til at få øje på de diskursive strukturer og til at at systematisere analysen med
+Gode analytiske begreber til at få øje på de diskursive strukturer og til at at systematisere analysen.
 
 ---
 
 ## Trin 7: Politikker og ”revner” og ”sprækker” i diskurserne?:
 
-- Hvilke politikker artikleres og hvordan hænger de sammen med identiteterne?
+- Hvilke politikker artikuleres og hvordan hænger de sammen med identiteterne?
 
 - Hvordan udfordres og testes eksisterende forståelser af virkeligheden?
 
-- Hvilke politiske reaktioner afføder oppositionen: afvisning eller tilpasning?
+- Hvilke politiske reaktioner afføder den diskursive opposition: afvisning eller tilpasning?
+
+--
+
+<iframe src="https://giphy.com/embed/3o7btNa0RUYa5E7iiQ" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 ---
 layout: false
@@ -432,13 +460,12 @@ layout: false
 
 Hvad er en god diskursanalyse?
 
-- ikke ”anything goes”: Tekster kan fejllæses, pga. fokus på eksplicitte artikulationer, og analysers kvalitet kan diskuteres.
+- ikke ”anything goes”: Tekster kan fejllæses (bl.a. i kraft af fokus på eksplicitte artikulationer), og analysers kvalitet kan diskuteres.
 - Men: Tekster kan læses på mange måder (især afhængigt af problemformulering)
-- Systematik og grundighed
 
-Replikerbarhed?
+Reproducerbart (reliabelt)?
 
-- Kan man genskabe en diskursanalyse, eller er resultaterne altid ”analytikerafhængige”? &rarr; klare krav om argumentation og transparans 
+- Kan man genskabe en diskursanalyse, eller er resultaterne altid ”analytikerafhængige”? &rarr; klare krav om systematik, argumentation og transparens 
 
 ---
 class: title-slide, center, middle
@@ -449,11 +476,16 @@ class: title-slide, center, middle
 
 # Lad os kigge på øvelsesopgaverne
 
+
 - Først denne uges øvelsesopgave vedr. asyl til homoseksuelle (øvelsesopgave 3)
 
-Og hvis der er tid:
+Hvis der er tid:
 
-- Sidste uges øvelsesopgave vedr. CP Danmark (øvelsesopgave 2).
+- Sidste uges øvelsesopgave vedr. CP Danmark (øvelsesopgave 2)
+
+```{r, out.width="50%"}
+include_graphics("https://politiken.dk/migration_catalog/img5713570.c8zx8c/ORIGINALS/original_960/Lesbisk%20asylans%C3%B8ger")
+```
 
 ---
 
@@ -483,13 +515,13 @@ Læs afgørelsen fra Flygtningenævnet og snak sammen om følgende spørgsmål:
 
 3. Hvorfor tilkendes “Diana” ikke asyl?
 
-4. De to tekster artikulerer henholdsvis en personlig og en juridisk diskurs, hvilken af dem giver det mest korrekte billede af de trusler, “Diana” står overfor, hvis hun vender tilbage til Uganda?
+De to tekster artikulerer henholdsvis en personlig og en juridisk diskurs, hvilken af dem giver det mest korrekte billede af de trusler, “Diana” står overfor, hvis hun vender tilbage til Uganda?
 
 ---
 
 # Øvelsesopgave 2
 
-I 2019 skiftede spastikerforeningen navn til "CP Danmark". Baggrunden er beskrevet på foreningens hjemmeside ([link 1](https://www.spastikerforeningen.dk/medlemstilbud/medlemsmagasin/artikler/historisk-tilbageblik); [link 2](https://www.spastikerforeningen.dk/medlemstilbud/medlemsmagasin/artikler/en-rigtig-god-beslutning)).
+I 2019 skiftede spastikerforeningen navn til "CP Danmark". Baggrunden er beskrevet på foreningens hjemmeside ([link 1](https://www.cpdanmark.dk/medlemstilbud/medlemsmagasin/artikler/historisk-tilbageblik-om-navne-og-logo/); [link 2](https://www.spastikerforeningen.dk/medlemstilbud/medlemsmagasin/artikler/en-rigtig-god-beslutning)).
 
 1. Hvorfor er det ifølge foreningen selv vigtigt at skifte navnet? Besvar spørgsmålet med inddragelsen af begreberne “sproglig betegner” (“sign”) og “linking” og “differentiering” (Hansen 2).
 
@@ -499,6 +531,16 @@ I 2019 skiftede spastikerforeningen navn til "CP Danmark". Baggrunden er beskrev
 
 4. Er der nogle af disse, som det kunne være interessant at få uddybet?
 
+???
+
+1950: Foreningen For Spastisk Lammede Børn
+1968: Foreningen for Spastisk Lammede (Landsforeningen til bekæmpelse af cerebral parese)
+1988: Spastikerforeningen
+1995: Cerebral Parese Foreningen – Spastikerforeningen
+1995: Spastikerforeningen
+2015: CP Ung (ungdomsafdelingen)
+2018: CP Danmark – Landsforeningen for cerebral parese (tidligere Spastikerforeningen).
+
 ---
 
 # Antagelser generelt
@@ -507,36 +549,41 @@ Det er altid væsentligt at vurdere antagelserne bag forskning. Det er meget oft
 
 - Forskere ved godt, at de gør sig antagelser
 
-- Antagelser er nødvendige for at bedrive forskning.
+- Antagelser er fuldkommen nødvendige for at bedrive forskning
 
-- Derfor: Glem ikke, at vurdere en metode på baggrund af dens egne præmisser
+- Derfor: Glem ikke (også) at vurdere en metode på baggrund af dens egne præmisser
 
-- Herudover: Tænk over, hvad metoden har til formål (herunder: bidrager den til at besvare problemformuleringen)
+- Tænk over, hvad metoden har til formål. Bidrager den til at besvare problemformuleringen?
 
 ---
 
 # Opsummering
 
-- Diskurser er systemer af tegn, der konstituerer identiteter og poltikker via linking og differentiering.
+- **Repræsentationer er væsentlige for politik** (Lene Hansen)
+
+- Diskurser er systemer af tegn, der strukturer og konstituerer identiteter og politikker via linking og differentiering.
 
 - Identitet og politik er *gensidigt* konstituerende: Diskurser muliggør politik, der (re)producerer diskurser.
 
-- Vi studerer politiske diskurser gennem kvalitative data i bred forstand.
+- Vi studerer politiske diskurser gennem kvalitativ analyse af kvalitative data i bred forstand.
 
 - Diskursanalyse kan afdække, hvordan diskurser konstituerer identiteter og dermed legitimerer politik i en given kontekst, og hvordan modfortælllinger udfordrer de dominerende repræsentationer.
 
-- Poststrukturalismens dobbeltpointe: Sprog skaber virkelighed, men enhver sproglig konstruktion er foreløbig og ustabil.
+- Sprog skaber virkelighed, men enhver sproglig konstruktion er foreløbig og ustabil.
 
-- Kast jer ud i det og læn jer op ad Lene Hansen (og andre)
+- Find et spændende område og kast jer ud i det. Læn jer op ad Lene Hansens bog (og evt. andre)
 
 ---
 
 # Næste gang
 
-- Interaktioner og modelspecifikation
+- **Interaktioner og modelspecifikation**
 
 - Stort spring: Kvalitativ &rarr; kvantitativ metode, poststrukturalisme &rarr; positivisme, tekster &rarr; Stata
 
+<iframe src="https://giphy.com/embed/4EIZ5XY6XmuQM" width="480" height="371" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
 ---
+class: center, middle
 
 # Tak for i dag!
