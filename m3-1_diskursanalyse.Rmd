@@ -223,17 +223,15 @@ class: title-slide, center, middle
 
 --
 
+- Det er som udgangspunkt **eksplicitte artikulationer**, vi analyserer som diskurser (ikke ekstra-tekstuelle betydninger, men gerne inter-tekstuelle)
+
+--
+
 - **Tekster** er ikke lig med diskurser. Men de artikulerer hver især unikke varianter/udtryk af en diskurs - og er vores indgangsvinkel til diskurserne
 
 --
 
-- "**basale diskurser**" strukturer politiske debatter og deres "underdiskurser" 
-    - Idealtyper
-    - Tekster konvergerer "around **common themes**, around certain **constructions of identity** and **sets of policies** ... **bound together by a smaller number of discourses**" (Hansen, 2006: 46)
-
---
-
-- Det er som udgangspunkt **eksplicitte artikulationer**, vi analyserer som diskurser (ikke ekstra-tekstuelle betydninger, men gerne inter-tekstuelle)
+- "**Basale diskurser**" er idealtyper, der strukturer politiske debatter og deres "underdiskurser" 
 
 ---
 
