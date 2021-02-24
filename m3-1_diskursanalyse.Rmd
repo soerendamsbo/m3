@@ -271,15 +271,11 @@ class: title-slide, center, middle
 
 > To understand **language as political** is to see it as a site for the **production** and reproduction of particular **subjectivities and identities** while others are simultaneously **excluded**.
 
+--
+
 - **Sproget (re)producerer bestemte identiteter**, som (u)muliggør handlinger/politikker
-
----
-
-# (Sprogets) ontologi
-
-## Sproget er strukturerende, stabilt og ustabilt på en og samme tid
-
-- Diskurser vil altid forsøge at etablere/stabilisere sig (deres specifikke repræsentation), men vil altid være udfordret af andre (mod)diskurser
+- Sproget er strukturerende, stabilt og ustabilt på en og samme tid 
+- Diskurser vil forsøge at etablere/stabilisere sig, men vil altid være udfordret af andre (mod)diskurser
 
 ---
 
