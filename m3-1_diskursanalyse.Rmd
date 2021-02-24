@@ -480,7 +480,7 @@ class: center, middle
 
 ---
 
-## Trin 7: Analyse II
+## Trin 6: Analyse II
 
 - Hvilke **politikker** artikuleres og hvordan hænger de sammen med identiteterne?
 
@@ -501,9 +501,8 @@ layout: false
     - Analysers kvalitet kan diskuteres
     - Men tekster kan læses på mange måder
 
-Reproducerbart (reliabelt)?
-
-- Er resultaterne af en diskursanalyse altid "analytikerafhængige"?
+- Reproducerbart?
+    - Er resultaterne af en diskursanalyse altid "analytikerafhængige"?
     - &rarr; klare krav om systematik, argumentation og transparens 
 
 ---
@@ -530,6 +529,7 @@ include_graphics("https://politiken.dk/migration_catalog/img5713570.c8zx8c/ORIGI
 - 10 min.
 - Hver gruppe vælger en referent
 - Når vi er tilbage, skriver referenterne svarene ind her (så kort som muligt): [kortlink.dk/2ama4](https://docs.google.com/document/d/1Hp063k_JNguUehdmFl8mnPBvWA9DPdN3HY57bWblCoA/edit?usp=sharing)
+- [Link](https://absalon.ku.dk/courses/46377/files/4520383?module_item_id=1219481) til tekster på Absalon
 
 ***
 
