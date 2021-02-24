@@ -70,23 +70,18 @@ Sys.setlocale(locale = "da_DK.UTF-8")
 
 # Mit take på Metode 3
 
-- Mega fedt fordi man:
-    - hurtigt lærer at **kunne** en masse konkret frem for "bare" at **vide** meget 
-    - laver egne empiriske analyser (så bliver det til forskning)
+- Mega fedt pga.:
+    - Man lærer hurtigt at **kunne** meget frem for "bare" at **vide** meget 
+    - Lave egne empiriske analyser (så bliver det til forskning)!
 
 --
 
-- Kunne have været et rent **teknisk fag**, men (bl.a.) diskursanalyse tvinger os til at være bevidste om videnskabsteoretisk fundament og grundlæggende muligheder og begrænsninger ved alle metoderne &rarr; **sundt**
+- Kunne have været et rent teknisk fag, men (bl.a.) diskursanalyse tvinger os til at være bevidste om videnskabsteoretisk fundament og grundlæggende muligheder og begrænsninger ved alle metoderne &rarr; **sundt**
 
 --
 
-- Ret **hurtig overflyvning** af metoderne
+- Ret hurtig overflyvning af metoderne
     - Man bliver først ekspert i en metode, når man har anvendt den &rarr; hjemmeopgaven er en unik mulighed for at blive ekspert!
-
-
---
-
-- **Forskningsspørgsmålet** er altid det primære (hvad er vi interesserede i, hvad vil vi finde svar på) &rarr; metoden er en teknik (med antagelser) til at besvare spørgsmålet
 
 ---
 
@@ -107,18 +102,17 @@ print_plan(8)
 
 ---
 
-# Hvad skal vi med holdtimerne?
+# Hvad skal vi med holdundervisningen?
 
-1. Recap af **vigtige pointer** fra forelæsning og pensum &rarr; så sætter det sig bedre fast
-    - Og det er ofte godt at høre flere alternative vinkler og formuleringer
-
---
-
-2. Mere **anvendelse**: Øvelsesopgaver, praktiske overvejelser og diskussion
+1. Recap af vigtige pointer fra forelæsning og pensum &rarr; så sætter det sig bedre fast
 
 --
 
-3. **Friere rum** til at diskutere, reflektere, hjælpe hinanden, stille "dumme" spørgsmål (= gode spørgsmål)
+2. Mere anvendelse: Øvelsesopgaver, praktiske overvejelser og diskussion
+
+--
+
+3. Friere rum til at diskutere, reflektere, hjælpe hinanden, stille "dumme" spørgsmål (= gode spørgsmål)
   - Vi er her for at lære, ikke for at teste hinandens viden
 
 ---
@@ -126,10 +120,9 @@ print_plan(8)
 # Undervisningsform
 
 - Zoom ...
-    - struktur: Lidt "forelæsning", recap og slides &rarr; øvelser og diskussion
+    - Struktur: Lidt "forelæsning", recap og slides &rarr; øvelser og diskussion
     - hyppige, korte break-outs
-    - spørgsmål: helst mundtligt (marker med x i chatten) eller alternativt skriv direkte i chatten
-    - svar: "raise hand"
+    - spørgsmål og kommentarer -- helst mundtligt (marker med x i chatten) eller alternativt skriv direkte i chatten
 
 --
 
@@ -150,6 +143,8 @@ print_plan(8)
     - Deltager i undervisningen
     - Siger til undervejs, hvis der er noget, der mangler/ikke fungerer/fungerer særlig godt
     
+--
+    
 - At I har noget metodeviden med fra tidligere - og siger til, når der er ekstra behov for at sætte det nye i relation til tidligere metode-ting
 
 --
@@ -157,10 +152,6 @@ print_plan(8)
 **Hvad er jeres forventninger/håb/ønsker til Metode 3, til holdtimerne, til mig?**
 
 - Brug 30 sekunder på at skrive en enkelt ting i chatten
-
---
-
-- Nogle spørgsmål inden vi går i gang?
 
 --
 
@@ -187,7 +178,7 @@ class: title-slide, center, middle
 
 # Pensum
 
-- Hansen, L. (2006). Security as practice: Discourse analysis and the Bosnian war. Routledge. Kapitel 2-3.
+- Hansen, L. (2013). Security as practice: Discourse analysis and the Bosnian war. Routledge. Kapitel 2-3.
 
 - Mik-Meyer, N. (2016). Othering, ableism and disability: A discursive analysis of co-workers' construction of colleagues with visible impairments. human relations, 69(6), 1341-1363.
 
@@ -205,7 +196,7 @@ class: title-slide, center, middle
 
 # Hvad er en diskurs?
 
-> "a discursive formation can be defined as 'a system of ... objects, types of statement, concepts, or thematic choices', which form 'a regularity' (an order, correlations, positions and functionings, transformations)" .right[Foucault, citeret i Hansen (2006: 17)]
+> "a discursive formation can be defined as 'a system of ... objects, types of statement, concepts, or thematic choices', which form 'a regularity' (an order, correlations, positions and functionings, transformations)" .right[Foucault, citeret i Hansen (2013: 17)]
 
 --
 
@@ -231,16 +222,15 @@ class: title-slide, center, middle
 
 --
 
-- **Tekster** er ikke lig med diskurser. Men de artikulerer hver især unikke varianter/udtryk af en diskurs - og er vores indgangsvinkel til diskurserne
+- **Tekster** er ikke lig med diskurser. Men de artikulerer hver især unikke varianter/udtryk af en diskurs -- og er vores indgangsvinkel til diskurserne
+
+--
+- På en måde er der en diskurs per tekst, men der er også (langt færre) "**basisdiskurser**", der strukturer politiske debatter. 
+    - Tekster konvergerer "around **common themes**, around certain **constructions of identity** and **sets of policies** considered viable, desirable or necessary ... **bound together by a smaller number of discourses**" (Hansen, 2013, p. 46)
 
 --
 
-- "**basale diskurser**" (idealtyper) strukturer politiske debatter og deres "underdiskurser" 
-    - Tekster konvergerer "around **common themes**, around certain **constructions of identity** and **sets of policies** considered viable, desirable or necessary ... **bound together by a smaller number of discourses**" (Hansen, 2006: 46)
-
---
-
-- Det er som udgangspunkt **eksplicitte artikulationer**, vi analyserer som diskurser (ikke ekstra-tekstuelle betydninger, men gerne inter-tekstuelle)
+- Det er **eksplicitte artikulationer** (ikke ekstra-tekstuelle betydninger), vi analyserer som diskurser
 
 ---
 
@@ -258,7 +248,7 @@ class: title-slide, center, middle
 
 --
 
-> To understand **language as political** is to see it as a site for the **production** and reproduction of particular **subjectivities and identities** while others are simultaneously **excluded**.
+> To understand **language as political** is to see it as a site for the **production** and reproduction of particular **subjectivities and identities** while others are simultaneously excluded.
 
 ---
 
@@ -296,22 +286,18 @@ Helt centralt begreb for poststrukturalistisk diskursanalyse!
 
 # Hvad er identitet?
 
-- Identiteter er ikke nødvendigvis noget, nogen "ejer" eller føler, men er "subjektpositioner" eller "mulige identiteter" i den sproglige repræsentation
+- - Identiteterne har ikke nødvendigvis nogen "ejer" i udgangspunktet, men er "subjektpositioner" eller "mulige identiteter" i den sproglige repræsentation
 
 - **Identiteter er relationelle**: 
     - Skabes af simultan positiv og negativ afgrænsning af identitet
-    - "Although the two processes [linking og differentiering] can be seperated analytically, it is important to stress that they are both part and parcel of the process of identity construction and enacted simultaneously" (Hansen 2006: 17).
+    - "Although the two processes [linking og differentiering] can be seperated analytically, it is important to stress that they are both part and parcel of the process of identity construction and enacted simultaneously" (Hansen 2013: 17).
 
 --
 
-- **Ordbogsdefinition** (Oxford English Dict):
+- Ordbogsdefinition (Oxford English Dict): 
     - (A) "*the characteristics determining who or what a person or thing is*" (standardforståelse)
     - (B) "*close similarity or affinity*" 
-    - A viser, hvordan identitet definerer konkrete ting/personer, mens B viser, hvorfor det giver god mening at tænke identitet som **linking** (lighed) - og differentation (forskel)
-
-???
-
-"Identity is at the ontological and epistemological center of poststructuralist discourse analysis"
+    - A viser, hvordan identitet definerer konkrete ting/personer, mens B viser, hvorfor det giver mening at tænke identitet som **linking** - og differentation
 
 ---
 
@@ -344,7 +330,7 @@ Pointer:
 
 - Sproget skaber identiteter gennem linking og differentiering (positiv og negativ afgrænsning)
 
-- "meaning is established not by the essence of a thing itself but through a series of *juxtapositions*, where one element is valued over its opposite" (Hansen 2006: 17)
+- "meaning is established not by the essence of a thing itself but through a series of *juxtapositions*, where one element is valued over its opposite" (Hansen 2013: 17)
 
 - Skal positiv og negativ her forstås i deskriptiv eller normativ forstand?
 ]
@@ -375,7 +361,7 @@ Hvordan? (nu bevæger vi os ind på metodologiens område)
 
 - Vi skal rette opmærksomheden mod hvordan identitet og politik artikuleres 
 
---
+-- 
 
 - Vi læser og fortolker tekster kvalitativt – ingen kvantificering (surprise). Modsat kvantitativ indholdsanalyse. 
 
@@ -399,9 +385,9 @@ Hvad ville Lene Hansen mon sige?
 
 ---
 
-# The impossibility of causality
+# Diskurser og kausalitet
 
-- Ad 1 (**forklaringer**): Der er ikke noget uden for diskursen. Derfor giver det ikke mening at sondre mellem diskursive forklaringer og andre (fx materielle) forklaringer &rarr; "the material ... is always discursively mediated" (Hansen, 2006: 22)
+- Ad 1 (**forklaringer**): Der er ikke noget uden for diskursen. Derfor giver det ikke mening at sondre mellem diskursive forklaringer og andre forklaringer.
 
 --
 
@@ -409,17 +395,15 @@ Hvad ville Lene Hansen mon sige?
 
 --
 
-- Ad 3 (**kausale spørgsmål**): Nej, man besvarer ikke kausale spørgsmål &rarr; fundamentalt anderledes tilgang (konstitutiv teori). Men stadigvæk interesseret i relationer mellem "ting" i den politiske verden.
+- Ad 3 (**kausale spørgsmål**): Nej, man besvarer ikke kausale spørgsmål &rarr; fundamentalt anderledes tilgang. Men stadigvæk interesseret i relationer mellem ting i den politiske verden.
 
 --
 
-- Det hele falder tilbage til ontologi og epistemologi: 
-    - "**Causal epistemology** cannot, however, establish its privilege through reference to any objective truth as **its own criterion for truth is enshrined within as historically situated discourse** of knowledge, not in a trans-historical, trans-discursive universal objectivity" (Hansen, 2006: 25).
-    - "Poststructuralism’s **break with causality** is thus not a flaw within its research design but an ontological and epistemological **choice**" (Hansen, 2006: 25)
+- "**The impossibility of causality** (Hansen, 2013: 22). Men der forudsættes agens og intentionalitet ved produktion af diskurser (aktører med intentioner om at koble identitet og politik for at muliggøre handlinger). 
 
-???
+--
 
-"It is, as a consequence, impossible to define identity as a variable that is causally separate from foreign policy or to measure its explanatory value in competition with non-discursive material factors."
+- Det hele falder tilbage til ontologien og epistemologien: "**Causal epistemology** cannot, however, establish its privilege through reference to any objective truth as **its own criterion for truth is enshrined within as historically situated discourse** of knowledge, not in a trans-historical, trans-discursive universal objectivity" (Hansen, 2013: 25).
 
 ---
 class: center, middle
@@ -432,7 +416,7 @@ class: center, middle
 
 - Hvilket emne/problemfelt/politikområde og relaterede "key events" ønsker du at undersøge?
 
-- Se evt. Tabel 4.2 i Hansen (2006) for inspiration
+- Se evt. Tabel 4.2 i Hansen (2013), kap. 4
 
 - Find noget spændende!
 
@@ -446,7 +430,6 @@ class: center, middle
     - Opfattelse af personer med handicap på arbejdspladsen (Mik-Meyer)
     - Storm på kongressen, QAnon, konspirationsteoretikere/magtkritiske
     - Klimakrise: Klimatosser og klimavenlige vs. klimaskurke og klimasyndere (virksomheder, stater, individer)
-    - Regulering af Facebooks brug af nyhedsmedier: platform?
 
 ---
 
@@ -454,13 +437,11 @@ class: center, middle
 
 - Hvad er det, vi vil undersøge?
 
-- Eksempel (Mik-Meyer, 2016: 1342): "in describing employees with impairments, **how do co-workers spontaneously engage in the ‘othering’** of employees with impairments, and how does their talk **challenge or reproduce ableism**?"
+- Afgørende i al empirisk videnskab uafhængigt af metode
 
-- Problemformuleringen er afgørende i al empirisk videnskab uafhængigt af metoden
+- Gælder i højeste grad også diskursanalyse (de relevante diskurser på et område afhænger direkte af problemstillingen)
 
 - Styrer hele analysen og læsningen
-
-- Gælder i højeste grad også diskursanalyse (fx afhænger de relevante tekster og diskurser på et område direkte af problemstillingen)
 
 ---
 
@@ -500,23 +481,21 @@ class: center, middle
 
 - Hvor stærke/svage er de forskellige positive/negative links (varierer graden af "anderledeshed")
 
-- Vær opmærksom på, om stærkt rodfæstede diskurser overﬂødiggør eksplicitte betegnere
+- Vær opmærksom på, om stærkt rodfæstede diskurser overﬂødiggøre eksplicitte signs
 
-- Hav blik for hvordan udsagnene er produceret (genre)
-
-- Hav blik for dynamikker/(u)stabilitet: identiteter kan få og miste betydning over tid (dis/appearance). Eller de kan også konstrueres ift. sig selv over tid (eksempel: EU)
+- Hav blik for dynamikker (afhængigt af problemformulering): Identiteter kan få og miste betydning over tid (dis/appearance). Eller de kan også konstrueres ift. sig selv over tid (eksempel: EU)
 
 ---
 
 ## Trin 6: Analyse II 
 
-- På hvilke (analytiske) dimensioner konstrueres **identiteter** gennem links og differentiering?
+- På hvilke (analytiske) dimensioner konstrueres identiteter gennem links og differentiering?
 
 - **Spatial**: Grænsedragning i rum - også abstrakte rum.
 
-- **Temporal**: Forandring, potentiale, udvikling, progression, stagnation mv.
+- **Temporal**: Differentiering mht. potentiale, udvikling, progression, stagnation mv.
 
-- **Etisk** (responsibility): Hvor placeres ansvarlighed (for hvad/hvem)?
+- **Etisk** (responsibility): Hvor placeres ansvaret for at handle?
 
 Gode analytiske begreber til afdække de diskursive strukturer og systematisere analysen.
 
@@ -530,7 +509,7 @@ Gode analytiske begreber til afdække de diskursive strukturer og systematisere 
 
 - Hvordan udfordres og testes eksisterende forståelser af virkeligheden?
 
-- Hvilke politiske dynamikker afføder den diskursive opposition: fx afvisning eller tilpasning?
+- Hvilke politiske reaktioner afføder den diskursive opposition: fx afvisning eller tilpasning?
 
 --
 
