@@ -142,15 +142,14 @@ print_plan(8)
 
     - Generelt er forberedte mht. læsning og øvelsesopgaver
     - Deltager i undervisningen (det kan man gøre på mange måder, intet pres)
-    - Siger til undervejs, hvis der er noget, der ikke fungerer/fungerer særlig godt (fx med Zoom)
-    
-- At I har noget metodeviden med fra tidligere - og siger til, når der er ekstra behov for at sætte det nye i relation til tidligere metode-ting
+    - Siger til hvis der er noget, der ikke fungerer/fungerer særlig godt (fx med Zoom)
+    - Siger til hvis der er særligt behov for at sætte det nye stof i relation til tidligere metode-ting
 
 --
 
-**Hvad er jeres forventninger/håb/ønsker/gode råd til Metode 3, til holdtimerne, til mig?**
+**Hvad er jeres forventninger/ønsker/råd til Metode 3, til holdtimerne, til mig?**
 
-- Brug 30 sekunder på at skrive en enkelt ting i chatten
+- Brug 30 sekunder på at skrive en enkelt vigtig ting i chatten (jeg læser senere)
 
 --
 
