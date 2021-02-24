@@ -402,7 +402,7 @@ Hvad ville Lene Hansen mon sige?
 - Det hele falder tilbage til ontologi og epistemologi: 
     - "**Causal epistemology** cannot, however, establish its privilege through reference to any objective truth as **its own criterion for truth is enshrined within as historically situated discourse** of knowledge" (Hansen, 2006: 25).
     - "Poststructuralism’s **break with causality** is thus not a flaw within its research design but an ontological and epistemological **choice**" (ibid.)
-    - konstitutiv teori - men stadigvæk interesseret i relationer mellem "ting" i den politiske verden
+    - Men stadigvæk interesseret i relationer mellem "ting" i den politiske verden
 
 ???
 
@@ -606,17 +606,11 @@ include_graphics("media/cpdk.png")
 
 - **Repræsentationer er væsentlige for politik** (Lene Hansen)
 
-- Diskurser er systemer af tegn, der strukturer og konstituerer identiteter og politikker via sproglige repræsentationer (linking og differentiering)
+- Diskurser er systemer af tegn, der strukturer den sproglige konstruktion af identiteter og politikker
 
-- Sprog skaber virkelighed, men enhver sproglig konstruktion er foreløbig og ustabil
+- Vi studerer diskurser gennem kvalitativ analyse af tekster
 
-- Identitet og politik er *gensidigt* konstituerende i de sproglige repræsentationer: Diskurser muliggør politik, der (re)producerer diskurser
-
-- Vi studerer politiske diskurser gennem kvalitativ analyse af tekster og andre kvalitative data
-
-- Diskursanalyse kan afdække, hvordan diskurser konstituerer identiteter og dermed legitimerer politik i en given kontekst, og hvordan modfortælllinger udfordrer de dominerende repræsentationer (magt!)
-
-- Find et spændende område og kast jer ud i det. Læn jer op ad Lene Hansens bog
+- Find et spændende område og kast jer ud i det! Læn jer op ad Lene Hansens bog
 
 ---
 
