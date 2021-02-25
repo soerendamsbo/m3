@@ -71,21 +71,20 @@ Sys.setlocale(locale = "da_DK.UTF-8")
 # Mit take på Metode 3
 
 - Mega fedt fordi man:
+
     - hurtigt lærer at **kunne** en masse konkret frem for "bare" at **vide** meget 
+    
     - laver egne empiriske analyser (så bliver det til forskning)
 
 --
 
 - Ret **hurtig overflyvning** af metoderne
+
     - Man bliver først ekspert i en metode, når man har anvendt den &rarr; hjemmeopgaven er en unik mulighed for at blive ekspert!
 
 --
 
-- **Forskningsspørgsmålet** er altid det primære (hvad er vi interesserede i, hvad vil vi finde svar på) &rarr; **metoden** er en teknik (med antagelser) til at besvare spørgsmålet
-
---
-
-- Kunne (måske) have været et rent **teknisk fag**, men ... godt det ikke er. 
+- **Metoderne** er teknikker (med antagelser) til at besvare **forskningsspørgsmålet** &rarr; er altid det primære
 
 ---
 
@@ -131,6 +130,7 @@ print_plan(8)
     - svar: "raise hand"
     - live sessions (optages ikke)
     - video på som hovedregel (især fra start og i grupper, fuld forståelse for undtagelser)
+    - godmorgen/farvel
     
 ---
 
@@ -274,7 +274,6 @@ class: title-slide, center, middle
 
 - **Sproget (re)producerer bestemte identiteter**, som (u)muliggør handlinger/politikker
 - Sproget er strukturerende, stabilt og ustabilt på en og samme tid 
-- Diskurser vil forsøge at etablere/stabilisere sig, men vil altid være udfordret af andre (mod)diskurser
 
 ---
 
@@ -302,10 +301,6 @@ class: title-slide, center, middle
     - (B) "*close similarity or affinity*" 
     - B viser, hvorfor det giver god mening at tænke identitet som **linking** (lighed) - og differentation (forskel)
 
-???
-
-""
-
 ---
 
 # Linking og differentiering
@@ -331,7 +326,7 @@ knitr::include_graphics("media/discourse_linkdiff1.png")
 # Linking og differentiering
 
 .pull-left[
-Forklar disse figurer. Hvad fortæller de, og hvad er forskellen? 
+Forklar disse figurer. Hvad fortæller de? Hvad er forskellen? 
 
 Pointer:
 
@@ -362,7 +357,7 @@ Hvordan? (nu bevæger vi os ind på metodologiens område)
 
 --
 
-- Vi læser og fortolker tekster kvalitativt (ingen kvantificering - surprise! - modsat kvantitativ indholdsanalyse). 
+- **Methodology of reading** &rarr; vi læser og fortolker tekster kvalitativt (ingen kvantificering - surprise! - modsat kvantitativ indholdsanalyse)
 
 - Retter opmærksomheden mod hvordan identitet og politik artikuleres
 
@@ -484,6 +479,7 @@ class: center, middle
 - Hvilke **politikker** artikuleres og hvordan hænger de sammen med identiteterne?
 
 - Er der sprækker i diskurserne? Hvordan udfordres og testes eksisterende forståelser af virkeligheden?
+    - diskurser vil forsøge at etablere/stabilisere sig, men vil altid være udfordret af andre (mod)diskurser
 
 --
 
@@ -547,10 +543,6 @@ Læs "Dianas" debatindlæg og snak sammen om følgende spørgsmål:
 ---
 
 # Øvelsesopgave 3.2 og 3.3
-
-- Same procedure
-
-***
 
 Læs afgørelsen fra Flygtningenævnet og snak sammen om følgende spørgsmål:
 
