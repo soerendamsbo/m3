@@ -63,14 +63,13 @@ Sys.setlocale(locale = "da_DK.UTF-8")
 
 --
 
-- Andet at fortælle om holdet?
-
+- Andet?
 
 ---
 
 # Mit take på Metode 3
 
-- Mega fedt fordi man:
+- Mega fedt, fordi man:
 
     - hurtigt lærer at **kunne** en masse konkret frem for "bare" at **vide** meget 
     
@@ -230,7 +229,11 @@ class: title-slide, center, middle
 
 --
 
-- "**Basale diskurser**" er idealtyper, der strukturer politiske debatter og deres "underdiskurser" 
+- "**Basale diskurser**" er idealtyper, der strukturer politiske debatter og deres "underdiskurser"
+
+???
+
+"texts converge around common themes, around certain constructions of identity and sets of policies ... debates are as a consequence bound together by a smaller number of discourses" (Hansen, 2006: 46)
 
 ---
 
@@ -388,7 +391,7 @@ Hvad ville Lene Hansen mon sige?
 --
 
 - Det hele falder tilbage til ontologi og epistemologi: 
-    - "**Causal epistemology** cannot, however, establish its privilege through reference to any objective truth as **its own criterion for truth is enshrined within as historically situated discourse** of knowledge" (Hansen, 2006: 25).
+    - "[Causal epistemology's] ... own criterion for truth is enshrined within as historically situated discourse of knowledge" (Hansen, 2006: 25).
     - "Poststructuralism’s **break with causality** is thus not a flaw within its research design but an ontological and epistemological **choice**" (ibid.)
     - Men stadigvæk interesseret i relationer mellem "ting" i den politiske verden
 
@@ -523,7 +526,7 @@ include_graphics("https://politiken.dk/migration_catalog/img5713570.c8zx8c/ORIGI
 
 - 10 min.
 - Hver gruppe vælger en referent
-- Når vi er tilbage, skriver referenterne svarene ind her (så kort som muligt): [kortlink.dk/2ama4](https://docs.google.com/document/d/1Hp063k_JNguUehdmFl8mnPBvWA9DPdN3HY57bWblCoA/edit?usp=sharing)
+- Referenterne skriver stikord ind her: [kortlink.dk/2ama4](https://docs.google.com/document/d/1Hp063k_JNguUehdmFl8mnPBvWA9DPdN3HY57bWblCoA/edit?usp=sharing)
 - [Link](https://absalon.ku.dk/courses/46377/files/4520383?module_item_id=1219481) til tekster på Absalon
 
 ***
@@ -573,7 +576,6 @@ I 2019 skiftede spastikerforeningen navn til "CP Danmark". Baggrunden er beskrev
 ```{r}
 include_graphics("media/cpdk.png")
 ```
-
 
 ???
 
