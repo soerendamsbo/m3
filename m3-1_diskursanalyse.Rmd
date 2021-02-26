@@ -526,7 +526,7 @@ include_graphics("https://politiken.dk/migration_catalog/img5713570.c8zx8c/ORIGI
 
 - 10 min.
 - Hver gruppe vælger en referent
-- Referenterne skriver stikord ind her: [kortlink.dk/2ama4](https://docs.google.com/document/d/1Hp063k_JNguUehdmFl8mnPBvWA9DPdN3HY57bWblCoA/edit?usp=sharing)
+- Referenterne skriver stikord ind i Google Docs
 - [Link](https://absalon.ku.dk/courses/46377/files/4520383?module_item_id=1219481) til tekster på Absalon
 
 ***
