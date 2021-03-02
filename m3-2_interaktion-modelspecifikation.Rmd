@@ -464,30 +464,56 @@ class: title-slide, center, middle
 
 - Lad os tage et par opgaver ad gangen i break-out rooms (ca. 10 min. per to opgaver)?
 
+- Tanken er, at I selv sidder i Stata og laver opgaverne
+
 - Jeg laver også opgaverne i Stata (I får do-file med svar efter timen) og så fortolker vi sammen 
 
 - Vi snakker om: 
 
-    - (Kort) hvad de rigtige kommandoer er
+    - (*Kort*) hvad de rigtige kommandoer er
 
-    - (Vigtigst) hvordan resultaterne fortolkes &rarr; hvad svaret er på spørgsmålene
+    - (*Vigtigst*) hvordan resultaterne fortolkes &rarr; hvad svaret er på spørgsmålene
+    
+***
+
+Link til slides: https://kortlink.dk/2acdr
+
+Link til data (*states.dta* på Absalon): https://absalon.ku.dk/files/4521284/download?download_frd=1  
+
+Link til "tom" do-fil med spørgsmål: 
+
+---
+
+* 1. I skal undersøge om urbanisering (urban - procent andel af mennesker, der bor i byområder) har en indﬂydelse på antallet af restriktioner af lovlig abort (abortlaw2017), når der kontrolleres for befolkningens gennemsnitlige støtte til homoseksuelle rettigheder (gay_support) og hvorvidt det er en sydlig stat ’Southern State’ (south). Før I gør det, skal I reﬂektere hvad jeres analyseenhed er og undersøge variablenes måleniveau (fx med codebook). Fortolk regressionsresultatet af modellen.
+
+* 2. Undersøg dernæst vha. en interaktionsmodel om stemmeandelen til Trump i 2016 (trump16) modererer effekten af urbanisering i modellen fra opgave 4.1. Husk at der enten skal stå i. eller c. foran de variable som interageres. Fortolk resultatet. Illustrér interaktionen mellem Trump-stemmeandel og urbanisering vha. marginale effekter (jf. Sønderskov afsnit 10.1.17).
+
+* 3. Sønderskov (2014) kommenterer, at der i modeller med interaktion ofte vil være multikollinearitet. Diskutér, hvorfor det er tilfældet og undersøg, hvorvidt det også gælder i modellen 4.2. Derudover anbefaler Sønderskov at anvende robuste standardfejl i modeller med interaktionsled. Ændrer der på resultaterne i ovenstående [4.2]?
+
+* 4. Undersøg dernæst, om der er forskel i effekten af befolkningens gennemsnitlige støtte til homoseksuelle rettigheder (gay_support) mellem Sydstaterne og andre stater. Lav en interaktionsmodel med interaktion mellem gay_support og south. Fortolk resultatet.
+
+* 5. Undersøg dernæst, om der er forskel i effekten af tidsbegrænsninger for lovgiver mellem Sydstaterne og andre stater. Lav en interaktionsmodel med interaktion mellem term_limits og south. Fortolk resultatet og illustrér interaktionen vha. marginale effekter.
+
+* 6. Undersøg dernæst, om der er forskel i effekten af urbanisering mellem graden af sekularisme (secularism3). Lav en interaktionsmodel med interaktion mellem urban og secularism3. Fortolk resultatet.
+
+* 7. Diskuter i hvilken grad de forskellige kriterierne for kausalitet er overholdt i disse analyser.
 
 ---
 
 # En sidste vigtig pointe
 
-Valget af uafhængig (X) og modererende (Z) variabel er et teoretisk valg - et spørgsmål om synsvinkel.
+Valget af uafhængig (X) og modererende (Z) variabel er et teoretisk valg - et spørgsmål om synsvinkel
 
 Hvorfor? (hint: $\beta_1 * X * Z = \beta_1 * Z * X$)
 
 --
 
-Matematisk set er interaktionen symmetrisk (Stata skelner ikke mellem X * Z og Z *X):
+Matematisk set er interaktionen symmetrisk (Stata skelner ikke mellem X * Z og Z * X):
 
-- Interaktionsleddet fortæller, hvordan X &rarr; Y er forskellig afhængigt af Z.
-- Men også hvordan Z &rarr; Y afhænger af X.
-- Det er op til os (vores argument, problemformulering, forskningsdesign, hypotese), hvordan vi fortolker og præsenterer resultaterne. 
-- Det er dog meget sjældent i praksis, at begge har en kausal fortolkning (det kræver meget af vores forskningsdesign).
+- Interaktionsleddet fortæller, hvordan X &rarr; Y er forskellig afhængigt af Z
+- Men også hvordan Z &rarr; Y afhænger af X
+- Det er op til os (vores argument, problemformulering, forskningsdesign, hypotese), hvordan vi fortolker og præsenterer resultaterne
+- Det er dog meget sjældent i praksis, at begge har en kausal fortolkning (det kræver meget af vores forskningsdesign)
 
 Summa summarum:
 
@@ -497,9 +523,9 @@ Standard practice og hjælp til sig selv at anse den ene som kausal faktor (X) o
 
 # Opsummering
 
-- Interaktionsmodeller er fede, da der kan gemme sig rigtig meget information i interakive modeller. 
+- Interaktionsmodeller er fede, da der kan gemme sig rigtig meget information i interakive modeller
 
-- Men man skal ofte holde tungen lige i munden, når man fortolker interaktionseffekter/moderation/marginale effekter.
+- Men man skal ofte holde tungen lige i munden, når man fortolker interaktionseffekter/moderation/marginale effekter
 
 - Kan kaste lys, over hvordan en effekt varierer på tværs af forskellige typer subjekter (med forskellig Z)
 
@@ -514,7 +540,7 @@ Standard practice og hjælp til sig selv at anse den ene som kausal faktor (X) o
 - **Logistisk regression (logit)**
 
 - En ikke-lineær generalisering af OLS (lineær regression), som bruges, når den *afhængige variabel* er binær 
-    - 0/1, "ja"/"nej", "succes"/"fiasko"
+    - 0/1, ja/nej, succes/fiasko
 
 - En række fordele ift. OLS, når outcome er binært - men også ulemper
 
