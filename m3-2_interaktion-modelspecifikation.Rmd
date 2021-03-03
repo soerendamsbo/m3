@@ -31,7 +31,8 @@ Sys.setlocale(locale = "da_DK.UTF-8")
 # Flytning af holdtime
 
 - IP-eksamen d. 8. april
-- Vi finder erstatningstime vha. poll i pausen
+
+- Vi finder erstatningstime vha. poll i pausen (dagen før eller dagen efter)
 
 ---
 
@@ -74,7 +75,7 @@ print_plan(9)
 
 - At træne os i at **fortolke** interaktionsmodeller pba. Stata output
 
-- Side note: Timen hedder "og modelspecifikation", fordi interaktionsanalyse foretages ved at specificere sin regressionsmodel på en bestemt måde
+Side note: Timen hedder "og modelspecifikation", fordi interaktionsanalyse foretages ved at specificere sin regressionsmodel på en bestemt måde
 
 ---
 
@@ -87,8 +88,6 @@ print_plan(9)
 ---
 
 # Lidt indledende begrebsafklaring
-
-**Interaktionsbegreber**
 
 - **Interaktion**: *X interagerer med Z* i sin påvirkning af Y 
 
@@ -115,13 +114,15 @@ De beskriver alle det samme: Vi undersøger X og Z's fælles indflydelse på Y (
 
 - Ordet **"effekt"** implicerer kausalitet &rarr; at en uafhængig variabel kausalt forårsager en ændring i en afhængig variabel.  
 
-- Når vi snakker interaktion i dag bruger vi ordet "effekt" i flæng uden rigtigt at forholde os til, om kriterierne for kausalitet er opfyldt (ofte er de ikke). Mao. skyder vi spørgsmål om kausalitet lidt til hjørne og antager simpelthen at "**X påvirker Y**" - for bedre at kunne lære om interaktion.
+- Når vi snakker interaktion i dag bruger vi ordet "effekt" i flæng uden rigtigt at forholde os til, om kriterierne for kausalitet er opfyldt (ofte er de ikke). Mao. skyder vi spørgsmål om kausalitet lidt til hjørne og antager simpelthen at "**X påvirker Y**" - for bedre at kunne lære om interaktion med **Z**.
+
+--
 
 - Vi vender tilbage til spørgsmålet om kausalitet senere. 
 
 ---
 
-# Interaktion
+# Et første blik på interaktion
 
 ```{r, echo=F, fig.width=12, fig.height=3.5, fig.align='center'}
 coords <- tribble(
@@ -155,8 +156,6 @@ cowplot::plot_grid(p1, p2, greedy=F, labels = c("Simpel (additiv) model", "Inter
                    label_size = 20)
 ```
 
---
-
 - Indtil videre har I lært (med lineær regression) at undersøge, hvordan en afhængig variabel (Y) påvirkes af en eller flere uafhængige variable (X). Dette kaldes en "**additiv model**"
 
 --
@@ -176,7 +175,7 @@ cowplot::plot_grid(p1, p2, greedy=F, labels = c("Simpel (additiv) model", "Inter
 
 --
 
-- Det antages, at effekten af X på Y er konstant (effekten af $X_1$ er $\beta_1$) uanset hvilke værdier de øvrige uafhængige variable i modellen har
+- Antagese: Effekten af X på Y er konstant (effekten af $X_1$ er $\beta_1$) uanset hvilke værdier de øvrige uafhængige variable i modellen har
 
 --
 
@@ -186,7 +185,7 @@ cowplot::plot_grid(p1, p2, greedy=F, labels = c("Simpel (additiv) model", "Inter
 
 # Additive modeller
 
-Hvis vi har en model med to uafhængige variable, X og Z, kan den additive model se således ud:
+Hvis vi har en model med to uafhængige variable, X og Z, kunne den additive model se således ud:
 
 .pull-left[
 
@@ -220,11 +219,11 @@ ggplot(data=bind_rows(a,b), aes(x=X, y=Y, color=Z)) +
 
 **Hvorfor interaktion?**
 
-- Når effekten af X interagerer med en tredjevariabel Z, kan det være misvisende at se på gennemsnitlige effekter (dvs. lave alm. lineær regression uden interaktion &rarr; additiv model)
+- Når effekten af X interagerer med en tredjevariabel Z, kan det være **misvisende at se på gennemsnitlige effekter** (dvs. lave alm. lineær regression uden interaktion &rarr; additiv model)
 
 --
 
-- Derudover gør interaktionsanalyse os i stand til at besvare andre typer spørgsmål/hypoteser:
+- Derudover gør interaktionsanalyse os i stand til at besvare **andre (vigtige) spørgsmål/hypoteser**:
     - modererer Z mon X &rarr; Y?
     - afhænger X &rarr; Y af Z?
     - er X's påvirkning af Y forskellig for forskellige niveauer af Z?
@@ -246,11 +245,15 @@ Interaktionsmodel | $Y = \alpha + \beta_1 X + \beta_2 Z + \beta_3 X Z$
 
 - Hvad er konstituerende led (hovedled) og hvad er interaktionsled?
 
-- Vi kommer tilbage til fortolkning om lidt.
+--
+
+- Vi kommer tilbage til fortolkning om lidt
 
 ---
 
 # Varierende hældning = varierende effekt
+
+**Interaktiv model**
 
 .pull-left[
 
@@ -258,7 +261,9 @@ Interaktionsmodel | $Y = \alpha + \beta_1 X + \beta_2 Z + \beta_3 X Z$
     - Hældningen for Z = "A" er 2
     - Hældningen for Z = "B" er 0.5 
 
-- Hældningen for Z = "B" kan også udtrykkes som forskellen fra A, dvs. *-1.5* (*0.5-2=-1.5*) &rarr; det er sådan Stata præsenterer interaktionseffekten for os
+- Hældningen for Z = "B" kan også udtrykkes som forskellen fra A, dvs. *-1.5*, fordi $ 0.5 - 2 = -1.5 $) 
+
+- Det er sådan Stata ville præsentere interaktionseffekten for os
 
 - I Stata tester vi, om der statistisk signifikant forskel på hældningerne 2 og 0.5 &rarr; om differencen (*-1.5*) er signifikant forskellig fra nul]
 
@@ -300,7 +305,7 @@ Interaktion mellem to uafhængige variable specificeres ved hjælp **#** a la:
 
 - I eksemplet er x kontinuert (derfor "c.") og z er kategorisk (derfor "i.")
 
-- Når man bruger **##** i stedet for **#** inkluderer Stata automatisk de konstitutive led (hovedleddene), dvs. *c.x* og *i.z*, foruden interaktionsleddet (andenordensleddet) *c.x#i.z*.
+- Når man bruger **##** i stedet for **#** inkluderer Stata automatisk de konstitutive led (hovedleddene), dvs. *c.x* og *i.z*, foruden interaktionsleddet (andenordensleddet) *c.x#i.z*
 
 ---
 
@@ -313,31 +318,41 @@ Når man laver interaktion er det særligt vigtigt at være opmærksom på - og 
 
 --
 
+- Man kan alle være "for tydelig" med brug af "i." og "c."
+
+-
+
+- Måleniveauer er også afgørende for fortolkningen &rarr; det ser vi i øvelsesopgaverne om lidt
+
+--
+
 Det giver altså:
 
 - Når X er kontinuert og Z er kategorisk/binær: **reg y c.x##i.z**
 - Når både X og Z er kontinuert: **reg y c.x##c.z**
 - Når både X og Z er kategorisk/binær: **reg y i.x##i.z**
 
+
+
 --
 
-- Måleniveauerne er også afgørende for fortolkningen &rarr; det ser vi i øvelsesopgaverne om lidt
+
 
 ---
 
 # Hvorfor ## og ikke bare # i Stata?
 
-Som sagt giver *x##z* os automatisk både hovedleddene og interaktionsleddene i regressionen.
-
---
+Som sagt giver *x##z* os automatisk både hovedleddene og interaktionsleddene i regressionen
 
 Men hvorfor ikke bare køre med # (uden hovedled)?
 
-Fordi det i mange tilfælde (afhængigt af måleniveau) implicit antager at begge hovedled er lig med 0, hvilket: 
+--
 
-- kan medføre et biased estimat af interaktionen, 
-- med sikkerhed medfører forvirring og en anden tolkning, og 
-- sjældent er brugbart.
+Fordi det i mange tilfælde (afhængigt af måleniveau) implicit antager, at begge hovedled er lig med 0, hvilket: 
+
+- kan medføre et biased estimat af interaktionen
+- med sikkerhed medfører forvirring og en anden tolkning
+- sjældent er nyttigt
 
 --
 
@@ -349,19 +364,20 @@ Fordi det i mange tilfælde (afhængigt af måleniveau) implicit antager at begg
 
 Når vi fortolker et regressionsoutput med interaktion et det væsentlige at fortolke koefficienten for interaktionsleddet:
 
-- **Fortegn**: Retning som effekten ændrer sig, når den modererende variabel (Z) ændres med +1 &rarr; bliver effekten (X &rarr; Y) *større eller mindre*, når Z vokser?
+- **Fortegn**: Retning som hovedeffekten (X &rarr; Y) bevæger sig, når den modererende variabel (Z) ændres med +1
+    - &rarr; *større eller mindre*?
 
-- **Størrelse**: Hvor meget effekten ændrer sig, når den moderende variabel ændres med +1 &rarr; *hvor meget* ændrer effekten (X &rarr; Y) sig, når Z vokser?
-
---
-
-- **Beta-koefficienten for X-hovedleddet** fortæller os, hvordan X påvirker Y, når $Z = 0$ &rarr; "udgangspunktet" for effekten. 
-    - Det er en *marginal effekt*. 
-    - Bemærk at koefficienterne for de konstituerende led ikke altid har en meningsfuld tolkning &rarr; Stata og *margins* hjælper os om lidt.
+- **Størrelse**: *Hvor meget* hovedeffekten (X &rarr; Y) ændrer sig, når den moderende variabel (Z) vokser med +1
 
 --
 
-- **Beta-koefficienten for interaktionsleddet** lægges til hovedleddets koefficient (eller trækkes fra) for at få de *marginale effekter* af X på Y for andre niveauer af Z end nul:
+- **Beta-koefficienten for X-hovedleddet**: Hvordan påvirker X &rarr; Y, når den modererende variabel er $Z = 0$ &rarr; kan ses som "udgangspunktet" for effekten
+    - Det er en **marginal effekt** &rarr; effekten for en bestemt gruppe 
+    - Bemærk at koefficienterne for de konstituerende led ikke altid har en meningsfuld tolkning (Stata og *margins* hjælper os om lidt)
+
+--
+
+- **Beta-koefficienten for interaktionsleddet (X * Z):** Den "ekstra effekt", der lægges til hovedleddets koefficient (eller trækkes fra) for at få de **marginale effekter af X &rarr; Y** for andre niveauer af Z end 0
 
 ---
 
@@ -371,13 +387,24 @@ Når vi fortolker et regressionsoutput med interaktion et det væsentlige at for
 
 - Hvis Z er **kontinuert**: *Hvor meget vokser effektstørrelsen, når Z vokser med +1?*
 
+--
+
 - Hvis Z er **binær**: *Hvad er forskellen i effektstørrelse mellem de to Z-grupper?*
 
-- Hvis Z er **kategorisk** med mere end to kategorier: 
-    - Stata indsætter automatisk en serie af (antal kategorier - 1) binære variable, som sammenligner hvert niveau af Z med det laveste niveau af Z (referencekategorien). 
-    - Interaktions-koefficienterne giver her forskellene i effektstørrelse mellem Z-gruppe 1 og 2, Z-gruppe 1 og 3, Z-gruppe 1 og 4, osv.
+--
 
-- Vi øver det lige om lidt!
+- Hvis Z er **kategorisk** med mere end to kategorier: 
+    - Stata indsætter automatisk en serie af (antal kategorier - 1) binære variable, som sammenligner hvert niveau af Z med det laveste niveau af Z (referencekategorien)
+    - Der er et interaktionsled (X * Z) for hver af disse "sammenligninger" 
+    - Interaktions-koefficienterne giver her forskellene i effektstørrelse mellem Z-gruppe 1 og 2, Z-gruppe 1 og 3, Z-gruppe 1 og 4, osv.
+    
+--
+
+- Den mest tricky - by far! - er, når **både X og Z er kategoriske**. Det følger fuldstændigt samme princip, så det er altså ikke umuligt. Men tungen skal holdes lige i munden, fordi der er mere end én "hovedeffekt" (X &rarr; Y), som så varierer forskelligt for forskellige niveauer af Z. Den springer vi over for nu.
+
+--
+
+- Vi øver det lige straks!
 
 ???
 
@@ -387,43 +414,49 @@ $Y_i = \beta_0 + \beta_1 X_{i} + \beta_2 Z_{i} + \beta_3 X_i Z_i +\epsilon_i$
 
 # Marginale effekter
 
-- Når vi beregner effekten af X &rarr; Y for forskellige niveauer af Z, taler vi om marginale effekter.
+- Når vi beregner den betingede effekt af **X &rarr; Y** for forskellige niveauer af Z, taler vi om **marginale effekter**
+
+- Kan forstås som effekten (X &rarr; Y) for forskellige grupper eller typer af observationer
 
 --
 
-- Beregnes i Stata, efter vi har kørt regressionen, ved hjælp af *margins*. Den mest anvendelige kommando er:
+- Beregnes i **Stata**, efter vi har kørt regressionen, ved hjælp af *margins*. Den mest anvendelige kommando er:
 
 > margins, dydx(x) at(z = (1 2 3 4 5 6 7 8 9 10)) 
 
-... hvor X er vores kausale variabel, Z er vores modererende tredjevariabel og tallene 1-10 er de niveauer af Z, som vi ønsker at beregne den **marginale effekt** (af X &rarr; Y) for. 
+... hvor X er vores kausale variabel, Z er en modererende tredjevariabel og 1-10 er de niveauer af Z, som vi ønsker at beregne den **marginale effekt** af X &rarr; Y for
 
 --
 
-- (Vær varsom med at *ekstrapolere*, dvs. beregne effekten for subjekter, som ikke findes i data eller måske overhovedet, fx en person med negativ alder)
+- *at(z = (1 2 3 4 5 6 7 8 9 10))* kan også skrives som *at(z = (1/10))* eller *at(z = (1(1)10))* 
 
 --
 
-Det hjælper ofte at visualisere de marginale effekter. Det gør ved at køre *marginsplot* umiddelbart efter *margins*.
+- (Vær varsom med at *ekstrapolere*, dvs. beregne marginal effekt for subjekter, som ikke findes i data eller måske overhovedet, fx en -200-årig)
+
+--
+
+Det hjælper ofte (faktisk altid!) at visualisere de marginale effekter. Det gør ved at køre *marginsplot* umiddelbart efter *margins*: 
+
+> marginsplot
 
 ---
 
 # Eksempler
 
-Problemstillingen og hypotesen er afgørende!
+**Problemstillingen og hypotesen er afgørende!**
 
 1. Modererer kvaliteten af statslige institutioner (Z) ulandsbistands (X) effekt på økonomisk vækst (Y)? (Sønderskov, 2014: 234ff)
 
-2. Carolins eksempel: Does the effect of national identification (X) on political trust (Y1) and participation (Y2) differ between natives and immigrants (Z)?
+2. Does the effect of national identification (X) on political trust (Y1) and participation (Y2) differ between natives and immigrants (Z)? (Rapp, 2018)
 
-3. **Min egen forskning: Temperaturer (X) påvirker klimaholdninger (Y), men afhænger effekten af (1) uddannelsesniveau, (2) partitilhørsforhold eller (3) nyhedsforbrug? &rarr;**
+3. Min egen forskning: **Temperaturer (X) påvirker klimaholdninger (Y), men afhænger effekten af (Z1) uddannelsesniveau, (Z2) partitilhørsforhold eller (Z3) nyhedsforbrug? (Damsbo-Svendsen, 2020) 
 
-???
-
-Damsbo-Svendsen, S. (2020). How weather experiences strengthen climate opinions in Europe. *West European Politics*.
+**&rarr;**
 
 ---
 
-## Temperaturer (X) påvirker klimaholdninger (Y), men afhænger effekten af (Z1) uddannelsesniveau, (Z2) partitilhørsforhold eller (Z3) nyhedsforbrug?
+Temperaturer (X) påvirker klimaholdninger (Y), men **afhænger effekten af (Z1) uddannelsesniveau, (Z2) partitilhørsforhold eller (Z3) nyhedsforbrug?**
 
 ```{r, out.width="63%"}
 include_graphics("media/d-s_regtable.png")
@@ -435,7 +468,7 @@ Damsbo-Svendsen, S. (2020). How weather experiences strengthen climate opinions 
 
 ---
 
-## Marginale effekter
+Hvordan ser de **marginal effekter** ud?
 
 ```{r, out.width="63%"}
 include_graphics("media/d-s_figure.png")
@@ -462,15 +495,16 @@ class: title-slide, center, middle
 
 # Øvelsesopgaver
 
-- Lad os tage et par opgaver ad gangen i break-out rooms (ca. 10 min. per to opgaver)?
+- Vi laver de første 2-3 opgaver sammen
 
-- Tanken er, at I selv sidder i Stata og laver opgaverne
+- Derefter laver I resten i grupper (4-7)
+    - Break-out sessions (ca. 20 min.)
+    - I sidder selv og laver opgaverne i Stata (brug evt. screen-share)
+    - Muligvis hopper jeg lidt rundt i rummene
+    
+- Vi gennemgår og fortolker sammen: 
 
-- Jeg laver også opgaverne i Stata (I får do-file med svar efter timen) og så fortolker vi sammen 
-
-- Vi snakker om: 
-
-    - (*Kort*) hvad de rigtige kommandoer er
+    - (*Kort*) hvad de rigtige Stata-kommandoer er
 
     - (*Vigtigst*) hvordan resultaterne fortolkes &rarr; hvad svaret er på spørgsmålene
     
@@ -482,25 +516,25 @@ class: title-slide, center, middle
 
 ---
 
-# Spørgsmål 1-3
+# Spørgsmål 1-2
 
-1. I skal undersøge om urbanisering (urban - procent andel af mennesker, der bor i byområder) har en indflydelse på antallet af restriktioner af lovlig abort (abortlaw2017), når der kontrolleres for befolkningens gennemsnitlige støtte til homoseksuelle rettigheder (gay_support) og hvorvidt det er en sydlig stat ’Southern State’ (south). Før I gør det, skal I reflektere hvad jeres analyseenhed er og undersøge variablenes måleniveau (fx med codebook). Fortolk regressionsresultatet af modellen.
+- 1. I skal undersøge om urbanisering (urban - procent andel af mennesker, der bor i byområder) har en indflydelse på antallet af restriktioner af lovlig abort (abortlaw2017), når der kontrolleres for befolkningens gennemsnitlige støtte til homoseksuelle rettigheder (gay_support) og hvorvidt det er en sydlig stat ’Southern State’ (south). Før I gør det, skal I reflektere hvad jeres analyseenhed er og undersøge variablenes måleniveau (fx med codebook). Fortolk regressionsresultatet af modellen.
 
-2. Undersøg dernæst vha. en interaktionsmodel om stemmeandelen til Trump i 2016 (trump16) modererer effekten af urbanisering i modellen fra opgave 4.1. Husk at der enten skal stå i. eller c. foran de variable som interageres. Fortolk resultatet. Illustrér interaktionen mellem Trump-stemmeandel og urbanisering vha. marginale effekter (jf. Sønderskov afsnit 10.1.17).
+- 2. Undersøg dernæst vha. en interaktionsmodel om stemmeandelen til Trump i 2016 (trump16) modererer effekten af urbanisering i modellen fra opgave 4.1. Husk at der enten skal stå i. eller c. foran de variable som interageres. Fortolk resultatet. Illustrér interaktionen mellem Trump-stemmeandel og urbanisering vha. marginale effekter (jf. Sønderskov afsnit 10.1.17).
 
-3. Sønderskov (2014) kommenterer, at der i modeller med interaktion ofte vil være multikollinearitet. Diskutér, hvorfor det er tilfældet og undersøg, hvorvidt det også gælder i modellen 4.2. Derudover anbefaler Sønderskov at anvende robuste standardfejl i modeller med interaktionsled. Ændrer der på resultaterne i ovenstående [4.2]?
+- 3. Sønderskov (2014) kommenterer, at der i modeller med interaktion ofte vil være multikollinearitet. Diskutér, hvorfor det er tilfældet og undersøg, hvorvidt det også gælder i modellen 4.2. Derudover anbefaler Sønderskov at anvende robuste standardfejl i modeller med interaktionsled. Ændrer der på resultaterne i ovenstående [4.2]?
 
 ---
 
 # Spørgsmål 4-7
 
-4. Undersøg dernæst, om der er forskel i effekten af befolkningens gennemsnitlige støtte til homoseksuelle rettigheder (gay_support) mellem Sydstaterne og andre stater. Lav en interaktionsmodel med interaktion mellem gay_support og south. Fortolk resultatet.
+- 4. Undersøg dernæst, om der er forskel i effekten af befolkningens gennemsnitlige støtte til homoseksuelle rettigheder (gay_support) mellem Sydstaterne og andre stater. Lav en interaktionsmodel med interaktion mellem gay_support og south. Fortolk resultatet.
 
-5. Undersøg dernæst, om der er forskel i effekten af tidsbegrænsninger for lovgiver mellem Sydstaterne og andre stater. Lav en interaktionsmodel med interaktion mellem term_limits og south. Fortolk resultatet og illustrér interaktionen vha. marginale effekter.
+- 5. Undersøg dernæst, om der er forskel i effekten af tidsbegrænsninger for lovgiver mellem Sydstaterne og andre stater. Lav en interaktionsmodel med interaktion mellem term_limits og south. Fortolk resultatet og illustrér interaktionen vha. marginale effekter.
 
-6. Undersøg dernæst, om der er forskel i effekten af urbanisering mellem graden af sekularisme (secularism3). Lav en interaktionsmodel med interaktion mellem urban og secularism3. Fortolk resultatet.
+- 6. Undersøg dernæst, om der er forskel i effekten af urbanisering mellem graden af sekularisme (secularism3). Lav en interaktionsmodel med interaktion mellem urban og secularism3. Fortolk resultatet.
 
-7. Diskuter i hvilken grad de forskellige kriterierne for kausalitet er overholdt i disse analyser.
+- 7. Diskuter i hvilken grad de forskellige kriterierne for kausalitet er overholdt i disse analyser.
 
 ---
 
