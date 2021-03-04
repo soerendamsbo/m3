@@ -2,7 +2,7 @@
 
 *Vi skal kigge på states.dta datasættet, som indeholder data om de 50 amerikanske stater.
 
-use ".../states.dta", replace // Indsæt den rigtige sti til filen states.dta på din computer (eller vælg Filer -> Open)
+use "/Users/soren/OneDrive - Københavns Universitet/Teaching/metode3/øvelsesopgaver/Data/states.dta", replace // Indsæt den rigtige sti til filen states.dta på din computer (eller vælg Filer -> Open)
 
 /* Kort oversigt over variable:
 
@@ -16,7 +16,7 @@ secularism3 = degree of secularism from religious to secular
 
 */
 
-******************************************************************************************
+******************************************************************
 
 * 1. I skal undersøge om urbanisering (urban - procent andel af mennesker, der bor i byområder) har en indﬂydelse på antallet af restriktioner af lovlig abort (abortlaw2017), når der kontrolleres for befolkningens gennemsnitlige støtte til homoseksuelle rettigheder (gay_support) og hvorvidt det er en sydlig stat ’Southern State’ (south). Før I gør det, skal I reﬂektere hvad jeres analyseenhed er og undersøge variablenes måleniveau (fx med codebook). Fortolk regressionsresultatet af modellen.
 
@@ -81,7 +81,7 @@ secularism3 = degree of secularism from religious to secular
 * Marginale effekter
 
 
-******************************************************************************************
+******************************************************************
 
 * 7. Diskuter i hvilken grad de forskellige kriterierne for kausalitet er overholdt i disse analyser.
 

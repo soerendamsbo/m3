@@ -28,14 +28,6 @@ knitr::opts_chunk$set(echo = FALSE,
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
 
-# Flytning af holdtime
-
-- IP-eksamen d. 8. april
-
-- Vi finder erstatningstime vha. poll i pausen (dagen før eller dagen efter)
-
----
-
 # Recap fra sidste gang
 
 - (Sproglige) repræsentationer er væsentlige for politik!
@@ -85,10 +77,6 @@ Side note: Timen hedder "og modelspecifikation", fordi interaktionsanalyse foret
 
 - Sønderskov, Kim Mannemar (2014). Stata – en praktisk introduktion (2. udg.). København: Hans Reitzels forlag. Kap. 10.
 
---
-
-<iframe src="https://giphy.com/embed/3oKIPv7vN1KIPy61ig" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-
 ---
 
 # Lidt indledende begrebsafklaring
@@ -108,7 +96,7 @@ De beskriver alle det samme: Vi undersøger X og Z's fælles indflydelse på Y (
 - Derudover en lille reminder om variables måleniveauer:
     - intervalskaleret ≈ kontinuert ≈ metrisk {1,2,3,4,5,6,7,8,9,10,...}
     - binær ≈ dikotom ≈ dummy {0,1}
-    - kategorisk {"a","b","c"}
+    - kategorisk ≈ faktorvariabel {"a","b","c"}
 
 ---
 
@@ -489,11 +477,11 @@ include_graphics("media/d-s_figure.png")
 
 --
 
-- "Figure 2(A) illustrates marginal effects for each education level. The trend is downward sloping, but the interaction term is indistinguishable from zero. The evidence therefore suggests that temperatures affect everyone equally regardless of education level."
+- "Figure 2(A) illustrates marginal effects for each education level. The trend is downward sloping, but **the interaction term is indistinguishable from zero**. The evidence therefore suggests that temperatures affect everyone equally regardless of education level."
 
 --
 
-- "Figure 2(B) shows that marginal effects are stronger for people who do not identify with a party, but this interaction term, too, is statistically insignificant meaning that the evidence of party identification as a moderating factor is also very weak." 
+- "Figure 2(B) shows that marginal effects are stronger for people who do not identify with a party, but this interaction term, too, is **statistically insignificant** meaning that the evidence of party identification as a moderating factor is also very weak." 
 
 ???
 
@@ -508,19 +496,15 @@ class: title-slide, center, middle
 
 # Øvelsesopgave 4
 
-- Vi laver de første 2-3 opgaver sammen
-
-- Derefter laver I resten i grupper
-    - Break-out session (ca. 20 min.)
-    - I sidder selv og laver opgaverne i Stata (brug evt. screen-share)
-    - Jeg hopper muligvis lidt rundt i rummene
-    
-- Vi gennemgår og fortolker sammen: 
+- Vi laver opgaverne sammen "på tavlen":
 
     - (*Kort*) hvad de rigtige Stata-kommandoer er
-    - (*Vigtigst*) hvordan resultaterne fortolkes &rarr; hvad svaret er på spørgsmålene
+    
+    - (*Vigtigst*) hvordan resultaterne fortolkes &rarr; hvad er svaret på spørgsmålene?
     
 ***
+
+Prøv selv:
 
 - Link til **slides**: http://kortlink.dk/2acdr
 - Link til **data** (*states.dta* på Absalon): https://absalon.ku.dk/files/4521284/download?download_frd=1  
@@ -578,8 +562,3 @@ Standard practice og hjælp til sig selv at fokusere på **én påstået kausale
 class: title-slide, center, middle
 
 # Tak for i dag!
-
----
-class: title-slide, center, middle
-
-# Poll (erstatningstime og Stata)
