@@ -201,11 +201,9 @@ Den store udfordring, når Y er binær:
 
 --
 
-Kan vi matematisk udtrykke disse heterogene effekter med *ét tal* som i OLS?
+Kan vi alligevel udtrykke det med *ét tal* som i OLS?
 
-- Spoiler alert ... Det kan vi!
-
-- Men dette ene tal ("logit") er ikke intuitivt
+- Det kan vi, men dette tal ("logit") er ikke intuitivt
 
 - Heldigvis findes der løsninger, når vi kommer til fortolkning
 
