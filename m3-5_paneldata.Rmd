@@ -74,7 +74,7 @@ layout: true
 
 **Paneldata**
 
-- Kombinerer tværsnits- og tidsseriedata: Data for ﬂere enheder og ﬂere perioder.
+- Kombinerer tværsnits- og tidsseriedata: Data for flere enheder og flere perioder.
 - Rumlig og tidslig variation: Estimationer baserer sig på variation mellem enheder og over tid.
 - F.eks. landepanel eller paneler af surveyrespondenter.
 
@@ -222,7 +222,7 @@ class: title-slide, center, middle
 
 Den afhængige variabel i Mutz’ analyser og i denne øvelsesopgave er **cutdifftherm**, som udtrykker respondentens positive følelser over for Donald Trump fratrukket positive følelser over for Hillary Clinton. Højere værdier af cutdifftherm betyder altså en relativt mere positiv holdning til Trump.
 
-Vi begynder med en cross-sectional analyse, der ignorerer datas panelstruktur. Undersøg derfor kun observationer i 2016. Fit en OLS-model med holdning til Trump som afhængig og “China threat” (chinaself) som uafhængig. Inkludér parti (xparty3), indkomst (income), ledighed (lookingforwork) og personlig økonomi (personeco) som kontrolvariable. Hvad er sammenhængen mellem “China threat” og støtte til Trump?
+Vi begynder med en cross-sectional analyse, der ignorerer datas panelstruktur. Undersøg derfor kun observationer i 2016. Fit en OLS-model med holdning til Trump som afhængig og “China threat" (chinaself) som uafhængig. Inkludér parti (xparty3), indkomst (income), ledighed (lookingforwork) og personlig økonomi (personeco) som kontrolvariable. Hvad er sammenhængen mellem “China threat" og støtte til Trump?
 
 Hvordan ville sådan en model se ud? Den generelle model på forrige slide så sådan her ud:
 
@@ -245,8 +245,8 @@ I hvilken grad respondenten opfatter Kina som en trussel mod USA (skalaen går f
 **Y: Cutdifftherm:**
 Udtrykker respondentens positive følelser over for Donald Trump fratrukket positive følelser over for Hillary Clinton. Højere værdier betyder altså en relativt mere positiv holdning til Trump.
 
-- Hvad er sammenhængen mellem “China threat” og støtte til Trump?
-- Hvor kan man aﬂæse $\beta_1$?
+- Hvad er sammenhængen mellem “China threat" og støtte til Trump?
+- Hvor kan man aflæse $\beta_1$?
 - Hvordan ser $R^2$ ud?
 ]
 
@@ -267,7 +267,7 @@ Overordnet set, en stærk negativ sammenhæng:
 
 Når en respondent går 1 point højere op på skalaen, altså opfatter Kina som mere mulighed og mindre trussel (bemærk skala), reduceres støtten til Trump med .47 skalapoint.
 
-Det peger altså isoleret set på at “China threat” havde en effekt på støtte til Trump.
+Det peger altså isoleret set på at “China threat" havde en effekt på støtte til Trump.
 ]
 
 .pull-right[
@@ -293,7 +293,7 @@ $cuttdifftherm_i = \alpha + \beta_1 ChinaThreat_i + \beta_2 Parti_i + \beta_3 In
 .pull-left[
 Vi tilføjer variablene der angiver om respondenten selv har haft gavn af international handel (tradeper) og om respondenten er pro-indvandring (proimmself).
 
-- Hvad er sammenhængen mellem “China threat” og støtte til Trump nu?
+- Hvad er sammenhængen mellem “China threat" og støtte til Trump nu?
 
 - Tænk i øvrigt over: Hvornår er de tilføjede variable målt? Hvor står de henne tidsligt ift. vores afhængige variabel?
 
@@ -311,7 +311,7 @@ include_graphics("media/panel2.png")
 # Øvelsesopgave 12.2
 
 .pull-left[
-Sammenhængen mellem “China threat” og støtte til Trump, $\beta_1$ reduceres til .2, men er stadig signifikant.
+Sammenhængen mellem “China threat" og støtte til Trump, $\beta_1$ reduceres til .2, men er stadig signifikant.
 
 **Bemærk dog**: At de variable vi tilføjede er holdningsvariable, og modellen bruger derfor holdninger til at forklare holdninger:
 
@@ -394,7 +394,7 @@ include_graphics("media/panel3.png")
 
 # Øvelsesopgave 12.4
 
-Estimér paneldatamodeller med de samme to specifikationer som ovenfor. Hvordan adskiller resultaterne sig? Hvad kan vi på baggrund heraf konkludere om betydningen af “China threat” for amerikanske vælgeres støtte til Donald Trump i 2016?
+Estimér paneldatamodeller med de samme to specifikationer som ovenfor. Hvordan adskiller resultaterne sig? Hvad kan vi på baggrund heraf konkludere om betydningen af “China threat" for amerikanske vælgeres støtte til Donald Trump i 2016?
 
 $cuttdifftherm_i = \alpha + \beta_1 ChinaThreat_{it} + \beta_2 Parti_{it} + \beta_3 Indkomst_{it} + \beta_4 Ledighed_{it} + \beta_5 Økonomi_{it} + \epsilon_{it}$
 
@@ -427,7 +427,7 @@ include_graphics("media/panel4.png")
 # Øvelsesopgave 12.4
 
 .pull-left[
-Koeﬃcienten på Chinaself er -.09, og betyder at for en positiv enhedsændring hos en respondent mellem surveybølge 1 og 2 reduceres støtten til Trump med ca. 0.09 - men ændringen er altså ikke signifikant.
+Koefficienten på Chinaself er -.09, og betyder at for en positiv enhedsændring hos en respondent mellem surveybølge 1 og 2 reduceres støtten til Trump med ca. 0.09 - men ændringen er altså ikke signifikant.
 
 Forskellen mellem resultaterne i hhv. tværsnitsmodellen og panelmodellen peger på, at selvom folk der opfatter Kina som en trussel bedre kan lide Trump (tværsnit), er det ikke sådan at ændringer i denne opfattelse af Kina hænger sammen med ændringer i støtte til Trump (paneldata).
 
@@ -502,14 +502,14 @@ Når vi tilføjer fixed effects for tid, estimeres en model med det, som kaldes 
 
 Denne model kaldes også difference-in-differences (DID)-estimatoren.
 
-Her udtrykker koeﬃcienten: Hvor meget mere ændrer y sig over tid for personer med x+1 sammenlignet med personer med x? M.a.o.: Hvor meget ændres tidstrenden i y, når x øges med 1?
+Her udtrykker koefficienten: Hvor meget mere ændrer y sig over tid for personer med x+1 sammenlignet med personer med x? M.a.o.: Hvor meget ændres tidstrenden i y, når x øges med 1?
 
 ---
 
 # Øvelsesopgave 12.4
 
 .pull-left[
-Fra forrige slide: Her udtrykker koeﬃcienten: Hvor meget mere ændrer y sig over tid for personer med x+1 sammenlignet med personer med x? M.a.o.: Hvor meget ændres tidstrenden i y, når x øges med 1?
+Fra forrige slide: Her udtrykker koefficienten: Hvor meget mere ændrer y sig over tid for personer med x+1 sammenlignet med personer med x? M.a.o.: Hvor meget ændres tidstrenden i y, når x øges med 1?
 
 - Hvad udtrykker $\beta_1$ her? Er der ændringer i tidstrenden?
 
@@ -530,7 +530,7 @@ include_graphics("media/panel6.png")
 .pull-left[
 $\beta_1$ er -.025 og insignifikant, hvorfor ingen gennemsnitlig ændring i y’s tidstrend, når x ændres med 1?
 
-Koeﬃcienten for 1.wave er til gengæld signifikant negativ: Det vil sige, at folk i gennemsnit bliver mere negative overfor Trump mellem 2012 og 2016 (reference er wave==0). Det giver god mening, for Trump var ikke kandidat i 2012, og ikke-politiske figurer er tit mere populære.
+Koefficienten for 1.wave er til gengæld signifikant negativ: Det vil sige, at folk i gennemsnit bliver mere negative overfor Trump mellem 2012 og 2016 (reference er wave==0). Det giver god mening, for Trump var ikke kandidat i 2012, og ikke-politiske figurer er tit mere populære.
 
 Modellen er stort set ens med den forudgående.
 ]
@@ -561,7 +561,7 @@ Samme antagelser som OLS. Når I vil teste dem så skal I bruge *reg*-kommandoen
 
 - Linearitet
 
-- Fravær af meget indﬂydelsesrige observationer
+- Fravær af meget indflydelsesrige observationer
 
 Og en ekstra:
 
@@ -581,7 +581,7 @@ Normale standardfejl antager at alle observationer er uafhængige af hinanden.
 
 På metode 2 lærte I, at vi kan tilføje White’s robuste standardfejl for at korrigere for heteroskedasticitet.
 
-Når vi observerer den samme observation ﬂere gange, vil der være en udfordring med autokorrelation: En enheds fejlled vil være korreleret over tid. Konsekvensen er, at normale standardfejl vil underestimere usikkerheden.
+Når vi observerer den samme observation flere gange, vil der være en udfordring med autokorrelation: En enheds fejlled vil være korreleret over tid. Konsekvensen er, at normale standardfejl vil underestimere usikkerheden.
 
 **Klyngerobuste standardfejl er løsningen**:
 

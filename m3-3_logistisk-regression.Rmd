@@ -1,5 +1,5 @@
 ---
-title: "Logistisk regression test"
+title: "Logistisk regression"
 subtitle: |
   | Metode 3
   | [.white[Link til slides: kortlink.dk/2ab58]](https://soerendamsbo.github.io/m3/m3-3_logistisk-regression.html)
@@ -22,7 +22,8 @@ pacman::p_load(tidyverse, knitr, ggdag, lubridate, kableExtra)
 
 knitr::opts_chunk$set(echo = FALSE, 
                       fig.align = "center", 
-                      fig.height=12)
+                      fig.height=12,
+                      cache = TRUE)
 
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
@@ -39,132 +40,308 @@ print_plan(10)
 
 # Recap fra sidste gang
 
+- Interaktion er, når effekten af X på Y afhænger af, hvilket niveau Z har        
+    - X og Z interagerer; Z modererer X &rarr; Y
+
+- Super smart redskab til at få flere nuancer og mere teoretisk dybde frem i sin analyse
+
+- Måleniveauer er vigtige for udførelse og fortolkning (intervalskaleret, kategorisk, binær)
+
+- Eksempel i Stata: **reg y c.x##i.z**
+
+- Marginale effekter er de *forskellige effekter, X har på Y* for hvert af de respektive niveauer af Z: 
+    - **margins, dydx(x) at(z = (1 2 3 4 5))** &rarr; **marginsplot**
+
+- Interaktionsleddet er *forskellen i effekt* eller *noget ekstra, der lægges til effekten* &rarr; signifikant?
+
+- Fortolkning kan være udfordrende - især med kategoriske variable
+
 ---
 
 # Dagens program
+
+1. Eksamensopgaven
+
+2. Logistisk regression
+    - Baggrund
+    - OLS vs. logistisk regression
+    - Fortolkning/præsentation
+
+3. Øvelsesopgaver undervejs - med/uden break-out
+
+---
+background-image: url("media/eksamensnotat.png")
+background-size: cover
+
+# Eksamensnotat
+
+---
+
+# Eksamen I
+
+- Læs eksamensnotatet på Absalon
+
+- Omfang (typeenheder): 19.200 for én studerende, 24.000 for to studerende, 28.800 for tre studerende
+    
+- Kraftig anbefaling: skriv sammen i **grupper** (2-3)
+
+- Eksempler på opgaver kommer på Absalon før påske
+    - inspiration, ikke en skabelon
+
+- Aflevering **7. juni 2021** (kl. ??)
+
+- Brug **mindst én metode** fra faget og perspektivér til mindst én anden
+    - flere metoder ≠ bedre opgave
+
+---
+
+# Eksamen II
+
+- "*analyse af en selvstændigt formuleret problemstilling*" &rarr; vigtigt! 
+    - find et substantielt spørgsmål - og en metode - der interesserer jer
+    - nogle gange kan det også hjælpe at starte med at finde data/materiale
+
+- Tre gode muligheder fra eksamensnotatet:
+    - egen undersøgelse (nyt - mindre skala)
+    - arbejd videre med tidligere projekt (fx metode 2-survey data) 
+    - replikation/kritisk diskussion af eksisterende undersøgelser (smart!) - skal *anvende* metoderne
+
+--
+
+**Vejledning**
+
+- Ca. 15 min. per gruppe ad to omgange
+- På Zoom
+- Lav et kort skriv om tankerne bag opgaven
+- Første gang efter påske (muligvis uge 16) og anden gang nær slutningen (muligvis uge 20)
+- I hører nærmere!
+
+
 
 ---
 
 # Dagens formål
 
+- At forstå hvornår og hvorfor, vi bruger logistisk regression (frem for OLS)
+
+- At vide hvordan man laver logistisk regression i Stata
+
+- At vide hvordan man fortolker (og præsenterer) sine resultater 
+
 ---
 
 # Pensum
 
-- Kellstedt, P. M., Whitten, G. D. (2018). The Fundamentals of Political Science Research. 3rd edition. Cambridge University Press. Kapitel 12.1+12.2
+- Kellstedt, P. M., Whitten, G. D. (2018). The Fundamentals of Political Science Research. 3rd edition. Cambridge University Press. Kapitel 12.1-12.2.
 
-- Sønderskov, Kim Mannemar (2014). Stata – en praktisk introduktion (2. udg.). København: Hans Reitzels forlag. Kap. 11
+- Sønderskov, Kim Mannemar (2014). Stata – en praktisk introduktion (2. udg.). København: Hans Reitzels forlag. Kap. 11 
+
+--
+
+***
+
+OBS! **Kausalitetsspørgsmålet** er stadig skudt lidt til hjørne &rarr; vi taler om "effekter" uden at være sikre på, at vores forskningsdesign muliggør dette - om kriterierne for kausalitet er opfyldt
 
 ---
 
 # Recap fra forelæsningen
 
-Når vores afhængige variable har et dikotomt udfaldsrum. Visuelt: Alle observationerne ligger vandret enten ud for y=0 eller ud for y=1.
+**Logistisk regression bruges når vores afhængige variabel har et dikotomt udfaldsrum (0/1)**
 
-Husk at med en regression forsøger vi, at finde den model som bedst beskriver data.
+- Visuelt: Alle observationer ligger vandret enten ud for enten y = 0 eller y = 1
 
-- ”Den bedste linje”
+- Når Y er 0 eller 1, kan Y i vores modeller fortolkes som den forudsagte **sandsynligheden for Y** fra 0-1
 
 ```{r}
 include_graphics("media/logit1.png")
 ```
 
+--
+
+- Hvad kunne et eksempel på en dikotom afhængig variabel (Y) være?
+
 ---
 
 # Hvad vil vi med regressioner?
 
-Husk: med en regression forsøger vi, at finde den model som bedst beskriver forholdet mellem X og Y.
+Husk at med regression forsøger vi at finde den model, som bedst beskriver forholdet mellem X og Y:
 
-- ”Den bedste linje”
-- OLS estimerer den bedste rette linje - som minimerer det kvadrerede residual. En ret linje - udtrykker linearitet
+- **Den bedste linje**
 
-- og altså en konstant hældning. (Blandt andet derfor) er OLS fedt:
+--
 
-- Det er intuitivt: Koeﬃcienten som beskriver forholdet mellem X og Y er intuitiv at tolke: Når X ændres med +1 udtrykker koeﬃcienten ændringen i Y.
+- OLS estimerer den rette linje, som minimerer de kvadrerede residualer 
+    
+    - minimerer hvor meget vi med modellen skyder over/under de sande værdier af Y
+    
+    - ret linje &rarr; linearitet &rarr; konstant hældning 
+    
+    - hældning = *beta-koefficient*
+    
+--
 
-- Det er effektivt: Forholdet mellem X og Y er opsummeret i ét tal.
+(Blandt andet) derfor er OLS fedt:
 
-Den store udfordring når Y er binær: Data beskrives ikke bedst af en lineær model (lige linje med konstant hældning).
+- Det er **intuitivt** - koefficienten som beskriver forholdet mellem X og Y har en intuitiv fortolkning:
+    - når X vokser med +1 udtrykker koefficienten den tilsvarende ændring i Y
 
-- Sandsynligheden for y=1 (P(Y=1)) varierer på tværs af x’s værdier (ikke-linearitet)!
-
-- Det komplicerer vores tolkning mærkbart - hvorvidt en ændring i x ændrer på sandsynligheden for y=1, afhænger af værdien på x.
-
-Men kan vi udtrykke en heterogen effekt med ét tal?
-
-- Spoiler alert: Det kan vi - men tallet er ikke intuivt.
-
-- Heldigvis er der løsninger!
+- Det er **effektivt** - forholdet mellem X og Y er opsummeret i **ét tal**
 
 ---
 
-# Hvordan ser logistisk regression så ud grafisk?
+# Udfordring med OLS
 
-Her er plottet fra før - der er bare indsat to linjer til at beskrive data. Hvordan beskriver de data?
+Den store udfordring, når Y er binær:
+
+- Data beskrives åbenlyst *ikke* bedst af en lige linje med konstant hældning
+
+--
+
+- Det komplicerer vores tolkning markant: 
+
+    - Hvorvidt/hvordan en ændring i X påvirker sandsynligheden for, at Y=1 **afhænger af, hvor på x-aksen vi står**
+
+--
+
+Kan vi matematisk udtrykke disse heterogene effekter med ét tal, som i OLS?
+
+- Spoiler alert ... Det kan vi!
+
+- Men dette ene tal ("logit") er ikke intuitivt
+
+- Heldigvis er der løsninger, når vi kommer til fortolkning (fx AME/MEM)
+
+---
+
+# Hvordan ser logistisk regression ud grafisk?
+
+.pull-left[
+
+Her er plottet fra før. Der er blot indsat to linjer til at beskrive data
+
+Hvordan og hvor godt beskriver de data (dvs. sammenhængen mellem X og Y)?
+
+]
+
+.pull-right[
 
 ```{r}
 include_graphics("media/logit2.png")
 ```
 
+]
+
 ---
 
-# Hvordan ser logistisk regression så ud grafisk?
+# Hvordan ser logistisk regression ud grafisk?
+
+.pull-left[
 
 Rød linje:
 
-- en ret linje - passer dårligt på punkterne.
+- en ret linje - passer ikke så godt på punkterne
 
-- OLS som I kender det - kaldes Lineær Sandsynlighedsmodel (LPM) fordi Y er dikotom.
+- = OLS som I kender det &rarr; kaldes også en **"lineær Sandsynlighedsmodel" (LPM)**, når Y er dikotom
 
 Blå linje:
 
-- en S-formet kurve som smyger sig langs punkterne - passer bedre
+- en S-formet linje, som smyger sig langs punkterne - passer bedre
 
-- Logistisk regression
+- = **logistisk regression**
+
+]
+
+.pull-right[
+
+```{r}
+include_graphics("media/logit2.png")
+```
+
+]
 
 ---
 
-# Sandsynligheden for et udfald
+# Sandsynligheden for et udfald (Y = 1)
 
-Med en dummy (dikotom/binær) som afhængig variabel, kan y kun antage værdierne 0 eller 1. Gennemsnittet af den afhængige variabel bliver derfor andelen af 1-taller
+Med en binær afhængig variabel kan Y per definition kun antage værdierne 0 eller 1 
 
-- Eksempel: Observationerne (0,0,1,1,1,1) har gennemsnittet 4/6 – svarende til andelen af 1-taller.
+--
 
-- Det betyder, at vi estimerer, at der er 66,7% sandsynlighed for at finde observationen 1-tal i populationen.
+- gennemsnit af en binær variabel er **andelen af 1-taller** (succeser)
 
-- Vores regression, når Y er en dummy, beskriver derfor sandsynligheden for at y=1, givet vores uafhængige variable.
+--
 
-- Lidt notation: Sandsynligheden for y=1 for et givet x skrives som: p(y = 1 | x).
+- hvis fx **gennemsnittet er 0.66**, må 2/3, 66%, af værdierne være 1-taller (og 1/3, 33%, være 0'er)
+    - fx observationerne [0,0,1,1,1,1]
+
+--
+
+- Det betyder, at der er 66% sandsynlighed for, at en observationen i populationen er **et 1-tal**
+
+--
+
+- **Hvad er gennemsnittet af [0,0,0,1,1,1]?**
+
+--
+
+- Når Y er en dummy, beskriver vores regression **sandsynligheden for, at Y=1** som funktion af en eller flere uafhængige variable
+
+--
+
+- (**Notation**) Sandsynligheden for, at Y = 1 for et givet X skrives som: **P(Y = 1 | X)**
+
+---
+
+# OLS versus logit
+
+Vi vil lave en model, der har et binært Y:
+
+1. Først ser vi på en "lineær sandsynlighedsmodel" &rarr; OLS med binært Y
+
+2. Så "udvider" vi til **logistisk regression** og sammenligner de to
 
 ---
 
 # OLS når Y er binær
 
-Lad os starte med den lineære sandsynlighedsmodel (LPM). Her er sandsynligheden for at y=1 en lineær funktion af x.
+Vi starter med lineær regression (OLS)
 
-- $p(y = 1 | x) = \alpha + βX$
+Her er sandsynligheden for, at Y=1 en lineær funktion af X:
 
-Det er langt henad vejen som I kender det! Forskellen er fortolkning af β :
+- $P(Y = 1 | X) = \alpha + \beta X$
 
-- LPM: ændringen i sandsynligheden for y=1, per ændring i x
+... helt som I kender det
 
-- Normalt: Ændringen i y per 1+ ændring i x.
+--
+
+Den lille forskel ligger i fortolkningen af $\beta$:
+
+--
+
+- "Normal OLS": Ændringen i den forudsagte *værdi af Y*, når X vokser med +1
+
+- OLS med binært Y: **Ændringen i sandsynligheden for, at Y=1**, når X vokser med +1
+
 
 ---
 
-# Eksempel på lineær sandsynlighedsmodel (LPM)
+# Øvelsesopgave 5.6
+
+**Eksempel på OLS med binært Y**
 
 .left-column[
 
-- Alder (angivet i år)
-- Kvinde, dummy (Kvinde=1)
-- Indkomst (1-16, hvor 1 = under 100.000, 16 = over 1. mio)
-- Ungdomsuddannelse, dummy (Gennemført=1)
-- Y = Stemmer personligt (=1)
+**Hvordan vil I fortolke outputtet?**
+
+Afhængig variabel (*stempers*): 
+
+Stemte personligt<br>(1 = "Ja", 0 = "Nej)
+
+Uafhængige variable: 
+*kvinde* (ref. mand), *alder* (17-100), *indkomst* (16 niveauer), *ungdomsudd* (5 niveauer)
 
 ]
 .right-column[
-Hvordan vil I fortolke outputtet?
 
 ```{r}
 include_graphics("media/logit3.png")
@@ -174,114 +351,135 @@ include_graphics("media/logit3.png")
 
 ---
 
-# Det fede ved LPM (lineær model)
+# Det fede ved OLS
 
-- Fortolkningen er ligetil
+- Fortolkningen er lige til - og vi kender det i forvejen
 
-- Er typisk ret god til at estimere den marginale effekt af x på p(y=1) omkring gennemsnittet af X (tænk på hældningen af de to linjer i plottet)
+- (At undersøge interaktioner er ligeud ad landevejen - vender vi tilbage til senere)
 
-- (vi kan teste interaktionsled - vender vi tilbage til senere)
+--
 
----
+# Det ufede ved OLS
 
-# Det ufede ved LPM (lineær model)
+Der er en række **grunde til, at OLS er problematisk, når Y er en dummy**:
 
-Der er en række grunde til at OLS bliver problematisk, når Y er en dummy:
+- Problemer med fejlled &rarr; altid heteroskedastiske og aldrig normalfordelte
 
-- Problemer med fejlled (altid heteroskedastiske og aldrig normalfordelte)
+--
 
-- Den funktionelle form (linearitet) er problematisk (gns. effekt er upassende).
+- Den funktionelle form (linearitet) er problematisk &rarr; gennemsnitseffekt er upassende
 
-Og fordi den rette linje potentielt løber fra −∞ til +∞
+--
 
-- Vores model kan forudsige udfald med sandsynligheder større end 1 eller mindre end 0
+- Den rette linje løber i princippet fra $-\infty$ til $\infty$:
 
-- $R^2$ er ikke informativ fordi den rette linje potentielt løber fra −∞ til +∞ og igennem alle punkter mellem y=0 og y=1 – hvor der ikke er nogen observationer
-
----
-
-# Logistisk regression (aka logit)
-
-Logistisk regression er alternativet til LPM, når vi har en dummy som afhængig variabel.
-
-For logistisk regression gælder det at
-
-- Y begrænset fra intervallet fra 0 til 1
-
-- Forholdet mellem X og Y er S-formet (ikke-lineært)
-
-```{r}
-include_graphics("media/logit4.png")
-```
+    - Betyder at vores model kan forudsige (absurde) sandsynligheder større end 100 % og mindre end 0 %
 
 ---
 
-# Teknikken
+# Logistisk regression (logit)
 
-Den generelle logistiske funktion ser matematisk således ud: $G(z) = \frac{e^z}{1+e^z}$ (der kunne også have stået F(x) i stedet for G(z). 
-
-Det ser grafisk således ud:
-
-```{r, out.width="20%"}
-include_graphics("media/logit5.png")
-```
-
-
-Vi anvender nu simpelthen den logistiske funktion på vores lineære sandsynlighedsmodel og får så, at vores nye statistiske model bliver:
-
-$P(y = 1 | x) = G(\alpha+ßX_i+\epsilon_i) = \frac{e^{\alpha+ßX_i+\epsilon_i}}{1+e^{\alpha+ßX_i+\epsilon_i}}$
-
-Modellen giver os sandsynligheden for at y=1 som en logistisk funktion af x &rarr; bedre funktionel form!
-
----
-
-# Ja, bedre funktionel form, men...
 
 .left-column[
-
 ```{r}
 include_graphics("media/logit4.png")
 ```
-
-
 ]
 
 .right-column[
 
-Vi er interesserede i den marginale effekt på sandsynligheden for y, når en af vores uafhængige variable ændrer sig én enhed - Ligesom med LPM – blot med en bedre model
+Logistisk regression er alternativet til OLS, når vi har en **binær afhængig variabel**
 
-Men fordi den logistiske funktion ikke er lineær, varierer den marginale effekt på p(y = 1) med størrelsen af x.
+- I logistisk regression begrænses de forudsagte Y-værdier til intervallet [0,1]
 
-Tænk på det sådan her:
-
-- Spørgsmål: ”Hvad er hældningen på den S-formede kurve?”
-
-- Svar: Det kommer an på, hvor på x-variablen du kigger! → Ikke-lineariteten tolkningen sværere
+- Forholdet mellem X og Y er S-formet (ikke lineært)
 ]
 
 ---
 
-# Hvordan fungerer logit-estimatoren? Maximum likelihood estimation!
+# Logistisk regression (logit)
 
-OLS estimerer ved at minimere det kvadrerede residual.
+.left-column[
+```{r}
+include_graphics("media/logit4.png")
+```
+]
 
-Logit estimerer ved hjælp af det, som man kalder maximum likelihood.
+.right-column[
 
-- Formål: finde den koeﬃcient, der er mest sandsynlig, givet det data, man har.
+Logistisk regression fungerer ved at lave en matematisk transformation
 
-- Intuition: Vi har noget data – baseret på det: hvilken sammenhæng mellem x og y er så mest sandsynlig i populationen?
+- Den generelle logistiske funktion ser således ud: 
 
-”Sandsynligheden” for at en koeﬃcient kan være fremkommet på baggrund af et datasæt måles ved det såkaldte log likelihood - som ikke har nogen intuitiv tolkning (altid negativ - jo tættere på 0 jo federe). Fremgangsmåde:
+$F(x) = \frac{e^x}{1+e^x}$
 
-- Givet en regressionsmodel, fx y = a + bx + e.
+- Vi indsætter vores lineære sandsynlighedsmodel på X's plads, så vi får:
 
-- Og en måde at estimere en sammenhæng på, fx Cov(x,y)/var(x).
+$Y = P(Y = 1 | X) = F(\alpha+\beta X+\epsilon) = \frac{e^{\alpha+\beta X+\epsilon}}{1+e^{\alpha+\beta X+\epsilon}}$
 
-- Forsøger Stata sig med en række værdier for b, indtil den finder den b, der har den laveste log likelihood.
+- Modellen giver os sandsynligheden for at Y = 1 som en *logistisk funktion af X*
+    - dette trick giver os en meget bedre funktionel form
+
+]
 
 ---
 
-# Sandsynlighed, odds (ratio) og logit-koefficient
+# Logistisk regression (logit) 
+
+.left-column[
+```{r}
+include_graphics("media/logit4.png")
+```
+]
+
+.right-column[
+
+- Vi modellerer stadig effekten af en uafhængig variabel på sandsynligheden for Y - blot med en bedre model
+
+- Fordi den logistiske funktion ikke er lineær, varierer effekten af X på Y med størrelsen af X
+
+Tænk på det sådan her:
+
+- Spørgsmål: "Hvad er hældningen på den S-formede kurve?"
+
+- Svar: "Det kommer an på, hvor på X-variablen, du kigger!" 
+    - fx stejlest på midten
+
+&rarr; Ja, bedre funktionel form, men **tolkningen bliver sværere**
+]
+
+---
+
+# Opsummering af OLS versus logit
+
+- Tænk på logistisk regression som **en udvidelse af lineær regression** (dog en udvidelse til en ikke-lineær model)
+
+--
+
+- Det kan give god mening at starte med at lave OLS - om ikke andet for ens egen skyld
+
+--
+
+- OLS på binært Y medfører problemer, men har et lidt dårligere ry end hvad rimeligt er
+
+    - Man skal ikke kimse af den værdi, der ligger i lettere fortolkning
+
+--
+
+    - Hvis man laver kausalstudier i praksis, er eksogenitetsantagelsen (fravær af spuriøsitet m.m.) langt vigtigere end valget mellem OLS vs. logistisk regression
+    
+--
+    
+- **I en metode 3-opgave skal man dog naturligvis bruge logistisk regression**
+    
+---
+class: title-slide, center, middle
+
+# Fortolkning, eksempler og øvelsesopgaver
+
+---
+
+## Sandsynlighed, odds, logit-koefficient og odds ratio
 
 ```{r}
 include_graphics("media/logit-table.png")
@@ -289,35 +487,35 @@ include_graphics("media/logit-table.png")
 
 ---
 
-# Logit-koefficienten: ln(odds)
+# Logit-koefficienten
 
-Logit-koeﬃcienten i Stata udtrykker ændringen i den naturlige logaritme til oddset når X stiger med 1 - Ikke særligt intuitivt.
+- Stata giver os som standard logit-koefficienten
 
-Logit-koeﬃcientens p-værdi kan tolkes som enhver anden p-værdi. Logit-koeﬃcientens fortegn indikerer sammenhængen:
+- Den udtrykker **ændringen i den naturlige logaritme til oddset, når X stiger med +1**
+    - ikke spor intuitivt!
 
-- Negativ koeﬃcient (< 0) falder sandsynligheden for Y = 1 når X stiger
+--
 
-- Positiv koeﬃcient (> 0) stiger sandsynligheden for Y = 1 når X stiger
+- **P-værdi** kan tolkes som normalt 
+    - er der en **statistisk signifikant sammenhæng** mellem X og Y?
 
-Mere kan vi egentlig ikke rigtig udlede.
+- **Fortegn**:
+    - **Positiv (+)**: sandsynligheden for Y = 1 *stiger*, når X vokser
+    - **Negativ (-)**: sandsynligheden for Y = 1 *falder*, når X vokser
+
+- Vi kan ikke udlede meget mere
 
 ---
-class: title-slide, center, middle
 
+# Øvelsesopgave 5.1
 
-# Øvelsesopgaver
-
----
-
-# Øvelsesopgave 8.1
+**Eksempel med logit-koefficient**
 
 .left-column[
 
-Alder og indkomst stærkt positivt korreleret med at stemme personligt. Uddannelse har ingen selvstændig effekt
+Hvad kan vi sige om effekten af alder på sandsynligheden for at stemme personligt?
 
-- Likelihood Ratio: Kollektiv signifikans (ligesom F-statistikken i OLS).
-
-- Pseudo $R^2$ : 1.51% forbedret log-likelihood sammenlignet med en model uder X’er
+Andet?
 
 ]
 
@@ -333,29 +531,38 @@ include_graphics("media/logit6.png")
 
 # Odds ratio
 
-Hvis vi ønsker logitkoeﬃcienten udtrykt som Odds Ratio fremfor ln(odds), skal vi blot tilføje optionen ”or” i vores logit-kommando.
+- Hvis vi ønsker logit-koefficienten udtrykt som **odds ratio**, tilføjer vi blot optionen "**or**": 
 
-Tolkning:
+> logit Y X1 X2 X3, or
 
-- Hvor meget større bliver odds når X er 1 i stedet for 0?
+--
 
-For odds ratio gælder at:
+- Den udtrykker, hvor mange gange større odds (Y=1) bliver, når X vokser med +1
+    - faktor som oddset for ”succes" ganges med
+    - eksempel: "*oddsene for at stemme på blå blok er ca. 1,18 gange større for mænd end for kvinder*"
 
-- 1 < betyder positiv sammenhæng
+--
 
-- 1 > betyder negativ sammenhæng
+- **P-værdi** kan tolkes som normalt
+    - er der en **statistisk signifikant sammenhæng** mellem X og Y?
+
+- **"Fortegn":**
+    - **OR > 1**: sandsynligheden for Y = 1 *stiger*, når X vokser
+    - **OR 0-1**: sandsynligheden for Y = 1 *falder*, når X vokser
 
 ---
 
-# Øvelsesopgave 8.2
+# Øvelsesopgave 5.2
 
-Jeg kører logit-modellen fra før, men beder om at få koeﬃcienter udtrykt som Odds Ratio.
+**Eksempel med odds ratio** - samme model med koefficienter udtrykt som odds ratio
 
 .left-column[
 
-Tolk på koeﬃcienterne
+Fortæller modellen noget, som den "almindelige" logit-model ikke fortalte os?
 
-- Fortæller modellen noget, som forrige model ikke fortalte os?
+Fokusér evt. på **alder**
+
+Hvad er uændret?
 
 ]
 
@@ -369,17 +576,17 @@ include_graphics("media/logit7.png")
 
 ---
 
-# Øvelsesopgave 8.2
+# Øvelsesopgave 5.2
+
+**Eksempel med odds ratio** - samme model med koefficienter udtrykt som odds ratio
 
 .left-column[
 
-Det er den samme model - ikke rigtig noget ny info - resultaterne er bare udtrykt anderledes.
+Samme model &rarr; koefficienterne er bare udtrykt anderledes
 
-- Alders koeﬃcient er 1.016905 betyder, at når alder stiger med ét år stiger oddsne for at stemme personligt med 1,7%
+Alders-OR på 1.017: Når alder stiger med ét år, stiger **oddsne** for at stemme personligt med 1,7%
 
-- Indkomst = 1.039697 betyder, at når
-
-indkomstkategorien stiger med én, stiger oddsne for at stemme personligt med 4%
+Indkomst-OR på 1.045: Når indkomst stiger med ét niveau, stiger **oddsne** for at stemme personligt med 4%
 
 ]
 
@@ -393,59 +600,78 @@ include_graphics("media/logit7.png")
 
 ---
 
-# Alternativer til logit-koefficienten
+# Mere intuitive måder at rapportere effekter 
 
-Logit-koeﬃcienten er dybest set et forsøg på at opsummere heterogene effekter med ét tal.
+- Logit-koefficienten og odds ratio er forsøg på at opsummere heterogene effekter med ét tal
 
-Ulempen er, at uanset om den udtrykkes som ln(odds) eller odds ratio, så er den ikke synderligt informativ rent substantielt.
+    - ikke synderligt informativt eller intuitivt
+    
+--
 
-Nu skal vi kigge på to alternative måder, at opsummere de heterogene effekter med ét tal: 
+- De fleste er nok enige i, at den mest intuitive fortolkning er:
 
-**Average Marginal Effect (AME)**
+    - **Sandsynlighed**: "der er 70 % sandsynlighed for, at hun stemmer personligt"
+    
+    - **Ændringer i sandsynlighed**: "når X vokser med +1, stiger sandsynligheden for, at hun stemmer personligt med 5 procentpoint"
 
-- Gennemsnitlige marginale effekter
+--
 
-- ”At finde den gennemsnitlige hældning for den s-formede kurve”
+***
 
-**Marginal Effect at the Mean (MEM)**
+**Effekten udtrykt som ændringer i sandsynligheder:**
 
-- Marginale effekter ved gennemsnittet (eller en anden væsentlig niveau på x).
+- Average Marginal Effect (AME)
+    - Gennemsnittet af den marginale effekt ved alle niveauer af X
 
-- At vælge et specifik punkt, og finde hældningen her.
+- Marginal Effect at the Mean (MEM)
+    - Den marginale effekt ved gennemsnittet af X
 
 ---
 
 # Gennemsnitlig Marginal Effekt (AME)
 
-Den gennemsnitlige ændring i p(y=1) på tværs af alle observationerne, når x ændres én enhed (altså ikke i et bestemt punkt, men i gennemsnit på tværs af alle punkterne).
+--
 
-Tolkning:
+- **Gennemsnittet af den marginale effekt ved alle niveauer af X**
+    - gennemsnitlig ændring i P(Y = 1), når X ændres vokser med +1 
+    - gennemsnitlig hældning af S-kurven
+    - ikke effekten i et bestemt punkt, men på tværs af alle punkter
+    - bedste bud på den marginale effekt, *hvis man ikke vidste, hvor på X-aksen man stod*
 
-- Den gennemsnitlige stigning i sandsynligheden for y=1, når X stiger med 1.
+--
 
-- Parallel til OLS-tolkningen.
+- **Fortolkning:**        
+    - parallel til tolkningen i OLS
+    - den gennemsnitlige effekt på P(Y=1), når X stiger med +1
 
-Hvorfor de er smarte:
+--
 
-- Det tillader os at opsummere resultatet fra en logistisk regression i ét meningsfuldt tal.
+- **Smart:**
+    - tillader os at opsummere resultatet fra en logistisk regression i et enkelt meningsfuldt tal
+    - letter fortolkningen enormt meget
 
-- Letter tolkningen enormt meget.
+--
 
-Hvorfor de nogle gange ikke er så smarte:
+- **Usmart:**
+    - særligt når der er stærk ikke-linearitet (S-form) kan den gennemsnitlige effekt være vildledende
 
-- Særligt når der er stærk ikke-linearitet kan gennemsnitlige effekter være vildledende.
+--
 
-AME er good practice indenfor logistisk regression.
+- AME er good practice
 
 ---
 
-# Øvelsesopgave 8.3 (AME)
+# Øvelsesopgave 5.3
+
+**Eksempel med Average Marginal Effect (AME)**
 
 .left-column[
 
-De gennemsnitlige marginale effekter kan fortolkes som sandsynligheder
+Den gennemsnitlige marginale effekt kan (pyha, endelig!) fortolkes som *ændringen i sandsynlighed*
 
-Tolk på de marginale effekter (dy/dx)
+**Tolk på de gennemsnitlige marginale effekter (dy/dx)**
+
+Fokusér evt. på *alder* og *kvinde*
 
 ]
 
@@ -459,13 +685,19 @@ include_graphics("media/logit8.png")
 
 ---
 
-# Øvelsesopgave 8.3 (AME)
+# Øvelsesopgave 5.3
+
+**Eksempel med Average Marginal Effect (AME)**
+
+--
 
 .left-column[
 
-- Når alder stiger med ét ˚ stiger den gennemsnitlige sandsynlighed for at stemme personligt med 4 promille. (over 70 år, svarer det til en ændring på $0.0040901*70 = 28.6$ pct.point.).
+Når alder stiger med +1, stiger sandsynligheden for at stemme personligt i gennemsnit med ca. 0,4 procentpoint 
 
-- Når indkomstkategori stiger med 1, stiger den gennemsnitlige sandsynlighed for at stemme personligt med 9,5 promille. (en ændring fra laveste til højeste kategori svarer til en ændring på $0.0094979*16 = 15.2$ pct.point)
+Over 50 år svarer det til en stigning på $0.004*50 = 0.2$ ≈ 20 procentpoint
+
+Sandsynligheden er ca. 1,2 procentpoint lavere for kvinder end for mænd (*insignifikant!*)
 
 ]
 
@@ -479,224 +711,282 @@ include_graphics("media/logit8.png")
 
 ---
 
-# Marginale effekter ved gennemsnittet (MEM) (eller et andet punkt)
+# Marginal Effekt ved Gennemsnittet (MEM)
 
-Dybest set:
+--
 
-- Hvor meget ændres p(y=1), når x ændres én enhed i et bestemt punkt (ofte gennemsnittet)?
+- Hvor stor er effekten af X på P(Y = 1) **i et bestemt punkt på grafen**, dvs. for en bestemt værdi af X
 
-Hvis man kigger ved gennemsnittet kan man tænke på det som:
+    - ofte vælger man gennemsnittet på X, deraf navnet MEM
+    
+    - argumentet er, at dette niveau af X er *repræsentativt* i en eller anden forstand
+    
+    - men man kan ligeså godt vælge **andre repræsentative/illustrative niveauer** af teoretiske eller andre grunde
+    
+    - hældningen af X-kurven i et bestemt punkt
+    
+--
+    
+- **Fortolkning:**
+    - Hvordan ændres sandsynligheden for Y=1, når X ændres med +1 - *for observationer som er gennemsnitlige på X*
 
-- Hvordan ændres sandsynligheden for y=1, når x ændres med +1, for observationer som er gennemsnitlige på x,
+--
 
-Husk dog:
-
-- Vi kan også kigge på andre væsentlige niveauer for X end gennemsnittet. Der kan være et bestemt niveau for X-variablen som vi er interesserede i.
+- Kan også være mere eller mindre smart - *mere eller mindre repræsentativ for den samlede effekt*
+    - afhængiger bl.a. af S-kurvens hældning og den konkrete X-variabel
 
 ---
 
-# Øvelsesopgave 8.3 (MEM)
+# Øvelsesopgave 5.3
 
-Her kigger vi på den marginale effekt ved gennemsnittet for x
+**Eksempel med Marginal Effect at the Mean (MEM)**
+
+--
 
 .left-column[
 
-Tolk igen på de marginale effekter (dy/dx)
+**Tolk igen på de marginale effekter (dy/dx)**
 
-- Husk at tænke over, at vi her har sat alle uafhængige variable på deres gennemsnit.
+Husk at vi her har sat alle uafhængige variable på deres gennemsnit
+
+Fokusér evt. på *alder* og *indkomst*
 
 ]
 
 .right-column[
 
 ```{r}
-include_graphics("media/logit8.png")
+include_graphics("media/logit9.png")
 ```
 
 ]
 
 ---
 
-# Øvelsesopgave 8.3 (MEM)
+# Øvelsesopgave 5.3
 
-Her kigger vi på den marginale effekt ved gennemsnittet for x
+**Eksempel med Marginal Effect at the Mean (MEM)**
 
 .left-column[
 
-dy/dx udtrykker den marginale sandsynlighed for Y=1, når man ﬂytter sig med +1 på x variablens gennemsnit.
+Med udgangspunkt i en person med gennemsnitlig alder, køn, uddannelse og indkomst estimeres følgende:
 
-- Når en person med gns.
+Når alder stiger med +1, øges sandsynligheden for at stemme personligt med ca. 0,4 procentpoint
 
-køn, gns. alder, gns. uddannelse, og gns. indkomst, ﬂytter sig med én på indkomstvariablen øges sandsynligheden til at stemme personligt med 9.7 promille.
-
-Ændringen på indkomstvariablen svarer ca. til at gå fra ”250.000-299.999 kr.” til ”300.000-349.999 kr.”.
-
-**Koeﬃcienterne fra AME og MME er meget ens. Hvorfor?**
+Når indkomstniveau stiger med +1, øges sandsynligheden med ca. 1,1 procentpoint
 
 ]
 
 .right-column[
 
 ```{r}
-include_graphics("media/logit8.png")
+include_graphics("media/logit9.png")
 ```
 
 ]
 
 ---
 
-# AME og MME er substantielt ens i nogle tilfælde
+# AME ≈ MEM
 
-I vores tilfælde er AME og MEM meget ens.
+I nogle tilfælde er AME og MEM nærmest ens som i vores tilfælde
 
-Det skyldes, at AME og MEM kun divergerer, når sammenhængen er meget S-formet (hvor MEM > AME) ( hvis MEM er sat til en værdi inden for 25. og 75. percentil).
+Hvorfor?
 
----
+--
 
-# Forudsagte sandsynligheder for alle niveauer af x
+**Svar**
 
-Hvorfor forsøge at opsummere hele den ikke-lineære model i ét tal, når vi bare kan plotte resultatet?
+- AME og MEM divergerer, når sammenhængen er meget S-formet (MEM > AME)
 
-Hvis vi regner de forudsagte sandsynligheder for at stemme personligt for alle niveauer af alder, kan vi vurdere hele sammenhængen.
-
-Lidt ligesom ved interaktioner for metrisk Z.
+- Jo mere lineær, vores S-kurve er, jo mere ens vil de være
 
 ---
 
-# Øvelsesopgave 8.4
+# Forudsagte sandsynligheder
 
-Dette plot (lavet med *margins* og *marginsplot* i Stata) viser de forudsagte sandsynligheder for at stemme personligt for alle niveauer af alder.
+Tidligere blev vi enige om, at de mest intuitive størrelser er **sandsynligheder** og **ændringer i sandsynligheder**
+    
+- Vi har kigget på *ændringer i sandsynligheder* i form af AME og MEM
 
-.column-left[
+--
 
-- Hvad ser vi?
-- Stemmer det overens med vores AME?
+- Hvorfor forsøge så hårdt at opsummere hele den ikke-lineære model i ét tal, når vi bare kan **plotte den forudsagte sandsynlighed for Y = 1 for alle værdier af X**? 
 
-]
+--
 
-.column-right[
+    - giver et hurtigt **overblik**: forudsagt Y (sandsynlighed) på Y-aksen, forklarende X på X-aksen
+    
+--
 
-```{r}
-include_graphics("media/logit-margins.png")
-```
-
-]
-
----
-
-# Øvelsesopgave 8.4
-
-
-
-.column-left[
-
-Fra 18 år til 88 år stiger den forudsagte sandsynlighed for at stemme personligt med knap 30 pct. point., hvilket jo passer med vores AME. Effekten er lille på årsbasis, men det løber op over tid.
-
-]
-
-.column-right[
-
-```{r}
-include_graphics("media/logit-margins.png")
-```
-
-]
+    - vi kan vurdere hele sammenhængen
 
 ---
 
-# Logit vs. OLS (LPM) (8.5)
+# Øvelsesopgave 5.5
+
+**Eksempel på forudsagte sandsynligheder**
+
+--
 
 .pull-left[
 
-**Logit: $AME = 0.0040901$**
+Ved hjælp af kommandoen 
 
-```{r}
-include_graphics("media/logit-margins.png")
-```
+> **margins, at(alder=(17(1)100))** 
+
+efterfulgt af 
+
+> **marginsplot** 
+
+kan vi plotte de forudsagte sandsynligheder for at stemme personligt (Y) for alle niveauer af alder (X)
+
+**Hvad ser vi?**
 
 ]
 
 .pull-right[
 
-**LPM (OLS): $ß = 0.004105$**
-
 ```{r}
-include_graphics("media/logit-margins-lpm.png")
+include_graphics("media/logit-margins.png")
 ```
 
 ]
 
 ---
 
-# Er der forskel på logit og LPM?
+# Øvelsesopgave 5.5
 
-I dette tilfælde er de så godt som identiske. Det tyder altså på, at S-formen for dette data ikke er særlig tydelig.
+**Eksempel på forudsagte sandsynligheder**
 
-MED ANDRE ORD: I dette tilfælde er linearitet ikke en problematisk funktionel form for sandsynligheden.
+.pull-left[
 
-- Generel pointe om, hvor godt en model fitte data for at være brugbar
+Fra (fx) 20 til 70 år stiger den forudsagte sandsynlighed for at stemme personligt med ca. 20 procentpoint, hvilket svarer til vores AME, som vi gangede op til 50 år. Effekten er lille på årsbasis, men løber op over tid
 
----
+Desuden næsten en ret linje: 
 
-# Interaktion i logit?
+S-formen er ikke tydelig
 
-Interaktion i en logit model er problematisk.
+Mao. er linearitet ikke en problematisk funktionel form for sandsynligheden i dette tilfælde
 
-Stata giver jer en p-værdi, men den er ikke til at stole på – ignorer den.
+]
 
-Det er komplekst at beregne korrekte standardfejl for interaktioner i ikke-lineære modeller. 
+.pull-right[
 
-Tips:
+```{r}
+include_graphics("media/logit-margins.png")
+```
 
-- Tolk på interaktionsleddet ved at regne marginale effekter. Men husk på at marginale effekter ikke siger noget om hele interaktionens signifikans ved OLS-regression.
-
-- Lav interaktionsmodeller med LPM (OLS)
-
----
-
-# Antagelser bag logit
-
-Mange af de samme som OLS, men sværere at tjekke.
-
-- Modellen er korrekt specificeret (altså ikke udeladt variabel bias etc.)
-
-- Fravær af alvorlig multikollinearitet (tjek VIF i LPM)
-
-- Fravær af meget indﬂydelsesrige observationer (se Carolins video)
-
-- Linearitet (”linear in the logit”s). Betyder: Der skal være en lineær sammenhæng mellem log-odds og x! Det er til gengæld lige meget med homoskedasticitet og normalfordelte fejlled N skal have en vis størrelse (ca. 200) (se næste slide).
+]
 
 ---
 
-# Logit er en asymptotisk unbiased estimator 
+# Interaktion i logistisk regression
 
-**Asymptotisk unbiased** betyder at
+Interaktion i en logit-model er "dobbelt-kompliceret" og kan være **problematisk**:
 
-- Logit bliver unbiased i takt med at N stiger
+- Det er komplekst at beregne korrekte standardfejl for interaktioner i ikke-lineære modeller &rarr; Stata giver en **P-værdi**, men den er ikke til at stole på
 
-- Dette kalder man også nogle gange for en **konsistent** estimator.
+- "På eget ansvar", men bestemt muligt
 
-Større krav til antal observationer end ved normal OLS. Sønderskov skriver:
+--
 
-”*Et bud på guidelines ville være, at 100 observationer er for lidt, 500 observationer vil være tilstrækkeligt i langt de ﬂeste tilfælde, og 200 er formentligt nok, såfremt modellen ikke indeholder mere end 20 uafhængige variable*” (p. 279).
+**To praktiske muligheder:**
+
+- (A) Hvis den modererende variabel (Z) er **binær** &rarr; ingen problemer med interaktion i logit
+
+- (B) Hvis den modererende variabel (Z) er **kontinuert eller kategorisk** &rarr; lav interaktionsanalysen med OLS
+    - tag forbehold og vær opmærksom på forudsætningsbrud
+    
+--
+
+- Også andre muligheder ved kontinert/kategorisk Z: 
+    - (C) find et alternativt, intervalskaleret Y og lav OLS-interaktion efter bogen
+    - (D) fortsæt med interaktion i logit, men fortolk/præsentér kun marginale effekter (husk på at marginale effekter ikke fortæller om interaktionens signifikans)
+
+???
+
+Til de særligt interesserede: Find mere om interaktion i logistisk regression [her](https://stats.idre.ucla.edu/stata/seminars/deciphering-interactions-in-logistic-regression)
 
 ---
 
-# En meta-pointe
+# To teknikaliteter
 
-Logistisk regression er fedt og et vigtigt redskab, fordi modellen tager højde for en masse af OLS’ shortcomings ift. dikotome afhængige variable.
+--
 
-Og ulempen er netop det samme: Vores modeller bliver langt mindre intuitive, når sandsynligheden for y=1 er er forskellig!
+## Maximum likelihood estimation
 
-I sidste ende, forsimpler vi typisk informationen fra vores logistiske regression.
+- Logit finder den bedste model (og dermed også "effektstørrelserne") med **maximum likelihood estimation (MLE)** i stedet for ordinary least squares (OLS)
+
+- Ikke så substantielt vigtigt her og nu, men vigtigt at vide
+
+--
+
+## Asymptotisk unbiased estimator
+
+- Logistisk regression er **asymptotisk unbiased**, hvilket betyder, at logit først bliver unbiased i takt med, at N stiger
+
+- Betyder større krav til **antal observationer** (N) end ved normal OLS
+
+> "Et bud på guidelines ville være, at 100 observationer er for lidt, 500 observationer vil være tilstrækkeligt i langt de ﬂeste tilfælde, og 200 er formentligt nok, såfremt modellen ikke indeholder mere end 20 uafhængige variable" .right[(Sønderskov, 2014, p. 279)]
+
+---
+
+# Antagelser bag logistisk regression
+
+Mange af de samme model-antagelser som i OLS, men lidt sværere at tjekke (se Sønderskov, 2014, pp. 274ff):
+
+--
+
+- Modellen er korrekt specificeret (ingen udeladt variabel bias etc.) - vigtigt!
+
+- Fravær af alvorlig multikollinearitet (tjek med VIF i OLS-version af modellen)
+
+- Fravær af meget indﬂydelsesrige observationer (ikke pensum men se evt. do-fil til øvelsesopgaven)
+
+- Linearitet ("linear in the logits") &rarr; der skal være en lineær sammenhæng mellem Y udtrykt som log-odds og den uafhængige variabel X &rarr; tjek jf. Sønderskov (2014), pp. 274ff 
+
+- Til gengæld antager vi *ikke* homoskedasticitet og normalfordelte fejlled
+
+--
+
+***
+
+Det gælder i øvrigt også for **interaktion** (sidste uge) - at der overordnet gøres de samme antagelser som i OLS uden interaktion (se Sønderskov, 2014, p. 239)
+
 
 ---
 
 # Dagens pointer
 
+.pull-left[
+
+- Logistisk regression er et vigtigt redskab, når vi arbejder med **dikotome afhængige variable**, fordi modellen tager højde for mange af OLS’ shortcomings
+
+- Det kommer dog med den ulempe, at vores resultater bliver **langt mindre intuitive**
+
+- I sidste ende laver vi typisk "korrekt" logistisk regression, men forsimpler informationen, når vi fortolker og formidler resultaterne
+    - fx vha. AME, MEM, OLS
+    
+]
+
+.pull-right[
+```{r, out.width="85%"}
+include_graphics("media/curves.png")
+```
+
+]
+
 ---
 
 # Næste gang
+
+- **Multilevel analyse**
+
+- Bruges når vi har uafhængige variable på flere niveauer
+    - fx lande-BNP og individ-alder
+
+- Helt nyt emne og ny teknik på pensum &rarr; I kan blive de første eksperter
 
 ---
 

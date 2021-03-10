@@ -86,7 +86,7 @@ Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a g
 - Flere niveauer
 - Hierarki af enheder, "nested within...""
 - Kendte eksempler: Individer inden for grupper (f.eks. lande/kommuner) og tidslige observationer inden for enheder (fx lande-år = paneldata)
-- The lowest level (level 1) is usually deﬁned by the individuals. 
+- The lowest level (level 1) is usually defined by the individuals. 
 - Level 1 (laveste), 2, 3, ... (teoretisk er der ingen grænse, men i praksis bliver det hurtigt vanskelligt. Der skal være en god grund til at arbejde med mere end to niveauer). 
 
 --
