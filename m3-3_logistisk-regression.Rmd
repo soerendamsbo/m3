@@ -45,14 +45,12 @@ print_plan(10)
 
 - Super smart redskab til at få flere nuancer og mere teoretisk dybde frem i sin analyse
 
-- Måleniveauer er vigtige for udførelse og fortolkning (intervalskaleret, kategorisk, binær)
-
 - Eksempel i Stata: **reg y c.x##i.z**
 
 - Marginale effekter er de *forskellige effekter, X har på Y* for hvert af de respektive niveauer af Z: 
     - **margins, dydx(x) at(z = (1 2 3 4 5))** &rarr; **marginsplot**
 
-- Interaktionsleddet er *forskellen i effekt* eller *noget ekstra, der lægges til effekten* &rarr; signifikant?
+- Interaktionsleddet er *forskellen i effekt* eller *noget ekstra, der lægges til effekten*
 
 - Fortolkning kan være udfordrende - især med kategoriske variable
 
@@ -174,13 +172,13 @@ Husk at med regression forsøger vi at finde den model, som bedst beskriver forh
     
     - minimerer hvor meget vi med modellen skyder over/under de sande værdier af Y
     
-    - ret linje &rarr; linearitet &rarr; konstant hældning 
+    - ret linje = konstant hældning = linearitet
     
-    - hældning = *beta-koefficient*
+    - hældning = $\beta$
     
 --
 
-(Blandt andet) derfor er OLS fedt:
+(Bl.a.) derfor er OLS fedt:
 
 - Det er **intuitivt** - koefficienten som beskriver forholdet mellem X og Y har en intuitiv fortolkning:
     - når X vokser med +1 udtrykker koefficienten den tilsvarende ændring i Y
@@ -199,17 +197,17 @@ Den store udfordring, når Y er binær:
 
 - Det komplicerer vores tolkning markant: 
 
-    - Hvorvidt/hvordan en ændring i X påvirker sandsynligheden for, at Y=1 **afhænger af, hvor på x-aksen vi står**
+    - Hvordan en ændring i X påvirker sandsynligheden for, at Y=1 **afhænger af, hvor på x-aksen vi står**
 
 --
 
-Kan vi matematisk udtrykke disse heterogene effekter med ét tal, som i OLS?
+Kan vi matematisk udtrykke disse heterogene effekter med *ét tal* som i OLS?
 
 - Spoiler alert ... Det kan vi!
 
 - Men dette ene tal ("logit") er ikke intuitivt
 
-- Heldigvis er der løsninger, når vi kommer til fortolkning (fx AME/MEM)
+- Heldigvis findes der løsninger, når vi kommer til fortolkning
 
 ---
 
@@ -241,7 +239,7 @@ Rød linje:
 
 - en ret linje - passer ikke så godt på punkterne
 
-- = OLS som I kender det &rarr; kaldes også en **"lineær Sandsynlighedsmodel" (LPM)**, når Y er dikotom
+- = OLS som I kender det &rarr; kaldes også en "lineær sandsynlighedsmodel" (LPM), når Y er dikotom
 
 Blå linje:
 
@@ -261,38 +259,38 @@ include_graphics("media/logit2.png")
 
 ---
 
-# Sandsynligheden for et udfald (Y = 1)
+<!-- # Sandsynligheden for et udfald (Y = 1) -->
 
-Med en binær afhængig variabel kan Y per definition kun antage værdierne 0 eller 1 
+<!-- Med en binær afhængig variabel kan Y per definition kun antage værdierne 0 eller 1  -->
 
---
+<!-- -- -->
 
-- gennemsnit af en binær variabel er **andelen af 1-taller** (succeser)
+<!-- - gennemsnit af en binær variabel er **andelen af 1-taller** (succeser) -->
 
---
+<!-- -- -->
 
-- hvis fx **gennemsnittet er 0.66**, må 2/3, 66%, af værdierne være 1-taller (og 1/3, 33%, være 0'er)
-    - fx observationerne [0,0,1,1,1,1]
+<!-- - hvis fx **gennemsnittet er 0.66**, må 2/3, 66%, af værdierne være 1-taller (og 1/3, 33%, være 0'er) -->
+<!--     - fx observationerne [0,0,1,1,1,1] -->
 
---
+<!-- -- -->
 
-- Det betyder, at der er 66% sandsynlighed for, at en observationen i populationen er **et 1-tal**
+<!-- - Det betyder, at der er 66% sandsynlighed for, at en observationen i populationen er **et 1-tal** -->
 
---
+<!-- -- -->
 
-- **Hvad er gennemsnittet af [0,0,0,1,1,1]?**
+<!-- - **Hvad er gennemsnittet af [0,0,0,1,1,1]?** -->
 
---
+<!-- -- -->
 
-- Når Y er en dummy, beskriver vores regression **sandsynligheden for, at Y=1** som funktion af en eller flere uafhængige variable
+<!-- - Når Y er en dummy, beskriver vores regression **sandsynligheden for, at Y=1** som funktion af en eller flere uafhængige variable -->
 
---
+<!-- -- -->
 
-- (**Notation**) Sandsynligheden for, at Y = 1 for et givet X skrives som: **P(Y = 1 | X)**
+<!-- - (**Notation**) Sandsynligheden for, at Y = 1 for et givet X skrives som: **P(Y = 1 | X)** -->
 
----
+<!-- --- -->
 
-# OLS versus logit
+# OLS vs. logit
 
 Vi vil lave en model, der har et binært Y:
 
@@ -308,9 +306,9 @@ Vi starter med lineær regression (OLS)
 
 Her er sandsynligheden for, at Y=1 en lineær funktion af X:
 
-- $P(Y = 1 | X) = \alpha + \beta X$
+$P(Y = 1 | X) = \alpha + \beta X$
 
-... helt som I kender det
+... helt som I kender det (med lidt ny notation)
 
 --
 
@@ -351,7 +349,7 @@ include_graphics("media/logit3.png")
 
 ---
 
-# Det fede ved OLS
+## Det fede ved OLS
 
 - Fortolkningen er lige til - og vi kender det i forvejen
 
@@ -359,7 +357,7 @@ include_graphics("media/logit3.png")
 
 --
 
-# Det ufede ved OLS
+## Det ufede ved OLS
 
 Der er en række **grunde til, at OLS er problematisk, når Y er en dummy**:
 
@@ -377,7 +375,7 @@ Der er en række **grunde til, at OLS er problematisk, når Y er en dummy**:
 
 ---
 
-# Logistisk regression (logit)
+# Logistisk regression
 
 
 .left-column[
@@ -397,7 +395,7 @@ Logistisk regression er alternativet til OLS, når vi har en **binær afhængig 
 
 ---
 
-# Logistisk regression (logit)
+# Logistisk regression
 
 .left-column[
 ```{r}
@@ -413,18 +411,18 @@ Logistisk regression fungerer ved at lave en matematisk transformation
 
 $F(x) = \frac{e^x}{1+e^x}$
 
-- Vi indsætter vores lineære sandsynlighedsmodel på X's plads, så vi får:
+- Vi indsætter vores lineære sandsynlighedsmodel på X's plads og får:
 
 $Y = P(Y = 1 | X) = F(\alpha+\beta X+\epsilon) = \frac{e^{\alpha+\beta X+\epsilon}}{1+e^{\alpha+\beta X+\epsilon}}$
 
-- Modellen giver os sandsynligheden for at Y = 1 som en *logistisk funktion af X*
+- Modellen giver os sandsynligheden for Y = 1 som en *logistisk funktion af X*
     - dette trick giver os en meget bedre funktionel form
 
 ]
 
 ---
 
-# Logistisk regression (logit) 
+# Logistisk regression 
 
 .left-column[
 ```{r}
@@ -450,9 +448,9 @@ Tænk på det sådan her:
 
 ---
 
-# Opsummering af OLS versus logit
+# OLS vs. logit - opsummering
 
-- Tænk på logistisk regression som **en udvidelse af lineær regression** (dog en udvidelse til en ikke-lineær model)
+- Tænk på logistisk regression som **en udvidelse af lineær regression** (det er dog en ikke-lineær model), som anvendes, når Y er binær
 
 --
 
@@ -464,9 +462,7 @@ Tænk på det sådan her:
 
     - Man skal ikke kimse af den værdi, der ligger i lettere fortolkning
 
---
-
-    - Hvis man laver kausalstudier i praksis, er eksogenitetsantagelsen (fravær af spuriøsitet m.m.) langt vigtigere end valget mellem OLS vs. logistisk regression
+    - Når man laver kausalstudier i praksis, er eksogenitetsantagelsen (fravær af spuriøsitet m.m.) langt vigtigere end valget mellem OLS vs. logistisk regression
     
 --
     
@@ -479,17 +475,15 @@ class: title-slide, center, middle
 
 ---
 
-## Sandsynlighed, odds, logit-koefficient og odds ratio
-
-```{r}
-include_graphics("media/logit-table.png")
-```
-
----
-
 # Logit-koefficienten
 
-- Stata giver os som standard logit-koefficienten
+Når vi kører en logistisk regression i Stata
+
+> logit Y X1 X2 X3
+
+... giver Stata os **logit-koefficienten**
+
+--
 
 - Den udtrykker **ændringen i den naturlige logaritme til oddset, når X stiger med +1**
     - ikke spor intuitivt!
@@ -499,11 +493,9 @@ include_graphics("media/logit-table.png")
 - **P-værdi** kan tolkes som normalt 
     - er der en **statistisk signifikant sammenhæng** mellem X og Y?
 
-- **Fortegn**:
+- **Fortegn**
     - **Positiv (+)**: sandsynligheden for Y = 1 *stiger*, når X vokser
     - **Negativ (-)**: sandsynligheden for Y = 1 *falder*, når X vokser
-
-- Vi kan ikke udlede meget mere
 
 ---
 
@@ -600,6 +592,14 @@ include_graphics("media/logit7.png")
 
 ---
 
+# Sandsynlighed, odds, logit-koefficient og odds ratio
+
+```{r}
+include_graphics("media/logit-table.png")
+```
+
+---
+
 # Mere intuitive måder at rapportere effekter 
 
 - Logit-koefficienten og odds ratio er forsøg på at opsummere heterogene effekter med ét tal
@@ -608,7 +608,7 @@ include_graphics("media/logit7.png")
     
 --
 
-- De fleste er nok enige i, at den mest intuitive fortolkning er:
+- De fleste er nok enige i, at det mest intuitive er:
 
     - **Sandsynlighed**: "der er 70 % sandsynlighed for, at hun stemmer personligt"
     
@@ -618,13 +618,11 @@ include_graphics("media/logit7.png")
 
 ***
 
-**Effekten udtrykt som ændringer i sandsynligheder:**
+**Effekten udtrykt som ændringer i sandsynligheder**
 
-- Average Marginal Effect (AME)
-    - Gennemsnittet af den marginale effekt ved alle niveauer af X
+- Average Marginal Effect (AME): Gennemsnittet af den marginale effekt ved alle niveauer af X
 
-- Marginal Effect at the Mean (MEM)
-    - Den marginale effekt ved gennemsnittet af X
+- Marginal Effect at the Mean (MEM): Den marginale effekt ved gennemsnittet af X
 
 ---
 
@@ -665,6 +663,8 @@ include_graphics("media/logit7.png")
 
 **Eksempel med Average Marginal Effect (AME)**
 
+--
+
 .left-column[
 
 Den gennemsnitlige marginale effekt kan (pyha, endelig!) fortolkes som *ændringen i sandsynlighed*
@@ -688,8 +688,6 @@ include_graphics("media/logit8.png")
 # Øvelsesopgave 5.3
 
 **Eksempel med Average Marginal Effect (AME)**
-
---
 
 .left-column[
 
@@ -790,6 +788,7 @@ include_graphics("media/logit9.png")
 # AME ≈ MEM
 
 I nogle tilfælde er AME og MEM nærmest ens som i vores tilfælde
+    - for *alder* var den fx 0,00404 vs. 0,00414
 
 Hvorfor?
 
@@ -811,15 +810,13 @@ Tidligere blev vi enige om, at de mest intuitive størrelser er **sandsynlighede
 
 --
 
-- Hvorfor forsøge så hårdt at opsummere hele den ikke-lineære model i ét tal, når vi bare kan **plotte den forudsagte sandsynlighed for Y = 1 for alle værdier af X**? 
+- Men hvorfor forsøge så hårdt at opsummere i ét tal, når vi bare kan **plotte den forudsagte sandsynlighed for Y = 1 for alle værdier af X**? 
 
 --
 
-    - giver et hurtigt **overblik**: forudsagt Y (sandsynlighed) på Y-aksen, forklarende X på X-aksen
+    - giver et hurtigt **overblik** over hele sammenhængen
     
---
-
-    - vi kan vurdere hele sammenhængen
+    - forudsagt Y (sandsynlighed) på Y-aksen, forklarende X på X-aksen
 
 ---
 
@@ -865,9 +862,9 @@ Fra (fx) 20 til 70 år stiger den forudsagte sandsynlighed for at stemme personl
 
 Desuden næsten en ret linje: 
 
-S-formen er ikke tydelig
+S-formen er ikke tydelig &rarr; mao. er linearitet ikke en problematisk funktionel form i dette tilfælde
 
-Mao. er linearitet ikke en problematisk funktionel form for sandsynligheden i dette tilfælde
+Hvad ser vi ikke? Signifikanstest!
 
 ]
 
@@ -891,7 +888,7 @@ Interaktion i en logit-model er "dobbelt-kompliceret" og kan være **problematis
 
 --
 
-**To praktiske muligheder:**
+**To praktiske muligheder**
 
 - (A) Hvis den modererende variabel (Z) er **binær** &rarr; ingen problemer med interaktion i logit
 
@@ -914,7 +911,7 @@ Til de særligt interesserede: Find mere om interaktion i logistisk regression [
 
 --
 
-## Maximum likelihood estimation
+**Maximum likelihood estimation**
 
 - Logit finder den bedste model (og dermed også "effektstørrelserne") med **maximum likelihood estimation (MLE)** i stedet for ordinary least squares (OLS)
 
@@ -922,19 +919,19 @@ Til de særligt interesserede: Find mere om interaktion i logistisk regression [
 
 --
 
-## Asymptotisk unbiased estimator
+**Asymptotisk unbiased estimator**
 
 - Logistisk regression er **asymptotisk unbiased**, hvilket betyder, at logit først bliver unbiased i takt med, at N stiger
 
 - Betyder større krav til **antal observationer** (N) end ved normal OLS
 
-> "Et bud på guidelines ville være, at 100 observationer er for lidt, 500 observationer vil være tilstrækkeligt i langt de ﬂeste tilfælde, og 200 er formentligt nok, såfremt modellen ikke indeholder mere end 20 uafhængige variable" .right[(Sønderskov, 2014, p. 279)]
+> Et bud på guidelines ville være, at 100 observationer er for lidt, 500 observationer vil være tilstrækkeligt i langt de ﬂeste tilfælde, og 200 er formentligt nok, såfremt modellen ikke indeholder mere end 20 uafhængige variable .right[(Sønderskov, 2014, p. 279)]
 
 ---
 
 # Antagelser bag logistisk regression
 
-Mange af de samme model-antagelser som i OLS, men lidt sværere at tjekke (se Sønderskov, 2014, pp. 274ff):
+Mange af de samme model-antagelser som i OLS, men lidt sværere at tjekke (se Sønderskov, 2014, pp. 274ff)
 
 --
 
@@ -989,5 +986,6 @@ include_graphics("media/curves.png")
 - Helt nyt emne og ny teknik på pensum &rarr; I kan blive de første eksperter
 
 ---
+class: title-slide, center, middle
 
 # Tak for i dag!
