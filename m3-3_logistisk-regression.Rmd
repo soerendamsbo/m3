@@ -465,7 +465,7 @@ Tænk på det sådan her:
 ---
 class: title-slide, center, middle
 
-# Fortolkning, eksempler og øvelsesopgaver<br><br>(pause)
+# Fortolkning, eksempler og øvelsesopgaver
 
 ---
 
@@ -705,7 +705,7 @@ include_graphics("media/logit8.png")
     
     - men man kan ligeså godt vælge **andre repræsentative/illustrative niveauer** af teoretiske eller andre grunde
     
-    - hældningen af X-kurven i et bestemt punkt
+    - hældningen af S-kurven i et bestemt punkt
     
 --
     
