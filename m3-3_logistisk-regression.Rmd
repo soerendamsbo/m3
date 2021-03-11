@@ -47,12 +47,10 @@ print_plan(10)
 
 - Eksempel i Stata: **reg y c.x##i.z**
 
-- Marginale effekter er de *forskellige effekter, X har på Y* for hvert af de respektive niveauer af Z: 
-    - **margins, dydx(x) at(z = (1 2 3 4 5))** &rarr; **marginsplot**
-
 - Interaktionsleddet er *forskellen i effekt* eller *noget ekstra, der lægges til effekten*
 
-- Fortolkning kan være udfordrende - især med kategoriske variable
+- Marginale effekter er de *forskellige effekter, X har på Y* for hvert af de respektive niveauer af Z: 
+    - **margins, dydx(x) at(z = (1 2 3 4 5))** &rarr; **marginsplot**
 
 ---
 
@@ -104,8 +102,6 @@ background-size: cover
     - arbejd videre med tidligere projekt (fx metode 2-survey data) 
     - replikation/kritisk diskussion af eksisterende undersøgelser (smart!) - skal *anvende* metoderne
 
---
-
 **Vejledning**
 
 - Ca. 15 min. per gruppe ad to omgange
@@ -126,6 +122,10 @@ background-size: cover
 
 - At vide hvordan man fortolker (og præsenterer) sine resultater 
 
+???
+
+OBS! **Kausalitetsspørgsmålet** er stadig skudt lidt til hjørne &rarr; vi taler om "effekter" uden at være sikre på, at vores forskningsdesign muliggør dette - om kriterierne for kausalitet er opfyldt.
+
 ---
 
 # Pensum
@@ -133,12 +133,6 @@ background-size: cover
 - Kellstedt, P. M., Whitten, G. D. (2018). The Fundamentals of Political Science Research. 3rd edition. Cambridge University Press. Kapitel 12.1-12.2.
 
 - Sønderskov, Kim Mannemar (2014). Stata – en praktisk introduktion (2. udg.). København: Hans Reitzels forlag. Kap. 11 
-
---
-
-***
-
-OBS! **Kausalitetsspørgsmålet** er stadig skudt lidt til hjørne &rarr; vi taler om "effekter" uden at være sikre på, at vores forskningsdesign muliggør dette - om kriterierne for kausalitet er opfyldt
 
 ---
 
@@ -215,7 +209,7 @@ Kan vi alligevel udtrykke det med *ét tal* som i OLS?
 
 Her er plottet fra før. Der er blot indsat to linjer til at beskrive data
 
-Hvordan og hvor godt beskriver de data (dvs. sammenhængen mellem X og Y)?
+**Hvordan og hvor godt beskriver de data**<br>(dvs. sammenhængen mellem X og Y)?
 
 ]
 
@@ -347,7 +341,7 @@ include_graphics("media/logit3.png")
 
 ---
 
-## Det fede ved OLS
+# Det fede ved OLS
 
 - Fortolkningen er lige til - og vi kender det i forvejen
 
@@ -355,21 +349,23 @@ include_graphics("media/logit3.png")
 
 --
 
+<br>
+
 ## Det ufede ved OLS
 
-Der er en række **grunde til, at OLS er problematisk, når Y er en dummy**:
+Der er en række **grunde til, at OLS er problematisk, når Y er en dummy**
 
 - Problemer med fejlled &rarr; altid heteroskedastiske og aldrig normalfordelte
 
 --
 
-- Den funktionelle form (linearitet) er problematisk &rarr; gennemsnitseffekt er upassende
+- Den funktionelle form (linearitet) er problematisk
 
 --
 
-- Den rette linje løber i princippet fra $-\infty$ til $\infty$:
+- Den rette linje løber i princippet fra $-\infty$ til $\infty$
 
-    - Betyder at vores model kan forudsige (absurde) sandsynligheder større end 100 % og mindre end 0 %
+    - betyder at vores model kan forudsige (absurde) sandsynligheder større end 100 % og mindre end 0 %
 
 ---
 
@@ -469,7 +465,7 @@ Tænk på det sådan her:
 ---
 class: title-slide, center, middle
 
-# Fortolkning, eksempler og øvelsesopgaver
+# Fortolkning, eksempler og øvelsesopgaver<br><br>(pause)
 
 ---
 
@@ -590,14 +586,6 @@ include_graphics("media/logit7.png")
 
 ---
 
-# Sandsynlighed, odds, logit-koefficient og odds ratio
-
-```{r}
-include_graphics("media/logit-table.png")
-```
-
----
-
 # Mere intuitive måder at rapportere effekter 
 
 - Logit-koefficienten og odds ratio er forsøg på at opsummere heterogene effekter med ét tal
@@ -614,13 +602,11 @@ include_graphics("media/logit-table.png")
 
 --
 
-***
+- **Effekten udtrykt som ændringer i sandsynligheder**
 
-**Effekten udtrykt som ændringer i sandsynligheder**
-
-- Average Marginal Effect (AME): Gennemsnittet af den marginale effekt ved alle niveauer af X
-
-- Marginal Effect at the Mean (MEM): Den marginale effekt ved gennemsnittet af X
+    - Average Marginal Effect (AME): Gennemsnittet af den marginale effekt _for alle niveauer af X_
+    
+    - Marginal Effect at the Mean (MEM): Den marginale effekt _ved gennemsnittet af X_
 
 ---
 
@@ -729,7 +715,7 @@ include_graphics("media/logit8.png")
 --
 
 - Kan også være mere eller mindre smart - *mere eller mindre repræsentativ for den samlede effekt*
-    - afhængiger bl.a. af S-kurvens hældning og den konkrete X-variabel
+    - afhænger bl.a. af S-kurvens hældning og den konkrete X-variabel
 
 ---
 
@@ -783,34 +769,13 @@ include_graphics("media/logit9.png")
 
 ---
 
-# AME ≈ MEM
-
-I nogle tilfælde er AME og MEM nærmest ens som i vores tilfælde
-    - for *alder* var den fx 0,00404 vs. 0,00414
-
-Hvorfor?
-
---
-
-**Svar**
-
-- AME og MEM divergerer, når sammenhængen er meget S-formet (MEM > AME)
-
-- Jo mere lineær, vores S-kurve er, jo mere ens vil de være
-
----
-
 # Forudsagte sandsynligheder
 
 Tidligere blev vi enige om, at de mest intuitive størrelser er **sandsynligheder** og **ændringer i sandsynligheder**
     
 - Vi har kigget på *ændringer i sandsynligheder* i form af AME og MEM
 
---
-
 - Men hvorfor forsøge så hårdt at opsummere i ét tal, når vi bare kan **plotte den forudsagte sandsynlighed for Y = 1 for alle værdier af X**? 
-
---
 
     - giver et hurtigt **overblik** over hele sammenhængen
     
@@ -821,8 +786,6 @@ Tidligere blev vi enige om, at de mest intuitive størrelser er **sandsynlighede
 # Øvelsesopgave 5.5
 
 **Eksempel på forudsagte sandsynligheder**
-
---
 
 .pull-left[
 
@@ -856,7 +819,7 @@ include_graphics("media/logit-margins.png")
 
 .pull-left[
 
-Fra (fx) 20 til 70 år stiger den forudsagte sandsynlighed for at stemme personligt med ca. 20 procentpoint, hvilket svarer til vores AME, som vi gangede op til 50 år. Effekten er lille på årsbasis, men løber op over tid
+Fra (fx) 20 til 70 år stiger den forudsagte sandsynlighed for at stemme personligt med ca. 20 procentpoint, hvilket svarer til vores AME, som vi gangede op til 50 år. 
 
 Desuden næsten en ret linje: 
 
@@ -905,6 +868,30 @@ Til de særligt interesserede: Find mere om interaktion i logistisk regression [
 
 ---
 
+# Antagelser bag logistisk regression
+
+Mange af de samme model-antagelser som i OLS, men lidt sværere at tjekke (se Sønderskov, 2014, pp. 274ff)
+
+--
+
+- Modellen er korrekt specificeret (ingen udeladt variabel bias etc.) - vigtigt!
+
+- Fravær af alvorlig multikollinearitet (tjek med VIF i OLS-version af modellen)
+
+- Fravær af meget indﬂydelsesrige observationer (ikke pensum men se evt. do-fil til øvelsesopgaven)
+
+- Linearitet ("linear in the logits") &rarr; der skal være en lineær sammenhæng mellem Y udtrykt som log-odds og den uafhængige variabel X (tjek jf. Sønderskov (2014), pp. 274ff)
+
+- Til gengæld antager vi *ikke* homoskedasticitet og normalfordelte fejlled
+
+--
+
+***
+
+Det gælder i øvrigt også for **interaktion** (sidste uge) - at der overordnet gøres de samme antagelser som i OLS uden interaktion (se Sønderskov, 2014, p. 239)
+
+---
+
 # To teknikaliteter
 
 --
@@ -923,32 +910,7 @@ Til de særligt interesserede: Find mere om interaktion i logistisk regression [
 
 - Betyder større krav til **antal observationer** (N) end ved normal OLS
 
-> Et bud på guidelines ville være, at 100 observationer er for lidt, 500 observationer vil være tilstrækkeligt i langt de ﬂeste tilfælde, og 200 er formentligt nok, såfremt modellen ikke indeholder mere end 20 uafhængige variable .right[(Sønderskov, 2014, p. 279)]
-
----
-
-# Antagelser bag logistisk regression
-
-Mange af de samme model-antagelser som i OLS, men lidt sværere at tjekke (se Sønderskov, 2014, pp. 274ff)
-
---
-
-- Modellen er korrekt specificeret (ingen udeladt variabel bias etc.) - vigtigt!
-
-- Fravær af alvorlig multikollinearitet (tjek med VIF i OLS-version af modellen)
-
-- Fravær af meget indﬂydelsesrige observationer (ikke pensum men se evt. do-fil til øvelsesopgaven)
-
-- Linearitet ("linear in the logits") &rarr; der skal være en lineær sammenhæng mellem Y udtrykt som log-odds og den uafhængige variabel X &rarr; tjek jf. Sønderskov (2014), pp. 274ff 
-
-- Til gengæld antager vi *ikke* homoskedasticitet og normalfordelte fejlled
-
---
-
-***
-
-Det gælder i øvrigt også for **interaktion** (sidste uge) - at der overordnet gøres de samme antagelser som i OLS uden interaktion (se Sønderskov, 2014, p. 239)
-
+> Et bud på guidelines ville være, at 100 observationer er for lidt, 500 observationer vil være tilstrækkeligt i langt de ﬂeste tilfælde, og **200 er formentligt nok**, såfremt modellen ikke indeholder mere end 20 uafhængige variable .right[(Sønderskov, 2014, p. 279)]
 
 ---
 
