@@ -22,7 +22,8 @@ pacman::p_load(tidyverse, knitr, ggdag, lubridate, kableExtra)
 
 knitr::opts_chunk$set(echo = FALSE, 
                       fig.align = "center", 
-                      fig.height=12)
+                      fig.height=12,
+                      cache = TRUE)
 
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
@@ -39,17 +40,54 @@ print_plan(11)
 
 # Recap fra sidste gang
 
+- Vi bruger **logistisk regression** i stedet for OLS, **når Y er binær**, pga. OLS' problemer med funktionel form (linearitet), fejlled, absurde sandsynligheder mv.
+
+- I logistisk regression er der ikke kun én effekt af X &rarr; Y. Effekten afhænger af, hvor på X-aksen, vi står
+
+- **Beta-koefficienterne** ("effekterne") angiver effekten af, at X vokser med +1 på *den naturlige logaritme til oddset for, at Y = 1* (fx at en person stemmer personligt)
+    - umuligt at forstå intuitivt
+    - **odds ratio** er ikke meget bedre
+    
+- Fortolker vha. tricks
+    - **Average Marginal Effect** (AME): Den marginale effekt X &rarr; P(Y=1) for *alle niveauer af X* - opsummeret i et gennemsnit
+    - **Marginal Effect at the Mean** (MEM): Den marginale effekt X &rarr; P(Y=1) i *et bestemt punkt* på X-aksen - typisk gennemsnittet af X
+    - **Forudsagte sandsynligheder**: Sandsynligheden for Y=1 for *alle niveauer af X* - "S-kurven"
+
 ---
 
+<!--
+
+- "Multilevel analysis can be seen as a generalization of OLS regression to accommodate the complexities of estimating regression models with two or more levels" (197)
+- Data! Smart. World values survey. European social survey. 
+- Merging data ... brief! 
+- Rule of thumb: 10 obs per indep. (level 2)
+
+- Bruges når data har en klar hierarkisk struktur - eller rettere når populationen har det. Eller: Når vi vil undersøge effekten af level 2-variable (foruden level 1-variable) på en level-1 afhængig var (Y). ... Eller: Når vi arbejder med multilevel-teorier/hypoteser. 
+- Nævn fixed effects med klyngerobust stdfejl. 
+
+-->
+
 # Dagens program
+
+- Multilevel analyse - nyt emne
+
+- Hvad er det, hvornår og hvorfor bruger vi det?
+
+- Hvordan udfører vi det i Stata og fortolker output? Eksempel fra Mehmetoglu & Jakobsen (2016)
+
+- Øvelsesopgaver i Stata (sammen - så meget vi når)
 
 ---
 
 # Dagens formål
 
-- Forstå hvad multilevel problemer og -analyse er
+- Forstå multilevel-problemer og analyse
+
 - Være bevidst om, hvilke problemer multilevel analyse afhjælper
--    
+
+- Hvilke muligheder er der, hvilke valg skal man træffe?
+
+- Lære hvordan man udfører og fortolke i Stata
 
 ---
 
@@ -61,7 +99,17 @@ Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a g
 
 ---
 
+# Begreber
+
+- Level 1 og level 2
+
+---
+
 # Hvad er multilevel analyse?
+
+- Endnu en udvidelse af OLS
+
+- Eksempler på data, hypoteser? 
 
 --
 
@@ -91,7 +139,7 @@ Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a g
 
 --
 
-**Find på mindst et eksempel på et multilevel problem (tænk på den virkelige verden). Behøver ikke være praktisk muligt.**
+**Find et eksempel på et multilevel problem (tænk på den virkelige verden). Behøver ikke være praktisk muligt.**
 
 ??? Husk paneldata
 
@@ -104,21 +152,9 @@ Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a g
 - **Disaggregation** means moving variables to a lower level, for instance by assigning to all pupils in the schools a variable that indicates the denomination of the school they belong to.
 - På hvilket niveau "står" vi? På hvilket niveau er variablen målt?
 
---
-
-- Variabel-typologi fra Hox (2010):
-    - Globale variable (same-level, e.g., pupil intelligence)
-    - Strukturelle variable (from sub-level, e.g., mean intelligence assigned to schools)
-    - Kontekstuelle variable (from super-level, e.g., mean intelligence assigned to pupils)
-    - Afhænger af, hvilket niveau vi "står" på. 
-    
---
-    
-**Eksempler -- øvelse... Tag jeres eksempel fra før (eller et nyt) og prøv at komme med et eksempel på en relevant global, strukturel og kontekstuel variabel. Hvis det er for svært, så giv et abstrakt svar ("det kunne fx være en variabel, som...")**
-
 ---
 
-# Den klassiske (dårlige) tilgang til multilevel analyse
+# Den dårlige tilgang til multilevel analyse
 
 1. Find ud af, på hvilket niveau vi er interesserede i at forklare et outcome. Typisk eksempel: Individ (fx hvem stemmer vil individet stemme på)
 
@@ -130,7 +166,7 @@ Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a g
     
 ---
 
-# Problemer ved den klassiske (dårlige) tilgang
+# Hvorfor er den dårlige tilgang dårlig?
 
 - Når variable disaggregeres, så der er en værdi per individ (laveste niveau), bliver disse værdier, som jo stammer fra et mindre antal "super-units" (overenheder), **blæst op** i den forstand, at det ligner, der er mange flere observationer.
 - Og omvendt: Når man aggregerer mister man en masse information (variation) og dermed power (svagere tests &rarr; mindre sandsynlighed for at finde effekter, der ellers i virkeligheden er der)
@@ -161,23 +197,426 @@ Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a g
 
 ---
 
-# Multilevel regressionsanalyse
+# Data 
+
+- Mange supergode multinationale datasæt frit tilgængelige, herunder European Social Survey og World Values Survey
+
+- Lovede Carolin at vise, hvordan man kan merge to datasæt
+
+- Hvordan man merger individdata med landedata &rarr;
 
 ---
 
-# Fixed effects ...
+## Hvordan man merger individdata med landedata: *Do-fil*
 
-- Eksempel fra egen forskning
-- Meget klar parallel til paneldata, som vi kommer til om to uger
+```{r, fig.align='left'}
+include_graphics("media/merge_do.png")
+```
+
+---
+
+## Hvordan man merger individdata med landedata: *Resultat*
+
+```{r}
+include_graphics("media/merge_result.png")
+```
+
+---
+class: title-slide, center, middle
+
+# Stata og fremgangsmåde med eksempler
+
+---
+
+# Multilevel analyse i Stata
+
+> **mixed   Y_lvl1 || ID_lvl2:** (*Null-model*)
+
+> **mixed   Y_lvl1   X1_lvl1   X2_lvl1   X3_lvl1   X4_lvl2   X5_lvl2   ||   ID_lvl2:**
+
+--
+
+- **ID_lvl2** er en variabel, der identificerer grupperne, fx *landenavn*. Husk kolon i enden af **ID_lvl2:**
+
+- **_lvl1** og **_lvl2** indikerer, hvilket niveau variablen hører til i eksemplet. *Stata finder selv ud af dette* i praksis! 
+
+- Eventuelle *random effects* (lvl1-X'er fra venstresiden af **||**) tilføjes efter **ID_lvl2:**
+
+--
+
+**Options**
+
+- Nogle tilføjer "**ml variance**", som specificerer, at modellen skal fittes med **maximum likelihood estimation**, og at vi vil se **niveau-opdelingen af variansen**. Begge dele er **standard**, hvorfor man ikke behøver specificere det.
+
+- Når man inkluderer en eller flere *random effects*, anbefaler Mehmetoglu & Jakobsen, at man tilføjer **cov(unstructured)**, så modellen bliver uafhængig af variabel-skala (2016, p. 212)
+
+---
+
+# Fremgangsmåde
+
+Vi vil estimere effekten af nogle uafhængige variable på niveau 1 - laveste niveau, samme som den afhængige variabel - **og på niveau 2 (gruppeniveau)**. Substantielt set er vi interesserede i **indflydelsen fra konteksten (niveau 2)** på grund af vores problemformluering, teori og/eller hypoteser
+
+--
+
+## Typisk fremgangsmåde
+
+1. Lav tom ("Null") model, der alene skelner mellem niveauerne
+
+2. Tilføj uafhængige **niveau 1**-variable
+
+3. Tilføj uafhængige **niveau 2**-variable
+
+4. Tilføj evt. **random effects** for en eller flere uafhængige niveau 1-variable
+
+5. Tilføj evt. en **interaktion** på samme niveau eller cross-level
+
+6. **Fortolk** på helheden, men især på de "fulde" modeller
+
+---
+
+# 1. Lav tom ("Null") model
+
+**Eksempel fra Mehmetoglu & Jakobsen, 2016, pp. 201ff**
+
+.left-column[
+
+**mixed political_trust || country:**
+
+Giver os bl.a. antal **observationer** per niveau og **gennemsnitlig tillid** (*_cons*)
+
+Desuden **opdelingen af den uforklarede varians** i tillid på gruppeniveau, *var(_cons)*, og individniveau,  *var(Residual)*
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet1.png")
+```
+
+]
+
+---
+
+# 1. Lav tom ("Null") model
+
+**Eksempel fra Mehmetoglu & Jakobsen, 2016, pp. 201ff**
+
+.left-column[
+
+Hvor stor en andel af variansen i tillid tilskrives **gruppeniveauet** (hvor stor er VPC/ICC)?
+
+$\frac{11.9}{11.9+35.8}$
+
+*Tommelfingerregel*:<br>Min. 5 % før niveau 2 er relevant
+
+Kan det betale sig at fortsætte med multilevel model?
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet1.png")
+```
+
+]
+
+???
+
+VPC/ICC ≈ 24.9 %
+
+Kan også findes med *estat icc*
+
+---
+
+# 2. Tilføj uafhængige niveau 1-variable
+
+.left-column[
+
+**mixed political_trust woman age unemployed eduyrs || country:**
+
+Påvirker uddannelse (X4) politisk tillid (Y)?
+
+Er den uforklarede varians i tillid faldet? Markant?
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet2.png")
+```
+
+]
+
+---
+
+# 2. Tilføj uafhængige niveau 1-variable
+
+.left-column[
+
+Påvirker uddannelse (X4) politisk tillid (Y)?
+
+*Ja (p=0.000). For hvert år vokser tilliden med 0.09*
+
+Er den uforklarede varians i tillid faldet? Markant?
+
+*Faldet marginalt, men stort set uændret. De nye variable (den nye model) har således ikke megen forklaringskraft*
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet2.png")
+```
+
+]
+
+---
+
+# 3. Tilføj uafhængige niveau 2-variable
+
+.left-column[
+
+**mixed political_trust woman age unemployed eduyrs GDPcapita1000 || country:**
+
+Påvirker uddannelse (X4) stadig politisk tillid (Y)?
+
+Hvad kan vi sige om **effekten af BNP**?
+
+Er den uforklarede varians i tillid faldet denne gang? Markant?
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet3.png")
+```
+
+]
+
+---
+
+# 3. Tilføj uafhængige niveau 2-variable
+
+.left-column[
+
+Effekten af uddannelse (X4) er praktisk talt uændret
+
+Når BNP/cap. vokser med $1000, øges hvert lands gennemsnitlige tillid med 0,14  
+
+På landeniveau er den uforklarede varians [*var(_cons)*] faldet markant fra 11,9 til 4,3
+
+$\frac{11.9-4.3}{11.9}≈0,64$<br>&rarr; ca. 64 % af gruppe-variansen kan forklares vha. BNP 
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet3.png")
+```
+
+]
+---
+
+# 4. Tilføj evt. **random effects** for niveau 1-variable
+
+.left-column[
+
+**mixed political_trust woman age unemployed eduyrs GDPcapita1000 || country: eduyrs**
+
+Hvilken uafhængig variabel (fra hvilket niveau) er tilføjet som *random effect*?
+
+Hvad vil det sige?
+
+Hvad kan vi sige om dens effekt på tillid?
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet4.png")
+```
+
+]
+
+---
+
+# 4. Tilføj evt. **random effects** for niveau 1-variable
+
+.left-column[
+
+Vi har tilføjet random effects for **uddannelse** (niveau 1)
+
+Vi accepterer, at uddannelse kan påvirke tillid fundamentalt forskelligt i forskellige lande. Derfor beregner vi effekten for hvert land. Koefficienten for *eduyrs* er gennemsnitseffekten
+
+Når et individs uddannelsesniveau vokser med +1, øges tilliden *gennemsnitligt set* med 0,086
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet4.png")
+```
+
+]
+
+---
+
+# 5. Tilføj evt. **interaktion** 
+
+.left-column[
+
+**mixed political_trust woman unemployed eduyrs GDPcapita1000 i.Nordic##c.age || country:** // obs! random effects for age? 
+
+Er det en alm. same-level eller en cross-level interaktion?
+ 
+Er effekten af alder betinget af, om landet er nordisk?
+ 
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet5.png")
+```
+
+]
+
+---
+
+# 5. Tilføj evt. **interaktion** 
+
+.left-column[
+
+Er det en alm. same-level eller en cross-level interaktion?
+
+*Cross-level! Nordic er en dummy, der angiver om landet (gruppen) er et af de nordiske lande* 
+ 
+Er effekten af alder betinget af, om landet er nordisk?
+
+*Ja! Effekten af alder er -0,0262 mindre i nordiske lande (p=0,000) - og den er 0,0097 i ikke-nordiske lande*
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet5.png")
+```
+
+]
+
+---
+
+# 5. Tilføj evt. **interaktion** 
+
+.left-column[
+
+Er det en alm. same-level eller en cross-level interaktion?
+
+*Cross-level! Nordic er en dummy, der angiver om landet (gruppen) er et af de nordiske lande* 
+ 
+Er effekten af alder betinget af, om landet er nordisk?
+
+*Ja! Effekten af alder er -0,0262 mindre i nordiske lande (p=0,000) - og den er 0,0097 i ikke-nordiske lande*
+
+]
+
+.right-column[
+
+```{r}
+include_graphics("media/mehmet6.png")
+```
+
+]
+
+---
+
+# Udvidelser
+
+- **Logistisk multilevel regression**
+    - &rarr; brug det kun, hvis det er nødvendigt
+
+- **Multilevel-model med tre niveauer**
+    - &rarr; brug det kun, hvis det er nødvendigt
+
+- **Cross-classified multilevel-model**
+    - ikke en klar hierarkisk struktur, men i stedet individ indlejret i mere eller mindre sideordnede kontekster
+    - &rarr; brug det kun, hvis det er nødvendigt
+
+- **Vægtning af observationer**
+    - kan give mening, når man arbejder med survey-data 
+    - &rarr; brug det kun, hvis det er nødvendigt
+
+
+
+---
+class: title-slide, center, middle
+
+# Øvelsesopgaver i Stata
+
+---
+
+# Antagelser 
+
+- **Ikke pensum!** 
+
+- I princippet de samme antagelser som OLS - *gange to*
+    - linearitet, uafhængige obs., homoskedasticitet, normalfordelte fejlled etc. skal i princippet være opfyldt på hvert niveau
+    
+- Det meste er svært-til-umuligt at teste
+
+- Multikollinearitet &rarr; tjek evt. med VIF efter alm. OLS
+
+- Indflydelsesrige outliers &rarr; tjek evt. grafisk for niveau 2
+    - er der lande med meget ekstreme værdier på Y eller meget ekstreme sammenhænge mellem X og Y?
+
+- Mere er ikke nødvendigt, men problematikken kan eventuelt nævnes
 
 ---
 
 # Dagens pointer
 
 ---
+background-color: #FEFFA2
 
 # Næste gang
 
+.pull-left[
+
+- Vi starter på fire uger med **kausal inferens**
+    
+    - begynder at tage kausalitets-spørgsmålet alvorligt frem for blot at antage "*effekter*" for eksemplets skyld
+    
+- Næste uge
+
+    - **Kausal inferens I: Kausal inferens og instrumentvariable**
+
+    - ingen holdtime
+    
+    - derefter **PÅSKEFERIE**
+    
+- Vi ses igen efter påske til Kausal inferens II: Paneldata
+
+]
+
+.pull-right[
+
+<iframe src="https://giphy.com/embed/54WycskplA1OlPc5cd" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+]
+
 ---
+class: center, middle
+background-color: #FEFFA2
 
 # Tak for i dag!
+
+<iframe src="https://giphy.com/embed/kBrCMKXl2Kz4kUGTr1" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
