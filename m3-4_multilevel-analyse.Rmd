@@ -272,7 +272,7 @@ class: title-slide, center, middle
 
 3. Tilføj uafhængige **niveau 2**-variable
 
-4. Tilføj evt. **varying slopes** (random effects) for uafhængige niveau 1-variable
+4. Tilføj evt. **varying slopes** for uafhængige niveau 1-variable
 
 5. Tilføj evt. **interaktion** - enten på samme niveau eller *cross-level*
 
@@ -583,7 +583,7 @@ Er det en alm. same-level eller en cross-level interaktion?
  
 Er effekten af alder betinget af, om landet er nordisk?
 
-*Ja! Effekten af alder er -0,0262 mindre i nordiske lande (p=0,000) - og den er 0,0097 i ikke-nordiske lande*
+*Ja! Effekten af alder er -0,0262 mindre i nordiske lande (p=0,000) &rarr; og den er 0,0098 i ikke-nordiske lande*
 
 ]
 
