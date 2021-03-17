@@ -57,13 +57,15 @@ print_plan(11)
 
 # Dagens program
 
-- Multilevel analyse - nyt emne
+- **Multilevel analyse** - nyt emne
 
 - Hvad er det, hvornår og hvorfor bruger vi det?
 
-- Hvordan udfører vi det i Stata og fortolker output? Eksempel fra Mehmetoglu & Jakobsen (2016)
+- Hvordan udfører vi det i **Stata** og fortolker output?
+    - eksempel fra Mehmetoglu & Jakobsen (2016)
 
-- Øvelsesopgaver i Stata (sammen - så meget vi når)
+- **Øvelsesopgaver** i Stata 
+    - så meget vi når
 
 ---
 
@@ -160,21 +162,21 @@ Substantiel/teoretisk grund: Viden om multilevel-dynamikker og konteksteffekter
 
 - Break-out i mindst 10 min.
 
-- Snak om så mange spørgsmål som muligt
+- Diskuter så mange spørgsmål som muligt
 
-- Bagefter hører vi et svar fra **break-out gruppe 1/6 på spgm. 1**, fra **gruppe 2/7 på spgm. 2**, fra **gruppe 3/8 på spgm. 3**, fra **gruppe 4/9 på spgm. 5/10**
+- Bagefter hører vi et svar fra **gruppe 1/6 på spgm. 1**, fra **gruppe 2/7 på spgm. 2**, fra **gruppe 3/8 på spgm. 3**, fra **gruppe 4/9 på spgm. 4** og fra **gruppe 5/10 på spgm. 5**
 
 ***
 
-1. Hvad er et multilevel-problem? Giv et hypotetisk eksempel på et problem eller en hypotese
+1. Hvad er et multilevel-problem? Giv et hypotetisk eksempel på et problem eller en hypotese (Hox, 2010, pp. 6-7)
 
 2. Hvordan adskiller multilevel-analyse sig fra almindelig regression? (behøver ikke være teknisk)
 
 3. Giv et par eksempler på data med multilevel-struktur
 
-4. Hvad menes der med "aggregering" og "disaggregering"? (se Hox, 2010, pp. 2-4)
+4. Hvad menes der med "aggregering" og "disaggregering"? (Hox, 2010, pp. 2-4)
 
-5. Hvad er *det statistiske problem* ved at aggregere hhv. disaggregere data? Hvad sker der med *N*? (se Hox, 2010, p. 3)
+5. Hvad er *det statistiske problem* ved at aggregere hhv. disaggregere data? Hvad sker der med *N*? (Hox, 2010, p. 3)
 
 ???
 
