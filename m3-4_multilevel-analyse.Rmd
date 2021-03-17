@@ -55,18 +55,6 @@ print_plan(11)
 
 ---
 
-<!--
-
-- "Multilevel analysis can be seen as a generalization of OLS regression to accommodate the complexities of estimating regression models with two or more levels" (197)
-- Data! Smart. World values survey. European social survey. 
-- Merging data ... brief! 
-- Rule of thumb: 10 obs per indep. (level 2)
-
-- Bruges når data har en klar hierarkisk struktur - eller rettere når populationen har det. Eller: Når vi vil undersøge effekten af level 2-variable (foruden level 1-variable) på en level-1 afhængig var (Y). ... Eller: Når vi arbejder med multilevel-teorier/hypoteser. 
-- Nævn fixed effects med klyngerobust stdfejl. 
-
--->
-
 # Dagens program
 
 - Multilevel analyse - nyt emne
@@ -98,10 +86,41 @@ Hox, J. J. (2010). *Multilevel analysis: techniques and applications* (2. editio
 Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a guide for the social sciences*. Sage. **Kapitel 9**.
 
 ---
+---
+---
+---
+
+<!--
+
+- "Multilevel analysis can be seen as a generalization of OLS regression to accommodate the complexities of estimating regression models with two or more levels" (197)
+- Data! Smart. World values survey. European social survey. 
+- Merging data ... brief! 
+- Rule of thumb: 10 obs per indep. (level 2)
+
+-->
+---
+---
+---
+---
 
 # Begreber
 
-- Level 1 og level 2
+- **Niveauer** (levels)
+    - niveau 1 = level 1 = det "laveste" niveau ≈ individniveau
+    - niveau 2 = level 2 = "gruppeniveau" = noget der indeholder niveau 1-observationer
+    
+- Multilevel analyse = multilevel model = multilevel regression = linear mixed (effects) model
+
+- **intercept** = Y intercept =  konstant = $\beta_0$ = $\alpha$
+    - **varying intercept** = random intercept
+
+- **slope** = hældning = effekt = (beta)koefficient = $\beta_1$    
+    - **varying slope** = random effect = random coefficient  
+	- multilevel
+	
+- **Fixed effect vs. random effect**
+    - fixed effect (FE) = "almindelige effekter" = én effekt for hele datasættet
+    - random effect (RE) = noget nyt = varierende effekter på tværs af grupper
 
 ---
 
@@ -109,48 +128,61 @@ Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a g
 
 - Endnu en udvidelse af OLS
 
-- Eksempler på data, hypoteser? 
-
---
-
 **Multilevel forskning**
 
 > "individuals and the social groups are conceptualized as a __hierarchical system of individuals nested within groups__, with individuals and groups defined at separate levels of this hierarchical system. Naturally, such systems can be observed at different hierarchical levels, and variables may be defined at each level. This leads to research into the relationships between __variables characterizing individuals and variables characterizing groups__, a kind of research that is generally referred to as __multilevel research__" .right[(Hox, 2010, p. 1)]
 
---
 
-**Multilevel problem**
-
-> "A multilevel problem is a problem that concerns the __relationships between variables that are measured at a number of different hierarchical levels__" .right[(Hox, 2010, p. 4)] 
+- Hierarkisk struktur i data (samplet) -> hierarkisk struktur i populationen/virkeligheden
 
 ---
 
-# Hvad er multilevel analyse? 
+# Hvorfor multilevel analyse?
 
-- Hvordan adskiller det sig fra andre typer kvantitativ analyse, vi kender?
-- Giv et eksempel på data med multilevel-struktur
+Hvorfor? 
 
-- Mere end udbygning af (unilevel) regressionsanalyse 
-- Flere niveauer
-- Hierarki af enheder, "nested within...""
-- Kendte eksempler: Individer inden for grupper (f.eks. lande/kommuner) og tidslige observationer inden for enheder (fx lande-år = paneldata)
-- The lowest level (level 1) is usually defined by the individuals. 
-- Level 1 (laveste), 2, 3, ... (teoretisk er der ingen grænse, men i praksis bliver det hurtigt vanskelligt. Der skal være en god grund til at arbejde med mere end to niveauer). 
+Metodemæssige grund: Statistisk og kausal inferens
 
---
+- Kontrol for variable på gruppeniveau, der både påvirker X og Y på level 1 -> undgå bias, spørgsmålet om kausalitet
 
-**Find et eksempel på et multilevel problem (tænk på den virkelige verden). Behøver ikke være praktisk muligt.**
+- Styr på standardfejl -> p-værdier (disaggregation)
 
-??? Husk paneldata
+Substantiel/teoretisk grund: Viden om multilevel-dynamikker og konteksteffekter
+
+- Substantielt interesseret i effekten af level 2-variabel (X) på level 1-variabel (Y) 
+	- level 2-spørgsmål/-hypoteser/-problemer/-research
+	- konteksteffekter, direkte og
+	- ink. Cross-level interaktion (hvordan kontekst betinger level 1-effekter)
 
 ---
 
-# (Dis)aggregation
+# Spørgsmål
 
-- Flytte variable mellem niveauer (målt på et niveau &rarr; repræsenteret/analyseret på et andet niveau)
-- **Aggregation**: variables at a lower level are moved to a higher level, for instance by assigning to the schools the school mean of the pupils’ intelligence scores. 
-- **Disaggregation** means moving variables to a lower level, for instance by assigning to all pupils in the schools a variable that indicates the denomination of the school they belong to.
-- På hvilket niveau "står" vi? På hvilket niveau er variablen målt?
+- Break-out i mindst 10 min.
+
+- Snak om så mange spørgsmål som muligt
+
+- Bagefter hører vi et svar fra **break-out gruppe 1/6 på spgm. 1**, fra **gruppe 2/7 på spgm. 2**, fra **gruppe 3/8 på spgm. 3**, fra **gruppe 4/9 på spgm. 5/10**
+
+***
+
+1. Hvad er et multilevel-problem? Giv et hypotetisk eksempel på et problem eller en hypotese
+
+2. Hvordan adskiller multilevel-analyse sig fra almindelig regression? (behøver ikke være teknisk)
+
+3. Giv et par eksempler på data med multilevel-struktur
+
+4. Hvad menes der med "aggregering" og "disaggregering"? (se Hox, 2010, pp. 2-4)
+
+5. Hvad er *det statistiske problem* ved at aggregere hhv. disaggregere data? Hvad sker der med *N*? (se Hox, 2010, p. 3)
+
+???
+
+"A multilevel problem is a problem that concerns the relationships between variables that are measured at a number of different hierarchical levels" (Hox, 2010, p. 4)
+
+Kendte eksempler: Individer inden for grupper (f.eks. lande/kommuner) og tidslige observationer inden for enheder (fx lande-år = paneldata)
+
+**(Dis)aggregation**: At flytte variable mellem niveauer. **Aggregation**: "variables at a lower level are moved to a higher level, for instance by assigning to the schools the school mean of the pupils’ intelligence scores". **Disaggregation**: "moving variables to a lower level, for instance by assigning to all pupils in the schools a variable that indicates the denomination of the school they belong to"
 
 ---
 
@@ -164,17 +196,9 @@ Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a g
     - Antager (som regel) at alle individer er uafhængige
     - Antager derfor også at at den disaggregerede data faktisk er målt (uafhængigt) for det pågældende individ
     
----
-
-# Hvorfor er den dårlige tilgang dårlig?
-
 - Når variable disaggregeres, så der er en værdi per individ (laveste niveau), bliver disse værdier, som jo stammer fra et mindre antal "super-units" (overenheder), **blæst op** i den forstand, at det ligner, der er mange flere observationer.
 - Og omvendt: Når man aggregerer mister man en masse information (variation) og dermed power (svagere tests &rarr; mindre sandsynlighed for at finde effekter, der ellers i virkeligheden er der)
 - Når man bruger den klassiske (dårlige) tilgang, vil almindelige statistiske tests tro, det er uafhængig information og derfor give en kunstigt høj sandsynlighed for (fejlagtig) statistisk signifikans. 
-
---
-
-## Derudover fortolkning/konklusioner/inferens:
 
 - "the fallacy of the wrong level": Når man analysere data på et niveau og drager konklusioner på et andet 
     - Ecological fallacy: Analysere et højere niveau og fortolke på lavere niveau (fx når man analyserer landedata og konkluderer om enkeltindividerne).
@@ -185,92 +209,120 @@ Mehmetoglu, M., and T. G. Jakobsen. (2016). *Applied statistics using Stata: a g
     
 ---
     
-# En bedre tilgang
-
-- Når man har et reelt **multilevel problem**, er alle niveauer vigtige
-- (Dog: Ofte en afvejning af kompleksitet og korrekthed. Kan det forsimples til et single-level problem uden større tab?)
-- Derfor &rarr; eksplicit modellering af flere niveauer
-- Bemærk: Typisk er der empirisk set fokus på en afhængig variabel på det niveau (fx individet). 
-- To logikker (grunde til at tænke i multilevels):
-    1. Vi vil gerne kvantificere indflydelsen fra andre niveauer
-    2. Vi vil gerne kontrollere for de andre niveauer, så vores analyse på dette niveau bliver bedst mulig
-
----
-
 # Data 
 
 - Mange supergode multinationale datasæt frit tilgængelige, herunder European Social Survey og World Values Survey
 
 - Lovede Carolin at vise, hvordan man kan merge to datasæt
 
-- Hvordan man merger individdata med landedata &rarr;
+- Hvordan man merger individdata med landedata &rarr; til sidst + do-fil
 
 ---
 
-## Hvordan man merger individdata med landedata: *Do-fil*
+# Multilevel-modellen
 
-```{r, fig.align='left'}
-include_graphics("media/merge_do.png")
-```
+--
 
+Multilevel-modellen begynder med at opdele **variansen i den afhængige variabel** på de to niveauer
+
+- **Variansen i den afhængige variabel** er et mål for spredningen eller afvigelserne *rundt om variablens gennemsnit*
+    
+--
+
+- Variansen opdeles i:
+    - (1) spredningen **inden for hver gruppe** rundt om *gruppens gennemsnit* (lagt sammen)  
+    - (2) spredningen **mellem grupperne**, dvs. gruppegennemsnittenes spredning om *det samlede gennemsnit*
+
+--
+
+- Denne opdeling kan ses i **Null-modellen** helt uden uafhængige variable (vi ser det om lidt)
+
+--
+
+- Matematisk ser det således ud:
+    - $Y_{ij} = \beta_0 + u_{0j} + e_{ij}$
+    - $dependent\_variable = total\_mean + error\_term\_level\_2 + error\_term\_level\_1$
+    
 ---
 
-## Hvordan man merger individdata med landedata: *Resultat*
+# Multilevel-modellen
 
-```{r}
-include_graphics("media/merge_result.png")
-```
+**Bottom line**
+
+--
+
+- Takket være variansopdelingstricket, kan vi inddrage uafhængige variable fra begge niveauer til analysen
+    
+    - fx $\beta_1 X_{1ij}$ (niveau 1) og $\beta_2 X_{2j}$ (niveau 2)
+    
+--
+
+- Vær her opmærksomme på **antal variable ift. antal observationer** på niveau 2
+    - tommelfingerregel\* om min. **10 obs.** per uafhængig variabel
+
+--
+
+- Multilevel-modellen bruger automatisk det korrekte *N* for hvert niveau til at beregne usikkerheder og p-værdier
+
+???
+
+*Tommelreglen kommer fra Mehmetoglu & Jakobsen (2016), s. 206, og er et absolut minimum. Det kan i nogle tilfælde være nødvendigt at anlægge 0.10 signifikansniveau i stedet for 0.05, når man analyser effekten af niveau 2-variable. 
 
 ---
 class: title-slide, center, middle
 
-# Stata og fremgangsmåde med eksempler
+# Stata, fremgangsmåde og eksempler
 
 ---
 
-# Multilevel analyse i Stata
+# Multilevel-analyse i Stata
+
+--
 
 > **mixed   Y_lvl1 || ID_lvl2:** (*Null-model*)
 
 > **mixed   Y_lvl1   X1_lvl1   X2_lvl1   X3_lvl1   X4_lvl2   X5_lvl2   ||   ID_lvl2:**
 
---
-
 - **ID_lvl2** er en variabel, der identificerer grupperne, fx *landenavn*. Husk kolon i enden af **ID_lvl2:**
 
 - **_lvl1** og **_lvl2** indikerer, hvilket niveau variablen hører til i eksemplet. *Stata finder selv ud af dette* i praksis! 
 
-- Eventuelle *random effects* (lvl1-X'er fra venstresiden af **||**) tilføjes efter **ID_lvl2:**
+- Eventuelle *varying slopes* (random effects, dvs. niveau 1-X'er fra venstresiden af **||**) tilføjes efter **ID_lvl2:**
 
 --
 
-**Options**
+**Stata options**
 
-- Nogle tilføjer "**ml variance**", som specificerer, at modellen skal fittes med **maximum likelihood estimation**, og at vi vil se **niveau-opdelingen af variansen**. Begge dele er **standard**, hvorfor man ikke behøver specificere det.
+- Nogle tilføjer "**ml variance**", som specificerer, at modellen skal fittes med **maximum likelihood estimation**, og at vi vil se **niveau-opdelingen af variansen**. Begge dele er **standard**, hvorfor man ikke behøver specificere det
 
-- Når man inkluderer en eller flere *random effects*, anbefaler Mehmetoglu & Jakobsen, at man tilføjer **cov(unstructured)**, så modellen bliver uafhængig af variabel-skala (2016, p. 212)
+- Når modellen inkluderer *varying slopes*, anbefaler Mehmetoglu & Jakobsen at tilføje **cov(unstructured)**, så modellen bliver uafhængig af variabel-skala (2016, p. 212)
 
 ---
+class: middle
 
 # Fremgangsmåde
 
-Vi vil estimere effekten af nogle uafhængige variable på niveau 1 - laveste niveau, samme som den afhængige variabel - **og på niveau 2 (gruppeniveau)**. Substantielt set er vi interesserede i **indflydelsen fra konteksten (niveau 2)** på grund af vores problemformluering, teori og/eller hypoteser
+- Vi vil estimere effekten af en eller flere **uafhængige variable (X) på niveau 2 (gruppeniveau)** på en **afhængig variabel (Y) på niveau 1 (individniveau)**         
+    - foruden eventuelle uafhængige variable (X) på niveau 1 (individniveau)
 
---
+- Vi er interesserede i **indflydelsen fra konteksten (niveau 2)**, fordi vores vores teori, problemformulering og/eller hypoteser tilsiger dette
 
-## Typisk fremgangsmåde
+---
+class: middle
 
-1. Lav tom ("Null") model, der alene skelner mellem niveauerne
+# Fremgangsmåde
+
+1. Lav tom ("Null") model, der alene skelner mellem niveauerne (*varying intercepts*)
 
 2. Tilføj uafhængige **niveau 1**-variable
 
 3. Tilføj uafhængige **niveau 2**-variable
 
-4. Tilføj evt. **random effects** for en eller flere uafhængige niveau 1-variable
+4. Tilføj evt. **varying slopes** (random effects) for en eller flere uafhængige niveau 1-variable
 
-5. Tilføj evt. en **interaktion** på samme niveau eller cross-level
+5. Tilføj evt. **interaktion** enten på samme niveau eller *cross-level*
 
-6. **Fortolk** på helheden, men især på de "fulde" modeller
+6. **Fortolk** på helheden - især de "fulde" modeller
 
 ---
 
@@ -423,13 +475,13 @@ include_graphics("media/mehmet3.png")
 ]
 ---
 
-# 4. Tilføj evt. **random effects** for niveau 1-variable
+# 4. Tilføj evt. **varying slopes** for niveau 1-variable
 
 .left-column[
 
 **mixed political_trust woman age unemployed eduyrs GDPcapita1000 || country: eduyrs**
 
-Hvilken uafhængig variabel (fra hvilket niveau) er tilføjet som *random effect*?
+Hvilken uafhængig variabel - fra hvilket niveau - er tilføjet som **random effect**?
 
 Hvad vil det sige?
 
@@ -447,13 +499,21 @@ include_graphics("media/mehmet4.png")
 
 ---
 
-# 4. Tilføj evt. **random effects** for niveau 1-variable
+# Ekskurs: Hvad er varying slopes aka random effects?
+
+- En slags ekstra udvidelse: Man kan sagtens lave en god multilevel analyse uden varying slopes
+
+
+
+---
+
+# 4. Tilføj evt. **varying slopes** for niveau 1-variable
 
 .left-column[
 
-Vi har tilføjet random effects for **uddannelse** (niveau 1)
+Vi har tilføjet varying slopes for **uddannelse** (niveau 1)
 
-Vi accepterer, at uddannelse kan påvirke tillid fundamentalt forskelligt i forskellige lande. Derfor beregner vi effekten for hvert land. Koefficienten for *eduyrs* er gennemsnitseffekten
+Vi accepterer, at uddannelse kan påvirke tillid fundamentalt forskelligt i forskellige lande. Derfor beregner vi en effekt for hvert land. Koefficienten for *eduyrs* er gennemsnitseffekten
 
 Når et individs uddannelsesniveau vokser med +1, øges tilliden *gennemsnitligt set* med 0,086
 
@@ -473,7 +533,7 @@ include_graphics("media/mehmet4.png")
 
 .left-column[
 
-**mixed political_trust woman unemployed eduyrs GDPcapita1000 i.Nordic##c.age || country:** // obs! random effects for age? 
+**mixed political_trust woman unemployed eduyrs GDPcapita1000 i.Nordic##c.age || country:** // OBS! Intet varying slope for *age*? 
 
 Er det en alm. same-level eller en cross-level interaktion?
  
@@ -538,51 +598,79 @@ include_graphics("media/mehmet6.png")
 ]
 
 ---
+class: middle, inverse
+
+
+# Tre ekstra-ting
+
+1. Udvidelser
+
+2. Antagelser
+
+3. Merge niveau 1-data (fx surveydata) med niveau 2-data (fx landedata)
+
+---
+class: inverse
 
 # Udvidelser
 
-- **Logistisk multilevel regression**
-    - &rarr; brug det kun, hvis det er nødvendigt
+1. **Logistisk multilevel regression (logit)** &rarr; brug det kun, hvis det er nødvendigt
 
-- **Multilevel-model med tre niveauer**
-    - &rarr; brug det kun, hvis det er nødvendigt
+2. **Multilevel-model med tre niveauer** &rarr; brug det kun, hvis det er nødvendigt
 
-- **Cross-classified multilevel-model**
-    - ikke en klar hierarkisk struktur, men i stedet individ indlejret i mere eller mindre sideordnede kontekster
-    - &rarr; brug det kun, hvis det er nødvendigt
-
-- **Vægtning af observationer**
-    - kan give mening, når man arbejder med survey-data 
-    - &rarr; brug det kun, hvis det er nødvendigt
-
-
+3. **Cross-classified multilevel-model**
+    - ikke en klar hierarkisk struktur &rarr; fx individer indlejret i sideordnede kontekster
+    - brug det kun, hvis det er nødvendigt
 
 ---
-class: title-slide, center, middle
+class: inverse
+
+# Antagelser 
+
+- **Ikke pensum!** - men problematikken kan eventuelt nævnes
+
+- I princippet samme antagelser som OLS - *gange to*
+    
+    - linearitet, uafhængige obs., homoskedasticitet, normalfordelte fejlled etc. skal i princippet være opfyldt på hvert niveau
+    
+    - det meste er svært-til-umuligt at teste
+
+**Muligheder**
+
+- *Multikollinearitet* &rarr; tjek evt. med VIF efter alm. OLS
+
+- *Indflydelsesrige outliers* &rarr; tjek evt. grafisk for niveau 2: er der lande med meget ekstreme værdier?
+
+---
+class: inverse
+
+## Hvordan man merger individdata med landedata: *do-fil*
+
+```{r, fig.align='left'}
+include_graphics("media/merge_do.png")
+```
+
+---
+class: inverse
+
+## Hvordan man merger individdata med landedata: *resultat*
+
+```{r}
+include_graphics("media/merge_result.png")
+```
+
+---
+class: center, middle, middle
+background-color: #FEFFA2
 
 # Øvelsesopgaver i Stata
 
 ---
-
-# Antagelser 
-
-- **Ikke pensum!** 
-
-- I princippet de samme antagelser som OLS - *gange to*
-    - linearitet, uafhængige obs., homoskedasticitet, normalfordelte fejlled etc. skal i princippet være opfyldt på hvert niveau
-    
-- Det meste er svært-til-umuligt at teste
-
-- Multikollinearitet &rarr; tjek evt. med VIF efter alm. OLS
-
-- Indflydelsesrige outliers &rarr; tjek evt. grafisk for niveau 2
-    - er der lande med meget ekstreme værdier på Y eller meget ekstreme sammenhænge mellem X og Y?
-
-- Mere er ikke nødvendigt, men problematikken kan eventuelt nævnes
-
----
+background-color: #FEFFA2
 
 # Dagens pointer
+
+- Test
 
 ---
 background-color: #FEFFA2
@@ -593,7 +681,7 @@ background-color: #FEFFA2
 
 - Vi starter på fire uger med **kausal inferens**
     
-    - begynder at tage kausalitets-spørgsmålet alvorligt frem for blot at antage "*effekter*" for eksemplets skyld
+    - begynder at tage kausalitetsspørgsmålet alvorligt frem for blot at antage "effekter" for eksemplets skyld
     
 - Næste uge
 
