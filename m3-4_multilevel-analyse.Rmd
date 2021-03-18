@@ -130,7 +130,7 @@ Mehmetoglu, M., & Jakobsen, T. G. (2016). *Applied statistics using Stata: a gui
     - niveau 1 = det "laveste" niveau ≈ individniveau
     - niveau 2 = gruppeniveau = klynger = noget der *indeholder* niveau 1-observationer ≈ landeniveau
     
-- **Multilevel-analyse** = multilevel-model = multilevel-regression ≈ linear mixed (effects) model
+- **Multilevel-analyse** = multilevel-model = multilevel-regression
 
 - **Intercept** = Y intercept =  konstant = $\beta_0$ = $\alpha$
     - **varying intercept** = random intercept ≈ forskellige gruppe-gennemsnit 
@@ -138,15 +138,13 @@ Mehmetoglu, M., & Jakobsen, T. G. (2016). *Applied statistics using Stata: a gui
 - **Slope** = hældning = effekt = (beta)koefficient = $\beta_1$    
     - **varying slope** = random effect (RE) = random coefficient ≈ forskellige effekter på tværs af grupper
 	
-- **Fixed effect (FE)** = "almindelige effekter" = én effekt gældende for hele datasættet ≠ RE
-
 ---
 
 # Spørgsmål
 
 - Break-out i 10 min.
 
-- Diskuter så mange spørgsmål som muligt
+- Diskutér så mange spørgsmål som muligt
 
 - Bagefter hører vi svar fra **gruppe 1/6 på spgm. 1**, fra **gruppe 2/7 på spgm. 2**, fra **gruppe 3/8 på spgm. 3**, fra **gruppe 4/9 på spgm. 4** og fra **gruppe 5/10 på spgm. 5**
 
@@ -185,7 +183,7 @@ Pas derudover på med at **analysere data på ét niveau og drage konklusioner p
 
 Multilevel-modellen begynder med at opdele **variansen i den afhængige variabel** på de to niveauer
 
-- **Variansen i den afhængige variabel** er et (standard)mål for spredningen eller afvigelserne *rundt om variablens gennemsnit*
+- **Variansen i den afhængige variabel** er et mål for spredningen eller afvigelserne *rundt om variablens gennemsnit*
     
 --
 
@@ -216,7 +214,7 @@ Multilevel-modellen begynder med at opdele **variansen i den afhængige variabel
 - Vær opmærksomme på **antal variable ift. antal observationer** på niveau 2
     - tommelfingerregel\* om min. **10 obs.** per uafhængig variabel
 
-- Multilevel-modellen bruger automatisk det korrekte *N* for hvert niveau til at beregne usikkerheder og p-værdier
+- Multilevel-modellen bruger automatisk det korrekte *N* for hvert niveau til at beregne usikkerheder og p-værdier &rarr; smart!
 
 ???
 
@@ -235,6 +233,8 @@ class: title-slide, center, middle
 
 > **mixed   Y_lvl1   X1_lvl1   X2_lvl1   X3_lvl1   X4_lvl2   X5_lvl2   ||   ID_lvl2:**
 
+--
+
 - **ID_lvl2** er en variabel, der identificerer grupperne (fx *landenavn*). Husk kolon i enden
 
 - **_lvl1** og **_lvl2** indikerer, hvilket niveau variablen hører til i eksemplet (Stata finder selv ud af dette)
@@ -247,18 +247,16 @@ class: title-slide, center, middle
 
 - "**ml variance**" specificerer, at modellen skal fittes med *maximum likelihood estimation*, og at vi vil se *opdelingen af variansen*. **Begge er standard** og derfor ikke nødvendige
 
-- Hvis modellen inkluderer *varying slopes*, anbefaler Mehmetoglu & Jakobsen at tilføje **cov(unstructured)**, så modellen bliver uafhængig af variabel-skala (2016, p. 212)
-
 ---
 
 # Fremgangsmåde
 
 **Formål**
 
+- Vi er interesserede i **indflydelsen fra konteksten (niveau 2)**, fordi vores teori, problemformulering og/eller hypoteser tilsiger dette
+
 - Vi vil gerne estimere effekten af en eller flere **uafhængige variable (X) på niveau 2** på en **afhængig variabel (Y) på niveau 1**         
     - foruden effekten af evt. uafhængige variable (X) på niveau 1
-
-- Vi er interesserede i **indflydelsen fra konteksten (niveau 2)**, fordi vores teori, problemformulering og/eller hypoteser tilsiger dette
 
 ---
 
