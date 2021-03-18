@@ -370,7 +370,7 @@ Påvirker uddannelse (X4) politisk tillid (Y)?
 
 Er den uforklarede varians i tillid faldet? Markant?
 
-*Faldet marginalt, men stort set uændret. De nye variable (den nye model) har således ikke megen forklaringskraft*
+*Faldet marginalt, men stort set uændret. De nye variable (den nye model) har således ikke megen yderligere forklaringskraft*
 
 ]
 
