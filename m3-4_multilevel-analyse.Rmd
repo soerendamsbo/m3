@@ -110,7 +110,7 @@ Mehmetoglu, M., & Jakobsen, T. G. (2016). *Applied statistics using Stata: a gui
 
     - Vi vil gerne have **korrekte standardfejl** (usikkerhed), så vi ikke får for høje/lave **p-værdier** og drager forkerte konklusioner
     
-    - Vi vil gerne kontrollere for variable på gruppeniveau, der både påvirker X og Y (på niveau 1), for at undgå *omitted variable bias* (spuriøsitet)
+    - Vi vil gerne kunne kontrollere for gruppe-variable, der både påvirker X og Y (på niveau 1), for at imødegå *omitted variable bias* (spuriøsitet)
 
 --
 
