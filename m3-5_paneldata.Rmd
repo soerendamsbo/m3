@@ -22,152 +22,238 @@ pacman::p_load(tidyverse, knitr, ggdag, lubridate, kableExtra)
 
 knitr::opts_chunk$set(echo = FALSE, 
                       fig.align = "center", 
-                      fig.height=12)
+                      fig.height=12,
+                      cache = TRUE)
 
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
+
+---
+
+**GENÅBNING!! (Men ikke for os ... Vi når nok ikke at ses ... Sandsynligvis holder jeg en lille spørgetime kort inden eksamen ...**
+
+---
+
+# Første vejledning
+
+- **15 min. per gruppe** (10 min. hvis man skriver alene)
+- Datoer: **16/4** (formiddag), **19/4** (eftermiddag) og **23/4** (eftermiddag)
+- **Tilmelding i Google Sheets** - først til mølle
+- Foregår på **Zoom**: Ét link som bruges af alle (også det andet hold) - log på et par minutter før jeres vejledning begynder
+- Jeg sender links til Google Sheet og Zoom
+
+--
+
+**Forberedelse**
+
+- Send en superkort beskrivelse af jeres idé indeholdende:
+    - Navn(e), hold, vejledningsnummer (jf. Google Sheet)
+    - Foreløbig problemformulering
+    - Primær metode
+    - Data
+    - Evt. andre væsentlige overvejelser
+    - Spørgsmål!
+- Format: Maks. en halv normalside &rarr; PDF-fil (filnavn der begynder med vejledningsnummer)
+- Deadline: Send til mig på sdas@ifs.ku.dk senest 24 timer før jeres vejledning
+
+---
 
 # Oversigt
 
 ```{r plan}
 
 source("../print_plan.R")
-print_plan(13)
+print_plan(14)
 ```
-
----
-
-# Recap fra sidste gang
 
 ---
 
 # Dagens program
 
+1. Overblik, kausalitet og lidt afgrænsning
+
+2. Panel**data**
+
+3. Fixed effects-modeller vs. almindelig OLS
+    - Hvad er fidusen?
+    - Øvelsesopgaver
+    - Stata
+
 ---
 
 # Dagens formål
+
+- Hariri var meget grundigt med det simplest tænkelige eksempel (2 units, 2 tider). Gense hans forelæsning for, at få den dér fingerspidsfornemmelse med fixed effects -> dvs. forskellige sammenligninger/effektestimatorer. Grundig gennemgang 
+    - Mange af jer kunne ikke deltage i forelæsningen pga. IP-eksamen, så Jakob har optaget den &rarr; se den! 
+
+- Denne time - mere anvendelsesagtigt. Hvornår bruger vi det, hvad får vi ud af det, hvordan gør vi? 
 
 ---
 
 # Pensum
 
-Stock, J. H., Watson, M. W. (2003). Introduction to econometrics (Vol. 104). Boston: Addison Wesley. 396-419. **Kapitel 10: Regression with Panel Data.**
-
----
-layout: true
-
-# Paneldata
+Stock, J. H., & Watson, M. W. (2003). Introduction to Econometrics (Vol. 104). Boston: Addison Wesley. 396-419. **Kapitel 10: Regression with Panel Data.**
 
 ---
 
-**Tværsnitsdata/krydssektionel data/cross-sectional data**
+# Recap på kausal inferens 
 
-- Et udsnit af en given population (eller en hel population) målt på ét tidspunkt
-- Rumlig/spatial variation: Estimationer baserer sig på variation mellem enheder
-- F.eks. valgundersøgelser, European Social Survey, World Value Survey, etc. &rarr; Alt hvad I har lært i metodefagene indtil nu.
+- Kausalitet og IV -> ekstremt vigtig forelæsning
+- Potential outcomes framework
+- Kausalitet! 
+- Eksogenitet
+- Naturlige eksperimenter
+    - IV -> én måde
+    - Paneldata er ikke et naturligt eksperiment (deraf Jakobs tøven), men ofte bedre end ren, traditionel kontrol
+
+---
+
+# Lidt vigtig intro og afgrænsning
+
+- "Paneldata" er slet og ret en **datastruktur** - ligesom tværsnitsdata (fx alm. surveys) &rarr; ikke særligt ophidsende
+
+- Grunden til at vi har en undervisningsgang om det er, at denne datastruktur giver nogle **fede analysemuligheder**:
+
+    - Paneldata kan i princippet bruges til at undersøge dynamik (udvikling/påvirkning over tid)
+    
+    - Kan i princippet besvare spørgsmål a la 'Hvad er effekten af at *blive* et demokrati' vs. 'Hvad er effekten af at *være* et demokrati' (ændringer i stedet for niveau)
+
+    - Men i praksis bruges paneldata først og fremmest som en smart kontrolstrategi &rarr; forbedret grundlag for **kausal inferens** ift. cross-sectional analyser (fx alm. OLS)
+
+- __Panel*data* kan analyseres på mange måder__ (bl.a. first-difference, random effects, tidsserieanalyse, m.m.), men i praksis anvendes mest (enheds- eller twoway) **fixed effects-modeller** &rarr; det er kun disse, vi kigger på i dag
+
+---
+
+# Omitted variable bias i forskellige former
+
+```{r}
+tb <- tribble(~a, ~b,
+              "A","B",
+              "C","D") %>% as.data.frame()
+
+names(tb) <- c("Tidsvariant", "Tidsinvariant (konstant)")
+rownames(tb) <- c("Enhedsvariant", "Enhedsinvariant (ens)")
+
+kable(tb)
+```
+
+- A. Faktorer der både varierer over tid og mellem enheder. Hvis de er relevante for den undersøgte sammenhæng, skal de kontrolleres for, hvis vi skal undgå omitted variable bias
+    - a.k.a. *ideosynkratisk* OVB
+
+- B. Faktorer der varierer mellem enheder, men er konstante over tid. Kan kontrolleres fuldstændigt vha. enheds-fixed effects 
+
+- C. Faktorer der varierer over tid, men er ens for alle. Kan kontrolleres fuldstændigt vha. tids-fixed effects
+
+- D. Fuldstændigt ens og konstante faktorer, fx "Planet = jorden". Behøver vi aldrig at bekymre os om 
+
+Summa summarum: Med tværsnitsdata og alm. OLS skal vi kunne kontrollere for både A- og B-faktorer (evt. også C). Med paneldata og fixed effects kan vi helt eliminere bias fra B og C, så det kun er A (*ideosynkratiske faktorer*), vi eventuelt skal bekymre os for      
+
+
+
+---
+
+# Datatyper
+
+**Tværsnitsdata/cross-sectional data**
+
+- Et tværsnit af en given population målt på ét tidspunkt - eller et sample (udsnit)
+- Kun rumlig/spatial variation, dvs. variation mellem enheder
+- Eksempler: Valgundersøgelsen, European Social Survey, etc. &rarr; alt det I har lært i metodefagene indtil nu
 
 **Tidsseriedata**
 
-- Vi følger én enhed over tid
-- Tidslig/temporal variation
-- F.eks. udviklingen i opbakning til statsministerpartiet fra 2001-2020.
+- En enkelt enhed/observation målt over tid
+- Kun tidslig/temporal variation, dvs. udvikling over tid
+- Eksempler: Udviklingen i opbakning til statsministerpartiet fra 2001-2020
 
 **Paneldata**
 
-- Kombinerer tværsnits- og tidsseriedata: Data for flere enheder og flere perioder.
-- Rumlig og tidslig variation: Estimationer baserer sig på variation mellem enheder og over tid.
-- F.eks. landepanel eller paneler af surveyrespondenter.
+- Kombinerer tværsnits- og tidsseriedata: Data for flere enheder og flere perioder
+- Rumlig og tidslig variation: Estimationer baserer sig på variation mellem enheder og over tid
+- Eksempler: Landepanel eller paneler af surveyrespondenter
 
 ---
 
-Paneldata kan have to strukturer. Hvad er forskellen?
+# Paneldata
+
+Paneldata kan grundlæggende have to strukturer. Hvad er forskellen?
 
 .pull-left[
-.center[**Bredt format**]
-```{r, results='asis'}
-tabl <- " 
-id | x1 | x2 | y1 | y2
-:---:|:---:|:---:|:---:|:---:
-a  | 1  | 1  | 4  | 5
-b  | 0  | 1  | 5  | 8
-c  | 1  | 0  | 3  | 3
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+
+```{r}
+t1 <- tribble(~enhed, ~x1, ~x2, ~y1, ~y2,
+        "a"  , 1  , 1  , 4  , 5,
+        "b"  , 0  , 1  , 5  , 8,
+        "c"  , 1  , 0  , 3  , 3) %>% 
+  kable(align = "c", caption="Bredt format") %>% 
+  column_spec(1:4, width="2cm")
+
+t1
 ```
 ]
 
 .pull-right[
-.center[**Langt format**]
-```{r, results='asis'}
-tabl <- " 
-id | tid | x | y 
-:---:|:---:|:---:|:---:|:---:
-a  | 1   | 1 | 4
-a  | 2   | 1 | 5
-b  | 1   | 0 | 5
-b  | 2   | 1 | 8
-c  | 1   | 1 | 3
-c  | 2   | 0 | 3
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+
+```{r}
+t2 <- tribble(~enhed, ~tid, ~x, ~y,
+        "a"  , 1   , 1 , 4,
+        "a"  , 2   , 1 , 5,
+        "b"  , 1   , 0 , 5,
+        "b"  , 2   , 1 , 8,
+        "c"  , 1   , 1 , 3,
+        "c"  , 2   , 0 , 3) %>% 
+  kable(align = "c", caption="Langt format") %>% 
+  column_spec(1:4, width="2cm")
+
+t2
 ```
 ]
 
 ---
 
-.pull-left[
-.center[**Bredt format**]
-```{r, results='asis'}
-tabl <- " 
-id | x1 | x2 | y1 | y2
-:---:|:---:|:---:|:---:|:---:
-a  | 1  | 1  | 4  | 5
-b  | 0  | 1  | 5  | 8
-c  | 1  | 0  | 3  | 3
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
-**En observation (række) per enhed og variable (kolonne) for hver periode.**
+# Paneldata
+
+Paneldata kan grundlæggende have to strukturer. Hvad er forskellen?
+
+.pull-left[`r t1` 
+
+*En række per enhed - en kolonne per variabel og periode*
+
 ]
 
-.pull-right[
-.center[**Langt format**]
-```{r, results='asis'}
-tabl <- " 
-id | tid | x | y 
-:---:|:---:|:---:|:---:|:---:
-a  | 1   | 1 | 4
-a  | 2   | 1 | 5
-b  | 1   | 0 | 5
-b  | 2   | 1 | 8
-c  | 1   | 1 | 3
-c  | 2   | 0 | 3
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
-**En observation (række) per enhed-periode og kun en kolonne per variabel.**
-]
+.pull-right[`r t2` 
 
-Bredt format kan have sine egne fordele, men vi skal bruge **langt dataformat** til regressionsanalyse. 
+*En række per enhed-periode - kun en kolonne per variabel*
+
+&rarr; Vi skal altid bruge **langt paneldataformat** til regressionsanalyse
+
+]
 
 ---
 
-## Hvordan ændrer man struktur?
+# Hvordan ændrer man format fra bredt til langt?
 
-Fra bredt til langt format i Stata:
+**Stata:**
 
-- *reshape long [variable, der skal transformeres], i([id-variabel]) j([navn på ny tidsvariabel])*
+> reshape long ["brede" variable der skal transformeres], i([ny enheds-variabel]) j([ny tidsvariabel])
 
-OBS: variable efter long skal være forsynet med en angivelse af tidsperiode/bølge eller lignende på en konsistent måde (f.eks. 10, 12 og 14 som angivelse af år 2010, 2012 og 2014).
+- OBS: Det er vigtigt, at variabel*navnene*, der angives efter long skal er forsynet med en angivelse af tidsperiode/bølge på en konsistent måde (f.eks. bnp10, bnp12 og bnp14 til angivelse af BNP i år 2010, 2012 og 2014)
+
+**Eksempel:**
+
+> reshape long bnp dem, i(land) j(aar)
+
+Problemer? Skriv "help reshape" (sådan kan I altid få hjælp til en kommando) eller søg på Google
+
+???
 
 Fra langt til bredt format i Stata:
 
-- *reshape wide [variable, der skal transformeres], i([id-variabel] ) j([tidsvariabel])*
+*reshape wide [variable, der skal bredes ud], i([enheds-variabel]) j([tidsvariabel])*
 
-Eller skriv: *help reshape* &rarr; sådan kan I altid finde hjælp til en kommando (eller brug Google).
+Fx. *reshape wide bnp dem, i(land) j(aar)*
 
 ---
-layout: false
 
 # Notation
 
@@ -218,19 +304,35 @@ class: title-slide, center, middle
 
 ---
 
-# Øvelsesopgave 12.1
+# Øvelsesopgave
 
-Den afhængige variabel i Mutz’ analyser og i denne øvelsesopgave er **cutdifftherm**, som udtrykker respondentens positive følelser over for Donald Trump fratrukket positive følelser over for Hillary Clinton. Højere værdier af cutdifftherm betyder altså en relativt mere positiv holdning til Trump.
+Hvorfor vandt Trump det amerikanske præsidentvalg i 2016? 
 
-Vi begynder med en cross-sectional analyse, der ignorerer datas panelstruktur. Undersøg derfor kun observationer i 2016. Fit en OLS-model med holdning til Trump som afhængig og “China threat" (chinaself) som uafhængig. Inkludér parti (xparty3), indkomst (income), ledighed (lookingforwork) og personlig økonomi (personeco) som kontrolvariable. Hvad er sammenhængen mellem “China threat" og støtte til Trump?
+Diana Mutz hævder, at Trump-vælgere er motiveret af en følelse af tabt status snarere end egentlige økonomiske vanskeligheder
+
+Paneldata med samme respondenter (*MNO*) målt to gange - i 2012 og 2016 (*wave*)
+
+Den afhængige variabel er *cutdifftherm*, som udtrykker respondentens positive følelser over for Donald Trump fratrukket positive følelser over for Hillary Clinton. Højere værdier af cutdifftherm betyder altså en mere positiv holdning til Trump
+
+Den primære uafhængige variabel er "China Threat" (*chinaself*), som udtrykker i hvilken grad respondenten opfatter Kina som en trussel mod USA fra 1 (trussel) til 7 (mulighed)
+
+---
+
+# Øvelsesopgave 1
+
+**Cross-sectional analyse** (ignorerer datas panelstruktur og anvender kun observationer fra 2016. 
+
+Fit en OLS-model med holdning til Trump (**cutdifftherm**) som afhængig variabel og **chinaself** som uafhængig. Inkludér parti (xparty3), indkomst (income), ledighed (lookingforwork) og personlig økonomi (personeco) som kontrolvariable. 
+
+Hvad er sammenhængen mellem "China threat" og støtte til Trump?
 
 Hvordan ville sådan en model se ud? Den generelle model på forrige slide så sådan her ud:
 
-$Y_i=\alpha + \beta_1 X_{1,i} + \beta_2 X_{2,i} + \beta_3 X_{3,i} + \beta_4 X_{4,i} + \beta_5 X_{5,i} + \epsilon_{i}$
+--
 
-Det, som vi bliver bedt om at gøre, ser sådan her ud (jeg har blot tilføjet navne):
+Vi bliver altså bedt om følgende:
 
-$cuttdifftherm_i = \alpha + \beta_1 ChinaThreat_i + \beta_2 Parti_i + \beta_3 Indkomst_i + \beta_4 Ledighed_i + \beta_5 Økonomi_i + \epsilon_{i}$
+> $cuttdifftherm_i = \alpha + \beta_1 ChinaThreat_i + \beta_2 Parti_i + \beta_3 Indkomst_i + \beta_4 Ledighed_i + \beta_5 Økonomi_i + \epsilon_{i}$
 
 ---
 
@@ -340,6 +442,9 @@ include_graphics("media/panel2.png")
 
 Det er en smart måde at imødekomme udfordringen med udeladt variabel bias i krydssektionel OLS.
 
+"This estimated relationship ... is immune to omitted variable bias from variables that are constant either over time or across [units]" (Stock & Watson) ... Twoway (unit and time fixed effects) ... Observed/unobserved ... Not other factors. 
+
+
 ---
 
 # Så hvordan estimeres det?
@@ -372,9 +477,9 @@ Hvad er der ændret ved α ift. tidligere?
 
 Der er to måde at estimere fixed effects på i Stata:
 
-1. *xtreg y x, fe* kræver forudgående specificering af datastrukturen: *xtset enhedsid tidsvariabel*
+> *xtreg y x, fe* kræver forudgående specificering af datastrukturen: *xtset enhedsid tidsvariabel*
 
-2. *reg y x i.tidsvariabel, absorb(enhedsid)*
+> *reg y x i.tidsvariabel, absorb(enhedsid)*
 
 I får samme resultater - med *reg* kan I dog teste OLS-antagelserne som I lærte på metode 2, hvilket er ganske handy.
 
@@ -633,41 +738,63 @@ include_graphics("media/panel7.png")
 
 ---
 
+# Sammenligning
+
+.pull-left[
+
+- Hvor stor en forskel tids-fixed effects og klyngerobuste standardfejl gør, afhænger af den konkrete undersøgte sammenhæng og de konkrete data (det samme gælder i øvrigt også enheds-fixed effects og kontrolvariable)
+
+- Her gør det næsten ingen forskel. Det er en god ting &rarr; indikerer at sammenhængen er robust over for disse udvidede modeller
+
+- 
+
+]
+
+.pull-right[
+```{r}
+include_graphics("media/panel8.png")
+```
+]
+
+---
+
+
+
 # En samlet fremgangsmåde
 
-1. Data med enheder observeret i flere perioder. Data skal være i langt format-
+1. Indsaml data med enheder, der er observeret i flere perioder, dvs. **paneldata** (skal være i **langt format**)
 
-2. Fortæl Stata, at data er paneldata vha. xtset [idvariabel] [tidsvariabel]
+2. Fortæl Stata, at data er paneldata
+    - xtset enhedsvariabel tidsvariabel
 
-3. Kør jeres analyse vha. xtreg y x, fe
+3. Kør jeres regressionsanalyser
+    - xtreg Y X Z1 Z2 Z3, fe
 
-4. Test antagelser (vha. reg y x, absorb(i.enhedsvariabel)
+4. Undersøg og demonstrér robusthed af resultater overfor forskellige specifikationer, herunder kontrol for *tidsvarierende* faktorer (vha. tids-fixed effects) og klyngerobuste standardfejl på enhedsniveau
+    - xtreg Y X Z1 Z2 Z3 i.tidsvariabel, fe
+    - xtreg Y X Z1 Z2 Z3 i.tidsvariabel, fe cluster(enhedsvariabel)
 
-5. Undersøg/demonstrer robusthed af resultater, når der tages højde for *tidsvarierende* kontrolvariable, og når der bruges klyngerobuste standardfejl.
-
----
-
-# Higher order fixed effects
-
-Bare en sidenote, som kan være nice to know, eller måske kan bringes i anvendelse, når I engang skal skrive bachelor:
-
-I dag har vi kun berørt enheds-fixed effects i paneldataanalyse.
-
-Man kan dog også godt tilføje rumlige fixed-effects som er på et højere niveau end enheds-niveauet.
-
-Hvis man f.eks. kigger på de samme individer over tid, kan man tilføje fixed effects på et højere rumligt niveau:
-
-- Lande-niveau
-
-- Kommune-niveau
-
-- Valgkreds-niveau
-
-- Osv.
+5. Test forudsætninger som normalt baseret på genkørsel med 
+    - reg Y X Z1 Z2 Z3 i.tidsvariabel, absorb(i.enhedsvariabel)
 
 ---
 
-# Ulemper ved panel data
+# Higher-order fixed effects
+
+En sidenote, som kan være nice to know, og evt. anvendes ifm. bachelorprojekt:
+
+- I dag har vi kun berørt enheds-fixed effects i paneldataanalyse
+
+- Man kan også tilføje rumlige fixed-effects på et højere niveau end enheds-niveauet
+    - også med tværsnitsdata (≠ paneldata)
+
+- Hvis man f.eks. kigger på individer i forskellige lande, kan man tilføje fixed effects (og evt. klyngerobuste standardfejl) på lande-niveau
+
+- Klar parallel til multilevel-analyse
+
+---
+
+# Ulemper ved paneldata(-analyse)
 
 Med panel data estimation med fixed effects løser mange af udfordringerne ved OVB: Men kun for de konstante (tidsinvariante) variable. Deraf navnet fixed effects. Træerne vokser altså ikke ind i den kausal-inferentielle himmel.
 
@@ -676,6 +803,8 @@ Der er fortsat potentielle kilder til bias:
 - Udeladte variable som ikke er konstante på tværs af enheder eller tid.
 
 - Omvendt kausalitet - det kan ikke modelleres væk
+
+Tager meget længere tid at indsamle og er derfor lidt mindre udbredt og tilgængeligt
 
 ---
 
