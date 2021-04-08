@@ -28,33 +28,25 @@ knitr::opts_chunk$set(echo = FALSE,
 Sys.setlocale(locale = "da_DK.UTF-8")
 ```
 
----
+# GENÅBNING!
 
-**GENÅBNING!! (Men ikke for os ... Vi når nok ikke at ses ... Sandsynligvis holder jeg en lille spørgetime kort inden eksamen ...**
+<br>
 
----
+.pull-left[
 
-# Første vejledning
+- Men ikke for os helt endnu...
 
-- **15 min. per gruppe** (10 min. hvis man skriver alene)
-- Datoer: **16/4** (formiddag), **19/4** (eftermiddag) og **23/4** (eftermiddag)
-- **Tilmelding i Google Sheets** - først til mølle
-- Foregår på **Zoom**: Ét link som bruges af alle (også det andet hold) - log på et par minutter før jeres vejledning begynder
-- Jeg sender links til Google Sheet og Zoom
+- Jeg venter ligesom jer i spænding på næste udmelding
 
---
+- Sandsynligvis afholder jeg en lille **spørgetime** inden eksamen, så forhåbentlig kan vi nå at mødes IRL en enkelt gang
 
-**Forberedelse**
+]
 
-- Send en superkort beskrivelse af jeres idé indeholdende:
-    - Navn(e), hold, vejledningsnummer (jf. Google Sheet)
-    - Foreløbig problemformulering
-    - Primær metode
-    - Data
-    - Evt. andre væsentlige overvejelser
-    - Spørgsmål!
-- Format: Maks. en halv normalside &rarr; PDF-fil (filnavn der begynder med vejledningsnummer)
-- Deadline: Send til mig på sdas@ifs.ku.dk senest 24 timer før jeres vejledning
+.pull-right[
+
+.right[<iframe src="https://giphy.com/embed/lKe5Ll88iZMmQ" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><br>**CSS**]
+
+]
 
 ---
 
@@ -70,9 +62,11 @@ print_plan(14)
 
 # Dagens program
 
-1. Overblik, kausalitet og lidt afgrænsning
+0. Info om vejledning
 
-2. Panel**data**
+1. Kausalitet og lidt overblik og afgrænsning
+
+2. Panel__*data*__
 
 3. Fixed effects-modeller vs. almindelig OLS
     - Hvad er fidusen?
@@ -81,12 +75,37 @@ print_plan(14)
 
 ---
 
+# Første vejledning
+
+- **15 min. per gruppe** (10 min. hvis man skriver alene)
+- Datoer: **16/4** (formiddag), **19/4** (eftermiddag) og **23/4** (eftermiddag)
+- Foregår på **Zoom**: Ét link til alle (begge hold) &arr; log på et par min. før jeres vejledning
+- **Tilmelding i Google Sheets** - først til mølle
+- Jeg sender **links** til Google Sheet og Zoom
+
+--
+
+**Forberedelse**
+
+- Send en **superkort beskrivelse** af jeres idé indeholdende:
+    - Navn(e), hold, vejledningsnummer (jf. Google Sheet)
+    - Foreløbig problemformulering
+    - Primær metode
+    - Data
+    - Evt. andre væsentlige overvejelser
+    - Spørgsmål!
+- **Format**: Max. en halv normalside &rarr; PDF-fil (filnavn der begynder med vejledningsnummer)
+- **Deadline**: Send til mig på **sdas@ifs.ku.dk** senest 24 timer før jeres vejledning
+
+---
+
 # Dagens formål
 
-- Hariri var meget grundigt med det simplest tænkelige eksempel (2 units, 2 tider). Gense hans forelæsning for, at få den dér fingerspidsfornemmelse med fixed effects -> dvs. forskellige sammenligninger/effektestimatorer. Grundig gennemgang 
-    - Mange af jer kunne ikke deltage i forelæsningen pga. IP-eksamen, så Jakob har optaget den &rarr; se den! 
+1. At forstå hvorfor paneldata ofte er smartere end tværsnitsdata  
 
-- Denne time - mere anvendelsesagtigt. Hvornår bruger vi det, hvad får vi ud af det, hvordan gør vi? 
+2. At få en fornemmelse for logikken bag fixed effects-modeller
+
+3. At vide hvordan man klargør og analyserer paneldata i Stata
 
 ---
 
@@ -98,57 +117,71 @@ Stock, J. H., & Watson, M. W. (2003). Introduction to Econometrics (Vol. 104). B
 
 # Recap på kausal inferens 
 
-- Kausalitet og IV -> ekstremt vigtig forelæsning
-- Potential outcomes framework
-- Kausalitet! 
-- Eksogenitet
-- Naturlige eksperimenter
-    - IV -> én måde
-    - Paneldata er ikke et naturligt eksperiment (deraf Jakobs tøven), men ofte bedre end ren, traditionel kontrol
+- I har flere gange hørt mig sige, at vi simpelthen har antaget, at sammenhængen mellem et X og Y er en "**effekt**", og at vi "skyder kausalitetsdiskussionen til hjørne" &rarr; det er slut nu!
+
+--
+
+- Hariris forelæsning om kausalitet og IV inden påske var en ekstremt vigtig (og god!) forelæsning
+
+    - Han præsenterede **potential outcomes**-frameworket, der er den dominerende forståelse af kausalitet
+    - Kort sagt handler kausalitet om sammenligninger - **kontrafaktiske sammenligninger**
+    - Effekten af X &rarr; Y er **forskellen mellem det faktiske Y for en person, der *har* fået "treatment" (X), og det Y personen ville have haft uden "treatment"** 
+    - Sidstnævnte (Y1|D=0) er **kontrafaktisk** og kan ikke observeres &rarr; derfor bruger vi diverse smarte påfund og krumspring (IV-regression og andre **naturlige eksperimenter**)
+    
+--
+
+- Med OLS og paneldataanalyse forsøger vi at lave fornuftige sammenligninger mellem det, vi antager er substantialt set ens enheder *efter vi har kontrolleret for en række faktorer* ("all else being equal") 
+    - vi kan dog aldrig vide os helt sikre på ikke at mangle væsentlige kontrolvariable, og derfor er det en forholdsvist usikker og følsom vej til kausal inferens ift. naturlige eksperimenter
+    - **paneldata** har dog nogle særlige fordele, som vi skal se på i dag
 
 ---
 
 # Lidt vigtig intro og afgrænsning
 
-- "Paneldata" er slet og ret en **datastruktur** - ligesom tværsnitsdata (fx alm. surveys) &rarr; ikke særligt ophidsende
+- **Paneldata** er slet og ret en type **data** - ligesom tværsnitsdata (fx alm. surveys) &rarr; ikke særligt ophidsende
 
-- Grunden til at vi har en undervisningsgang om det er, at denne datastruktur giver nogle **fede analysemuligheder**:
+--
+
+- Årsagen til denne undervisningsgang er, at denne datastruktur giver nogle **fede analysemuligheder**:
 
     - Paneldata kan i princippet bruges til at undersøge dynamik (udvikling/påvirkning over tid)
-    
-    - Kan i princippet besvare spørgsmål a la 'Hvad er effekten af at *blive* et demokrati' vs. 'Hvad er effekten af at *være* et demokrati' (ændringer i stedet for niveau)
+    - Kan besvare spørgsmål a la 'Hvad er effekten af at *blive* et demokrati' vs. 'Hvad er effekten af at *være* et demokrati' (ændringer i stedet for niveau)
+    - Men i praksis bruges paneldata først og fremmest som en smart kontrolstrategi &rarr; forbedret grundlag for **kausal inferens** ift. almindelig OLS
 
-    - Men i praksis bruges paneldata først og fremmest som en smart kontrolstrategi &rarr; forbedret grundlag for **kausal inferens** ift. cross-sectional analyser (fx alm. OLS)
+--
 
-- __Panel*data* kan analyseres på mange måder__ (bl.a. first-difference, random effects, tidsserieanalyse, m.m.), men i praksis anvendes mest (enheds- eller twoway) **fixed effects-modeller** &rarr; det er kun disse, vi kigger på i dag
+- __Panel*data* kan analyseres på mange måder__ (bl.a. first-difference, random effects, tidsserieanalyse, m.m.), men i praksis anvendes mest (enheds- eller two-way) **fixed effects-modeller** &rarr; det er kun disse, vi kigger på i dag
+
+--
+
+- Hariri var meget grundig, teknisk og pædagogisk til forelæsningen
+    - (gen)se evt. hans forelæsning for at få fingerspitzengefühl med fixed effects (de forskellige sammenligninger og estimatorer) 
+    - denne time bliver mere anvendelsesfokuseret &rarr; hvornår/hvorfor/hvordan bruger vi paneldata
 
 ---
 
-# Omitted variable bias i forskellige former
+# Paneldata - Den Ultrakorte Version
 
-```{r}
-tb <- tribble(~a, ~b,
-              "A","B",
-              "C","D") %>% as.data.frame()
+--
 
-names(tb) <- c("Tidsvariant", "Tidsinvariant (konstant)")
-rownames(tb) <- c("Enhedsvariant", "Enhedsinvariant (ens)")
+1. Når vi har mulighed for at arbejde med **paneldata** (gentagne observationer af mange enheder) - *og alternativet er en analyse af tværsnitsdata* - så er det næsten altid smart at anvende paneldata
 
-kable(tb)
-```
+--
 
-- A. Faktorer der både varierer over tid og mellem enheder. Hvis de er relevante for den undersøgte sammenhæng, skal de kontrolleres for, hvis vi skal undgå omitted variable bias
-    - a.k.a. *ideosynkratisk* OVB
+2. Paneldata giver os redskaber til at lukke nogle problem-døre - konkret at eliminere nogle former for **omitted variable bias**. Mao. giver det et meget stærkere (omend uperfekt) fundament for **kausal inferens**
 
-- B. Faktorer der varierer mellem enheder, men er konstante over tid. Kan kontrolleres fuldstændigt vha. enheds-fixed effects 
+--
 
-- C. Faktorer der varierer over tid, men er ens for alle. Kan kontrolleres fuldstændigt vha. tids-fixed effects
+3. De vigtigste redskaber/modeller at kende og forstå er **fixed effects-modeller**, som essentielt set kan koges ned til **alm. OLS med kontrol for enheden samt evt. tidsperioden**
 
-- D. Fuldstændigt ens og konstante faktorer, fx "Planet = jorden". Behøver vi aldrig at bekymre os om 
+--
 
-Summa summarum: Med tværsnitsdata og alm. OLS skal vi kunne kontrollere for både A- og B-faktorer (evt. også C). Med paneldata og fixed effects kan vi helt eliminere bias fra B og C, så det kun er A (*ideosynkratiske faktorer*), vi eventuelt skal bekymre os for      
+4. I praksis fungerer det ved, at man **tilføjer dummyer for hver enhed** (samt evt. for hver tidsperiode), hvormed hovedeffekten __estimeres inden for (*within*) hver enhed__  
 
+---
+class: center, middle, inverse
 
+# Panel__*data*__
 
 ---
 
@@ -158,25 +191,25 @@ Summa summarum: Med tværsnitsdata og alm. OLS skal vi kunne kontrollere for bå
 
 - Et tværsnit af en given population målt på ét tidspunkt - eller et sample (udsnit)
 - Kun rumlig/spatial variation, dvs. variation mellem enheder
-- Eksempler: Valgundersøgelsen, European Social Survey, etc. &rarr; alt det I har lært i metodefagene indtil nu
+- Eksempler: Valgundersøgelsen, European Social Survey, etc. &rarr; alt det I har lært i metode indtil nu
 
 **Tidsseriedata**
 
-- En enkelt enhed/observation målt over tid
+- (Typisk) en enkelt enhed/observation målt over tid
 - Kun tidslig/temporal variation, dvs. udvikling over tid
 - Eksempler: Udviklingen i opbakning til statsministerpartiet fra 2001-2020
 
 **Paneldata**
 
 - Kombinerer tværsnits- og tidsseriedata: Data for flere enheder og flere perioder
-- Rumlig og tidslig variation: Estimationer baserer sig på variation mellem enheder og over tid
-- Eksempler: Landepanel eller paneler af surveyrespondenter
+- Rumlig *og* tidslig variation, dvs. variation *indenfor* enheder over tid samt enhedsforskelle i denne 
+- Eksempler: Landepanel eller panel af surveyrespondenter
 
 ---
 
-# Paneldata
+# Paneldata - struktur
 
-Paneldata kan grundlæggende have to strukturer. Hvad er forskellen?
+Paneldata kan overordnet set have to strukturer. Data i tabellerne nedenfor er ens. **Hvad er forskellen?**
 
 .pull-left[
 
@@ -186,7 +219,7 @@ t1 <- tribble(~enhed, ~x1, ~x2, ~y1, ~y2,
         "b"  , 0  , 1  , 5  , 8,
         "c"  , 1  , 0  , 3  , 3) %>% 
   kable(align = "c", caption="Bredt format") %>% 
-  column_spec(1:4, width="2cm")
+  column_spec(1:4, width="1.5cm")
 
 t1
 ```
@@ -203,7 +236,7 @@ t2 <- tribble(~enhed, ~tid, ~x, ~y,
         "c"  , 1   , 1 , 3,
         "c"  , 2   , 0 , 3) %>% 
   kable(align = "c", caption="Langt format") %>% 
-  column_spec(1:4, width="2cm")
+  column_spec(1:4, width="1.5cm")
 
 t2
 ```
@@ -211,9 +244,9 @@ t2
 
 ---
 
-# Paneldata
+# Paneldata - struktur
 
-Paneldata kan grundlæggende have to strukturer. Hvad er forskellen?
+Paneldata kan overordnet set have to strukturer. Data i tabellerne nedenfor er ens. **Hvad er forskellen?**
 
 .pull-left[`r t1` 
 
@@ -225,23 +258,29 @@ Paneldata kan grundlæggende have to strukturer. Hvad er forskellen?
 
 *En række per enhed-periode - kun en kolonne per variabel*
 
-&rarr; Vi skal altid bruge **langt paneldataformat** til regressionsanalyse
-
 ]
+
+.center[&rarr; Vi skal altid bruge **langt format** til regressionsanalyse af paneldata!]
 
 ---
 
 # Hvordan ændrer man format fra bredt til langt?
 
-**Stata:**
+**Stata**
 
 > reshape long ["brede" variable der skal transformeres], i([ny enheds-variabel]) j([ny tidsvariabel])
 
-- OBS: Det er vigtigt, at variabel*navnene*, der angives efter long skal er forsynet med en angivelse af tidsperiode/bølge på en konsistent måde (f.eks. bnp10, bnp12 og bnp14 til angivelse af BNP i år 2010, 2012 og 2014)
+--
 
-**Eksempel:**
+Det er vigtigt, at variabel*navnene*, der angives efter "long", er forsynet med en angivelse af tidsperiode/bølge på en konsistent måde (f.eks. bnp10, bnp12 og bnp14 for BNP i år 2010, 2012 og 2014)
 
-> reshape long bnp dem, i(land) j(aar)
+--
+
+**Eksempel**
+
+> reshape long x y, i(enhed) j(tid)
+
+--
 
 Problemer? Skriv "help reshape" (sådan kan I altid få hjælp til en kommando) eller søg på Google
 
@@ -249,110 +288,128 @@ Problemer? Skriv "help reshape" (sådan kan I altid få hjælp til en kommando) 
 
 Fra langt til bredt format i Stata:
 
-*reshape wide [variable, der skal bredes ud], i([enheds-variabel]) j([tidsvariabel])*
+reshape wide [variable, der skal bredes ud], i([enheds-variabel]) j([tidsvariabel])
 
-Fx. *reshape wide bnp dem, i(land) j(aar)*
+Fx. "reshape wide bnp dem, i(land) j(aar)"
+
+---
+class: center, middle, inverse
+
+# Analyse af paneldata
+
+1. Notation
+2. Alm. OLS
+3. Fixed effects
 
 ---
 
 # Notation
 
-For at holde styr på at variable både kan varierer tidsligt og rumligt (mellem enheder), er der tilføjet et ekstra fodtegn, *t*.
-
-Vær ikke bange: *i* refererer til enhederne som observeres og *t* refererer til hvilken tidsperiode der observeres.
-
-- $i = 1, 2, 3, ... , n$
-
-- $t = 1, 2, 3, ... , T$
-
-Dvs. når vi skriver en statistisk model, så angiver fodtegnet hvor en variabel varierer:
-
-- $x_i$ angiver at variablen x varierer på tværs af i enheder.
-
-- $x_t$ angiver at variablen x varierer på tværs af t tidsperioder
-
-- $x_{it}$ angiver at variablen x varierer på tværs af i enheder og t tidspunkter.
-
-$Y_{it}=\alpha_i + \beta_1 X_{it}+\epsilon_{it}$
-
-Her er ledet $\alpha_i$ enheds-fixed effects &rarr; varierer på tværs af tværs af i enheder, men er konstante på tværs af tid.
-
----
-
-# OLS på krydssektionelle data
-
-Dette var et hovedtema på metode 2:
-
-- At lave en statistisk model, som udtrykker hvor meget Y gennemsnitligt ændrer sig i sin egen enhed, når x ændres med én.
-
-Sådan en model kunne se sådan her ud:
-
-$Y_i=\alpha + \beta_1 X_{1,i} + \beta_2 X_{2,i} + \beta_3 X_{3,i} + \beta_4 X_{4,i} + \beta_5 X_{5,i} + \epsilon_{i}$
-
-Her er den store udfordring endogenitet:
-
-- Dvs. at en vores uafhængige variable, $X_{1,i} ... X_{5,i}$ er korreleret med vores $\epsilon_{i}$.
-
-- Hvis dette er tilfældet har vi *udeladt variabel bias* (OVB), altså glemt at kontrollere for en relevant variabel.
-
-(Endogenitet elimineres, når den uafhængige variabel tildeles tilfældigt &rarr; hint til eksperimenter og næste uge.)
-
----
-class: title-slide, center, middle
-
-# Øvelsesopgaver
-
----
-
-# Øvelsesopgave
-
-Hvorfor vandt Trump det amerikanske præsidentvalg i 2016? 
-
-Diana Mutz hævder, at Trump-vælgere er motiveret af en følelse af tabt status snarere end egentlige økonomiske vanskeligheder
-
-Paneldata med samme respondenter (*MNO*) målt to gange - i 2012 og 2016 (*wave*)
-
-Den afhængige variabel er *cutdifftherm*, som udtrykker respondentens positive følelser over for Donald Trump fratrukket positive følelser over for Hillary Clinton. Højere værdier af cutdifftherm betyder altså en mere positiv holdning til Trump
-
-Den primære uafhængige variabel er "China Threat" (*chinaself*), som udtrykker i hvilken grad respondenten opfatter Kina som en trussel mod USA fra 1 (trussel) til 7 (mulighed)
-
----
-
-# Øvelsesopgave 1
-
-**Cross-sectional analyse** (ignorerer datas panelstruktur og anvender kun observationer fra 2016. 
-
-Fit en OLS-model med holdning til Trump (**cutdifftherm**) som afhængig variabel og **chinaself** som uafhængig. Inkludér parti (xparty3), indkomst (income), ledighed (lookingforwork) og personlig økonomi (personeco) som kontrolvariable. 
-
-Hvad er sammenhængen mellem "China threat" og støtte til Trump?
-
-Hvordan ville sådan en model se ud? Den generelle model på forrige slide så sådan her ud:
+For at holde styr på variable, der både varierer tidsligt og rumligt, tilføjes et ekstra fodtegn, **t**, udover det velkendte **i** &rarr; **i** refererer til de observerede *enheder*, mens **t** refererer til *tidsperioden*, enhederne observeres i 
 
 --
 
-Vi bliver altså bedt om følgende:
+Når vi skriver en **statistisk model** på formel, angiver fodtegnet altså, **hvor(dan) hver variabel varierer**:
 
-> $cuttdifftherm_i = \alpha + \beta_1 ChinaThreat_i + \beta_2 Parti_i + \beta_3 Indkomst_i + \beta_4 Ledighed_i + \beta_5 Økonomi_i + \epsilon_{i}$
+- $X_i$  &rarr; variablen X varierer kun mellem enheder
+- $X_t$  &rarr; variablen X varierer kun over tid 
+- $X_{it}$ &rarr; variablen X varierer *både* mellem enheder og over tid. Der er altså en måling for hver periode *t* for hver enhed *i*  
+
+--
+
+**Eksempel**  
+
+$Y_{it}=\alpha + \beta_1 X_{1,it} + \beta_2 X_{2,i} + \beta_2 X_{3,t} + \epsilon_{it}$
+
+Hvad kan vi sige om variationen i de tre uafhængige variable?
+
+<!-- --- -->
+
+<!-- # Recap OLS på krydssektionelle data -->
+
+<!-- - Hovedtema på Metode 2: At lave en statistisk model, som udtrykker hvor meget Y gennemsnitligt ændrer sig, når X vokser med +1 -->
+
+<!-- Sådan en model kunne se sådan her ud: -->
+
+<!-- $Y_i=\alpha + \beta_1 X_{1,i} + \beta_2 X_{2,i} + \beta_3 X_{3,i} + \epsilon_{i}$ -->
+
+<!-- Her er den store udfordring endogenitet: -->
+
+<!-- - Dvs. at en vores uafhængige variable, $X_{1,i} ... X_{5,i}$ er korreleret med vores $\epsilon_{i}$ -->
+
+<!-- - Hvis dette er tilfældet har vi *udeladt variabel bias* (OVB), altså glemt at kontrollere for en relevant variabel. -->
+
+<!--  -->
 
 ---
 
-# Øvelsesopgave 12.1: Lad os tolke
+# Øvelsesopgave 8
 
-$cuttdifftherm_i = \alpha + \beta_1 ChinaThreat_i + \beta_2 Parti_i + \beta_3 Indkomst_i + \beta_4 Ledighed_i + \beta_5 Økonomi_i + \epsilon_{i}$
+**Hvorfor vandt Trump det amerikanske præsidentvalg i 2016?**
 
-.pull-left[
-**X: China self/China Threat:**
-I hvilken grad respondenten opfatter Kina som en trussel mod USA (skalaen går fra 1 (trussel) til 7 (mulighed))
+.left-column[
 
-**Y: Cutdifftherm:**
-Udtrykker respondentens positive følelser over for Donald Trump fratrukket positive følelser over for Hillary Clinton. Højere værdier betyder altså en relativt mere positiv holdning til Trump.
+```{r}
+include_graphics("media/trump2.jpg")
+```
 
-- Hvad er sammenhængen mellem “China threat" og støtte til Trump?
-- Hvor kan man aflæse $\beta_1$?
-- Hvordan ser $R^2$ ud?
+```{r}
+include_graphics("media/trump.png")
+```
+
+```{r}
+include_graphics("media/trump3.jpg")
+```
+
 ]
 
-.pull-right[
+.right-column[
+
+- Mutz hævder, at Trump-vælgere er motiveret af en **følelse af tabt status** snarere end økonomiske vanskeligheder
+
+- Vi har paneldata med samme respondenter (**MNO**) målt to gange - i 2012 og 2016 (**wave**)
+
+    - Den *afhængige* variabel er **cutdifftherm**, som udtrykker respondentens **positive følelser over for Trump** fratrukket positive følelser over for Hillary (0-19; højere værdi = mere positiv holdning til Trump)
+    - Den primære *uafhængige* variabel er **chinaself** ("China threat"), som udtrykker **i hvilken grad respondenten opfatter Kina som en trussel mod USA** fra 1 (trussel) til 7 (mulighed)
+    - En **positiv sammenhæng** mellem X og Y ville altså indikere, at mindre trussel &rarr; mere støtte til Trump  
+
+]
+
+---
+
+# Øvelsesopgave 8.1
+
+**Cross-sectional analyse af 2016-bølgen** 
+
+- Vi ignorerer datas panelstruktur og anvender kun observationer fra 2016 (= tværsnit)
+
+- **Fit en OLS-model med holdning til Trump (_cutdifftherm_) som afhængig variabel og _chinaself_ som uafhængig**
+
+    - **Kontrolvariable**: indkomst (income), ledighed (lookingforwork), personlig økonomi (personeco) og parti (xparty3)
+
+--
+
+- Hvordan ville sådan en model se ud? 
+
+--
+
+> $cutdifftherm_i = \alpha + \beta_1 ChinaThreat_i + \beta_3 Indkomst_i + \beta_4 Ledig_i\\+ \beta_5 Økonomi_i + \beta_6 Parti\_Independent_i + \beta_7 Parti\_Democrat_i + \epsilon_i$
+
+---
+
+# Øvelsesopgave 8.1
+
+**Cross-sectional analyse af 2016-bølgen** 
+
+.left-column[
+
+**Hvad er sammenhængen mellem "China threat" (chinaself) og støtte til Trump?**
+
+... efter kontrol for de fire kontrolvariable
+
+]
+
+.right-column[
 ```{r}
 include_graphics("media/panel1.png")
 ```
@@ -360,19 +417,21 @@ include_graphics("media/panel1.png")
 
 ---
 
-# Øvelsesopgave 12.1: Lad os tolke
+# Øvelsesopgave 8.1
 
-$cuttdifftherm_i = \alpha + \beta_1 ChinaThreat_i + \beta_2 Parti_i + \beta_3 Indkomst_i + \beta_4 Ledighed_i + \beta_5 Økonomi_i + \epsilon_{i}$
+**Cross-sectional analyse af 2016-bølgen** 
 
-.pull-left[
-Overordnet set, en stærk negativ sammenhæng:
+.left-column[
 
-Når en respondent går 1 point højere op på skalaen, altså opfatter Kina som mere mulighed og mindre trussel (bemærk skala), reduceres støtten til Trump med .47 skalapoint.
+Overordnet set, en **stærk negativ sammenhæng**
 
-Det peger altså isoleret set på at “China threat" havde en effekt på støtte til Trump.
+Når en respondent går 1 point højere op på China threat-skalaen (1-7), altså opfatter Kina *mindre* som trussel, reduceres støtten til Trump med 0.46 skalapoint (p<0.000)
+
+Det peger altså isoleret set på, at "China threat" havde en stærk effekt på støtten til Trump
+
 ]
 
-.pull-right[
+.right-column[
 ```{r}
 include_graphics("media/panel1.png")
 ```
@@ -380,29 +439,19 @@ include_graphics("media/panel1.png")
 
 ---
 
-# Øvelsesopgave 12.2 
+# Øvelsesopgave 8.2 
 
-Tilføj variablene der angiver om respondenten selv har haft gavn af international handel (tradeper) og om respondenten er pro-indvandring (proimmself). Hvordan påvirkes dit svar på spm. 1?
+**Cross-sectional analyse af 2016-bølgen - med yderligere kontrolvariable** 
 
-Her bliver I faktisk spurgt om hvorvidt $\beta_1$ ændrer sig, når vi tilføjer de to variable, tradeper og proimmself som før lå og hyggede sig nede i fejlledet, $\epsilon_i$:
+.left-column[
 
-$cuttdifftherm_i = \alpha + \beta_1 ChinaThreat_i + \beta_2 Parti_i + \beta_3 Indkomst_i\\+ \beta_4 Ledighed_i + \beta_5 Økonomi_i + \beta_6 Handel_i + \beta_7 ProInd_i + \epsilon_{i}$
+Tilføj kontrolvariable, der angiver om respondenten selv har haft gavn af international handel (**tradeper**) og er *for* indvandring (**proimmself**)
 
----
+**Er der stadigvæk en sammenhæng mellem chinaself og cutdifftherm? Har den ændret sig?**
 
-# Øvelsesopgave 12.2
-
-.pull-left[
-Vi tilføjer variablene der angiver om respondenten selv har haft gavn af international handel (tradeper) og om respondenten er pro-indvandring (proimmself).
-
-- Hvad er sammenhængen mellem “China threat" og støtte til Trump nu?
-
-- Tænk i øvrigt over: Hvornår er de tilføjede variable målt? Hvor står de henne tidsligt ift. vores afhængige variabel?
-
-Så hvordan påvirkes dit svar på spm. 1?
 ]
 
-.pull-right[
+.right-column[
 ```{r}
 include_graphics("media/panel2.png")
 ```
@@ -410,17 +459,19 @@ include_graphics("media/panel2.png")
 
 ---
 
-# Øvelsesopgave 12.2
+# Øvelsesopgave 8.2 
 
-.pull-left[
-Sammenhængen mellem “China threat" og støtte til Trump, $\beta_1$ reduceres til .2, men er stadig signifikant.
+**Cross-sectional analyse af 2016-bølgen - med yderligere kontrolvariable** 
 
-**Bemærk dog**: At de variable vi tilføjede er holdningsvariable, og modellen bruger derfor holdninger til at forklare holdninger:
+.left-column[
 
-I denne specifikation er der derfor en vis risiko for såkaldt *post-treatment (adjustment) bias*: tradeper kunne godt være en konsekvens af om man ser Kina som en trussel, og så går den ikke at bruge som kontrolvariabel.
+Sammenhængen reduceres markant fra 0.46 til 0.20, men er stadig signifikant (p<0.01)
+
+Side note: Man skal være yderst varsom med at kontrollere for (holdnings)variable, der i sig selv er påvirket af X &rarr; risiko for **post-treatment bias**
+
 ]
 
-.pull-right[
+.right-column[
 ```{r}
 include_graphics("media/panel2.png")
 ```
@@ -428,97 +479,195 @@ include_graphics("media/panel2.png")
 
 ---
 
-# Hvorfor anvende paneldata?
+# Men er det en *kausal* sammenhæng?
 
-- Den **teoretiske** grund: Vi kan studere **dynamik** og stabilitet 
+- Kan vi med ro i maven konkludere, at X (opfattet trussel fra Kina) har en kausal effekt på Y (støtte til Trump), dvs. *forårsager* Y?
 
-- Den **metodiske** grund: Vi kan anvende fixed effects og dermed opnå stærkere kausal inferens:
+- Hvorfor/hvorfor ikke?
 
-- Vi kan tage højde for alle faktorer, som er konstante indenfor enheder (enheds-fixed effects) og
+- Hvad skal der til?
 
-- alle faktorer indenfor en tidsperiode, som påvirker enhederne på samme måde (tids-fixed effects).
+- Snak om det i 3-5 min.
 
-- Det fede er, at vi ikke engang behøver at måle disse faktorer!
+***
 
-Det er en smart måde at imødekomme udfordringen med udeladt variabel bias i krydssektionel OLS.
+--
 
-"This estimated relationship ... is immune to omitted variable bias from variables that are constant either over time or across [units]" (Stock & Watson) ... Twoway (unit and time fixed effects) ... Observed/unobserved ... Not other factors. 
+- Den helt **centrale forudsætning** er, at der ikke er endogenitetsbias, herunder **omitted variable bias** (OVB)
+    - at der er kontrolleret for alle **faktorer, som kan påvirke både X og Y** (a.k.a. fravær af spuriøsitet)
+    
+- Vi kunne ret hurtigt finde nogle faktorer, der potentielt påvirker trusselsopfattelse *og* støtte til Trump og dermed *confounder* sammenhængen 
 
+---
+layout: true
+
+# Omitted variable bias
+
+```{r}
+tb <- tribble(~a, ~b,
+              "A - farlig","B - håndterbar",
+              "C - håndterbar","D - OK") %>% as.data.frame()
+
+names(tb) <- c("Tidsvariant", "Tidsinvariant (konstant)")
+rownames(tb) <- c("Enhedsvariant", "Enhedsinvariant (ens)")
+
+kable(tb, caption="Typologi over faktorer, der kan medføre OVB")
+```
 
 ---
 
-# Så hvordan estimeres det?
+--
+
+- D. Fuldstændigt **ens og konstante faktorer** (Planet = jorden) &rarr; behøver vi ikke at bekymre os om 
+
+--
+
+- C. Faktorer der **varierer over tid**, men er ens for alle 
+
+--
+
+- B. Faktorer der **varierer mellem enheder**, men er konstante over tid
+
+--
+
+- A. Faktorer der **både varierer over tid og mellem enheder**
+
+--
+
+- Med **tværsnitsdata/OLS** skal vi kunne kontrollere for det hele (bortset fra D)
+
+---
+
+- Med **paneldata** kan vi anvende **fixed effects** til at eliminere nogle former for OVB
+    - **enheds-fixed effects** eliminerer B
+    - **tids-fixed effects** eliminerer C
+    - D er ufarlig
+
+--
+    
+- Det magiske er, at **vi ikke engang behøver kunne observere disse faktorer**
+
+--
+
+- Kun **A er tilbage** (*ideosynkratisk OVB*, jf. Hariri) og må håndteres med kontrolvariable
+
+--
+
+> "[Two-way fixed effects] is **immune to omitted variable bias from variables that are constant either over time or across [units]**" .right[(Stock & Watson)]
+
+---
+layout: false
+
+# Så hvordan estimeres (two-way) fixed effects?
+
+--
 
 $Y_{it} = \beta_1 X_{it} + \alpha_i + \gamma_t + \epsilon_{it}$
 
-Det lyder avanceret, men det er i virkeligheden ikke særlig langt fra hvad I allerede kan.
-
-Tænk på det, på den her måde:
-
-- Enheds-fixed effects, $\alpha_i$ , opnår vi ved tilføje en dummy for hver enhed som kontrolvariabel.
-
-- Tids-fixed effects, $\gamma_t$ , opnår vi ved at tilføje en dummy variabel (0/1) for hver tidsperiode som kontrolvariabel.
-
-Hvorfor er det, at vi opnår fixed effects på den måde? (hint: hvad opnår vi ved statistisk kontrol?)
+Sådan! Det ser avanceret ud, men det er i virkeligheden tæt på, hvad I allerede kan. Læg mærke til fodtegnene
 
 --
 
-Den tilbageværende variation er kun indenfor enheder &rarr; FE kaldes også en within-estimator.
+- **Enheds-fixed effects**, $\alpha_i$, opnår vi ved tilføje en **dummy for hver enhed** som kontrolvariabel
+    - Vi "kontrollerer for enhedsvariation" og giver hver enhed sit eget $\alpha_i$ (konstantled), som tager højde for enheds-konstante faktorer
 
-Hvad er der ændret ved α ift. tidligere?
+--
 
-- modellen har ikke længere nogen overordnet konstant.
-- Alle enheder har nu deres eget konstantled, det er derfor fodtegnet i er tilføjet til α i - dette udtrykker altså at konstantledet faktisk ikke længere er en konstant, men varierer på tværs af enhederne i.
-- Modellen tager netop højde for enheds-konstante effekter, ved at hver enhed har sit eget konstantled.
+- **Tids-fixed effects**, $\gamma_t$ , opnår vi ved at tilføje en **dummy for hver tidsperiode** som kontrolvariabel
+    - Vi "kontrollerer for tidsvariation" og fjerner den overordnede tidstrend
 
----
+--
 
-# Stata: To metoder
-
-Der er to måde at estimere fixed effects på i Stata:
-
-> *xtreg y x, fe* kræver forudgående specificering af datastrukturen: *xtset enhedsid tidsvariabel*
-
-> *reg y x i.tidsvariabel, absorb(enhedsid)*
-
-I får samme resultater - med *reg* kan I dog teste OLS-antagelserne som I lærte på metode 2, hvilket er ganske handy.
-
-*absorb* tilføjelsen er det samme som at tilføje i.enhedsid som kontrolvariabel men ikke ønske, at dens estimater præsenteres i Stata-outputtet (vi har jo oftest mange enheder).
+- Den tilbageværende variation er kun **indenfor hver enhed** &rarr; kaldes derfor også en *within-estimator*
 
 ---
 
-# Øvelsesopgave 12.3
+# Så hvordan estimeres (two-way) fixed effects?
 
-Brug xtset-kommandoen til at angive id- og tidsvariablene:
+**Stata**
+
+*Enten*
+
+> xtset enhedsid tidsvariabel
+
+*efterfulgt af*
+
+> xtreg Y X i.tidsvariabel, fe
+
+*eller*
+
+> reg y x i.tidsvariabel, absorb(enhedsid)
+
+--
+
+- Samme kommandoer uden **"i.tidsvariabel"**, hvis vi kun vil have enheds-fixed effects
+
+--
+
+- Med **reg** kan vi efterfølgende teste OLS-antagelser. **absorb**-tilføjelsen er det samme som at tilføje "i.enhedsid" som kontrolvariabel uden at estimaterne printes i Stata-outputtet
+
+---
+
+# Øvelsesopgave 8.3
+
+**Tilbage til Trump og Mutz!**
+
+.left-column[
+
+```{r}
+include_graphics("media/trump2.jpg")
+```
+
+```{r}
+include_graphics("media/trump.png")
+```
+
+```{r}
+include_graphics("media/trump3.jpg")
+```
+
+]
+
+.right-column[
+
+Brug *xtset*-kommandoen til at specifiere panelstrukturen og enheds- og tidsvariablene for Stata:
 
 ```{r}
 include_graphics("media/panel3.png")
 ```
 
----
-
-# Øvelsesopgave 12.4
-
-Estimér paneldatamodeller med de samme to specifikationer som ovenfor. Hvordan adskiller resultaterne sig? Hvad kan vi på baggrund heraf konkludere om betydningen af “China threat" for amerikanske vælgeres støtte til Donald Trump i 2016?
-
-$cuttdifftherm_i = \alpha + \beta_1 ChinaThreat_{it} + \beta_2 Parti_{it} + \beta_3 Indkomst_{it} + \beta_4 Ledighed_{it} + \beta_5 Økonomi_{it} + \epsilon_{it}$
-
-Vi bliver igen bedt om at kigge på $\beta_1$ . Men denne gang udnytter vi panelstrukturen gennem $\alpha$ i som indfanger enheds-fixed effects.
-
-Det vil sige, at $\beta_1$ nu udtrykker hvor meget y ændrer sig, når x ændrer sig med ét skalapoint indenfor personer.
+]
 
 ---
 
-# Øvelsesopgave 12.4
+# Øvelsesopgave 8.4
+
+**Enheds-fixed effects**
+
+- I opgave 8.4 bliver vi igen bedt om at estimere $\beta_1$
+
+- Men denne gang udnytter vi panelstrukturen og den tidslige variation (*t*-fodtegn) og tilføjer enheds-fixed effects, $\alpha_i$
+
+--
+
+$cutdifftherm_{it} = \alpha_{i} + \beta_1 ChinaThreat_{it} + \beta_3 Indkomst_{it} + \beta_4 Ledig_{it} + \beta_5 Økonomi_{it} \\ + \beta_6 Parti\_Independent_{it} + \beta_7 Parti\_Democrat_{it} + \epsilon_{it}$  
+
+--
+
+- Konsekvens: Nu udtrykker $\beta_1$, **hvor meget Y ændrer sig, når X vokser med +1 _indenfor personer_**
+
+---
+
+# Øvelsesopgave 8.4
+
+**Enheds-fixed effects**
 
 .pull-left[
-X: China self/China Threat I hvilken grad respondenten opfatter Kina som en trussel mod USA (skalaen går fra 1 til 7, hvor 1 er ‘trussel’ og 7 er ‘mulighed’)
 
-Y: Cutdifftherm Positive følelser over for Donald Trump fratrukket positive følelser over for Hillary Clinton. (des højere værdier, des mere positiv holdning til Trump).
+**Hvordan adskiller resultaterne sig fra tværsnitsanalysen?** 
 
-- Hvordan ser det ud ift. vores OLS model på tværsnitsdata?
+Hænger *chinaself* sammen med støtte til Trump?
 
-- Hvad er der sket med $R^2$?
 ]
 
 .pull-right[
@@ -529,14 +678,16 @@ include_graphics("media/panel4.png")
 
 ---
 
-# Øvelsesopgave 12.4
+# Øvelsesopgave 8.4
+
+**Enheds-fixed effects**
 
 .pull-left[
-Koefficienten på Chinaself er -.09, og betyder at for en positiv enhedsændring hos en respondent mellem surveybølge 1 og 2 reduceres støtten til Trump med ca. 0.09 - men ændringen er altså ikke signifikant.
 
-Forskellen mellem resultaterne i hhv. tværsnitsmodellen og panelmodellen peger på, at selvom folk der opfatter Kina som en trussel bedre kan lide Trump (tværsnit), er det ikke sådan at ændringer i denne opfattelse af Kina hænger sammen med ændringer i støtte til Trump (paneldata).
+Koefficienten for chinaself er -0.09 (forventet retning), men sammenhængen er **ikke signifikant** (p=0.184)
 
-Peger på at tidsinvariant uobserveret heterogenitet, dvs. permanente forskelle mellem individer, som panelmodellen tager højde for, kan forklare den sammenhæng vi observerede i tværsnitsmodellen.
+Selvom folk der opfatter Kina som en trussel bedre kan lide Trump, **jf. tværsnitsanalyse**, betyder det ikke, at *ændringer i opfattelsen af Kina* hænger sammen med - eller forårsager - *ændringer i støtte til Trump*, **jf. paneldata-analyse**
+
 ]
 
 .pull-right[
@@ -547,46 +698,34 @@ include_graphics("media/panel4.png")
 
 ---
 
-# Øvelsesopgave 12.4
+# Øvelsesopgave 8.4
 
-**Lige en krølle mere på fortolkningen:**
+**En krølle på fortolkningen**
 
-Der er forskel på *at være* et demokrati og *at blive* et demokrati’
+- Der er forskel på *at være* et demokrati og *at blive* et demokrati - eller at være/blive Trump-tilhænger
 
-- På samme måde kan man her sige at ‘der er forskel på at være Trump-støtte og at blive Trump-støtte’.
+- Tværsnitsanalysen og panelanalysen besvarer derfor reelt forskellige spørgsmål
 
-- Det illustrerer at tværsnitsanalysen og panelanalysen besvarer forskellige spørgsmål.
+--
 
-Forestil jer for eksempel at borgere i områder, hvor mange arbejdspladser gennem 00’erne er blevet outsourcet til Kina, betragter Kina som en trussel og elsker Trump. Tværsnitsanalysen viser os netop, at der er en stærk sammenhæng mellem de to. Der er ikke et kausalt forhold, for de er begge to konsekvenser af noget bagvedliggende (outsourcing).
+- Forestil jer for eksempel at borgere i områder, hvor mange arbejdspladser gennem 00’erne er blevet outsourcet til Kina, betragter Kina som en trussel og elsker Trump. Tværsnitsanalysen viser os netop, at der er en stærk sammenhæng mellem de to. Der er ikke et kausalt forhold, for de er begge to konsekvenser af noget bagvedliggende (fx outsourcing)
 
-Netop dét kan vi lære af panelmodellen, som viser at ændringer i X ikke hænger sammen med ændringer i Y. Dermed bør vi være skeptiske over for, om der er en kausal sammenhæng mellem de to, og vi er jo ofte interesserede i kausalitet. Men resultatet fra tværsnitsanalysen er jo stadig interessant, også selvom det er misvisende ift. en kausal fortolkning.
-
----
-
-# Øvelsesopgave 12.4
-
-.pull-left[
-$R^2$ viser, at respondenterne ligner sig selv over tid og er forskellige fra hinanden generelt: Der er 67% ved within og $R^2$ between er omkring 5% udtrykker tids-fixed effects. Dette opsummerer meget godt, hvor meget forklaringskraft som modellen har squeezed ud af fejlledet. (husk at et højt $R^2$ ikke er et mål i sig selv, når vi laver statistiske analyser).
-
-Som sagt før, eksisterer der ikke en konstant i FE-modellen. I Stata-outputtet udtrykker cons den gennemsnitlige værdi for fixed effects (læs mere her).
-]
-
-.pull-right[
-```{r}
-include_graphics("media/panel4.png")
-```
-]
+- Panelmodellen viser imidlertid, at ændringer i X ikke hænger sammen med ændringer i Y. Men resultatet fra tværsnitsanalysen er stadig interessant, også selvom det er misvisende ift. en kausal fortolkning
 
 ---
 
-# Øvelsesopgave 12.4: Yderligere kontrol
+# Øvelsesopgave 8.4
 
-$cuttdifftherm_{it} = \alpha_i + \beta_1 ChinaThreat_{it} + \beta_2 Parti_{it} + \beta_3 Indkomst_{it}\\+ \beta_4 Ledighed_{it} + \beta_5 Økonomi_{it} + \beta_6 Handel_{it} + \beta_7 ProInd_{it} + \epsilon_{it}$
+**Enheds-fixed effects med yderligere kontrolvariable**
 
 .pull-left[
-Hvad er der sket med koefficienten for *chinaself*?
 
-Nu er den blevet endnu mindre signifikant.
+Vi tilføjer **to kontrolvariable** mere (*tradeper* og *proimmself*)
+
+Se på koefficienten for **chinaself** igen
+
+Nu er den blevet endnu mindre signifikant (p=0.776)
+
 ]
 
 .pull-right[
@@ -597,47 +736,20 @@ include_graphics("media/panel5.png")
 
 ---
 
-# Øvelsesopgave 12.4: Tilføjelse af tids-fixed effects
+# Øvelsesopgave 8.4
 
-Lad os tilføje tids-fixed effects, $\gamma_t$:
-
-$cuttdifftherm_{it} = \alpha_i + \gamma_t + \beta_1 ChinaThreat_{it} + \beta_2 Parti_{it} + \beta_3 Indkomst_{it}\\+ \beta_4 Ledighed_{it} + \beta_5 Økonomi_{it} + \beta_6 Handel_{it} + \beta_7 ProInd_{it} + \epsilon_{it}$
-
-Når vi tilføjer fixed effects for tid, estimeres en model med det, som kaldes two-way fixed-effects.
-
-Denne model kaldes også difference-in-differences (DID)-estimatoren.
-
-Her udtrykker koefficienten: Hvor meget mere ændrer y sig over tid for personer med x+1 sammenlignet med personer med x? M.a.o.: Hvor meget ændres tidstrenden i y, når x øges med 1?
-
----
-
-# Øvelsesopgave 12.4
+**Two-way fixed effects**
 
 .pull-left[
-Fra forrige slide: Her udtrykker koefficienten: Hvor meget mere ændrer y sig over tid for personer med x+1 sammenlignet med personer med x? M.a.o.: Hvor meget ændres tidstrenden i y, når x øges med 1?
 
-- Hvad udtrykker $\beta_1$ her? Er der ændringer i tidstrenden?
+**Vi tilføjer tids-fixed effects** ("i.wave") dvs. en dummy for hver periode (her reelt kun én dummy)
 
-- Hvad fortæller estimatet ved *i.wave* os?
+Dermed estimeres en model med **two-way fixed-effects** (kaldes også *difference-in-differences-estimatoren*)
 
-- Er modellen substantielt forskellig fra den forudgående, som kun havde enheds-fixed effects?
-]
+Her udtrykker koefficienten: Hvor meget *mere* ændrer Y sig over tid for personer med X+1 sammenlignet med personer med X? Eller **hvor meget ændres tidstrenden for Y, når X øges med +1**?
 
-.pull-right[
-```{r}
-include_graphics("media/panel6.png")
-```
-]
----
+**Er tidstrenden gennemsnitligt set forskellig** for individer, der ser Kina som en mulighed vs. som en trussel? (Se på _chinaself_ igen)
 
-# Øvelsesopgave 12.4
-
-.pull-left[
-$\beta_1$ er -.025 og insignifikant, hvorfor ingen gennemsnitlig ændring i y’s tidstrend, når x ændres med 1?
-
-Koefficienten for 1.wave er til gengæld signifikant negativ: Det vil sige, at folk i gennemsnit bliver mere negative overfor Trump mellem 2012 og 2016 (reference er wave==0). Det giver god mening, for Trump var ikke kandidat i 2012, og ikke-politiske figurer er tit mere populære.
-
-Modellen er stort set ens med den forudgående.
 ]
 
 .pull-right[
@@ -648,105 +760,64 @@ include_graphics("media/panel6.png")
 
 ---
 
-# Antagelser
+# Øvelsesopgave 8.4
 
-Lad os lige vende antagelserne.
+**Two-way fixed effects**
 
-Samme antagelser som OLS. Når I vil teste dem så skal I bruge *reg*-kommandoen med *absorb*-tilføjelsen for tid og enheder. Derefter kan I lave jeres sædvanelige tests fra metode 2:
+.pull-left[
 
-- (Fravær af bias)
+Nej! Nu er $\beta_1$ (-0.24) endnu mindre signifikant (p=0.74)
 
-- TIlfældig stikprøve
+Hvad fortæller estimatet for **wave** os?
 
-- Normalfordelte fejlled
+Folk bliver gennemsnitligt set mere negative overfor Trump fra 2012 til 2016
 
-- Homoskedasticitet
+]
 
-- Fravær af stærk multikollinearitet
-
-- Linearitet
-
-- Fravær af meget indflydelsesrige observationer
-
-Og en ekstra:
-
-- Uafhængige observationer/fravær af autokorrelation: En enheds fejlled må ikke korrelere over tid.
-
-- Løsning: Klyngerobuste standardfejl (clustered standard errors). Anvend disse som udgangspunkt
-
-- Tilføjes med *cluster(id-variabel)*
+.pull-right[
+```{r}
+include_graphics("media/panel6.png")
+```
+]
 
 ---
 
 # Klyngerobuste standardfejl
 
-Standardfejl: *Præcisionen* at et estimat (en effekt)
-
-Normale standardfejl antager at alle observationer er uafhængige af hinanden.
-
-På metode 2 lærte I, at vi kan tilføje White’s robuste standardfejl for at korrigere for heteroskedasticitet.
-
-Når vi observerer den samme observation flere gange, vil der være en udfordring med autokorrelation: En enheds fejlled vil være korreleret over tid. Konsekvensen er, at normale standardfejl vil underestimere usikkerheden.
-
-**Klyngerobuste standardfejl er løsningen**:
-
-- Når I tilføjer klyngerobuste standardfejl på enhedsniveau (i vores tilfælde personer) så tager vi højde for, at observationerne ikke er uafhængige inden for personer - det er jo den samme person. Derfor holder vores antagelse om uafhængige observationer ikke.
-
-- Dette betyder, at normale standardfejl vil overvurdere, hvor meget selvstændig variation, der er i data.
-
-- Derved blivr vores standardfejl for små, og altså vores usikkerhed undervuderet. Ved at clustre vores standardfejl på individer (MNO), ordner vi dette problem.
-
-- Mao. kan man sige, at de klyngerobuste standardfejl tager højde for, at data rummer sammenklumpede observationer
-
----
-
-# Øvelsesopgave 12.4: Lad os tilføje klyngerobuste standardfejl
+- **Standardfejl** angiver *præcisionen* at et estimat (en effekt)
 
 --
 
-.pull-left[
-Vi har tilføjet klyngerobuste standardfejl på individniveau vha. optionen vce(cluster MNO).
+- Normale standardfejl antager at alle observationer er uafhængige af hinanden
 
-- Hvad er der sket med størrelserne på vores estimater?
+--
 
-- Hvad er der sket med vores standardfejl?
-]
+- Når vi observerer den samme observation flere gange, vil der ofte være udfordringer med **autokorrelation**, dvs. at samme enheds fejlled er korreleret over tid 
+    - **normale standardfejl undervurderer derfor usikkerheden**
 
-.pull-right[
-```{r}
-include_graphics("media/panel7.png")
-```
-]
+--
 
----
+- En mulig løsning: **Klyngerobuste standardfejl** på enhedsniveau
+    - det får Stata til at tage højde for, at observationerne ikke er uafhængige, men at der er flere per person - at data indeholder sammenklumpede (clustered) observationer
+    - ofte en god idé - i det mindste som supplement
 
-# Øvelsesopgave 12.4: Lad os tilføje klyngerobuste standardfejl
+--
 
-.pull-left[
-Vores estimater er uændrede. Hvorfor det? Fordi standardfejlen ikke vedrører vores estimaters størrelser, men alene vedrører usikkerheden ved disse estimater.
-
-Standardfejlen for vores primære forklarende variabel, *chinaself* er også næsten uændret. Dette indikerer, at variablen ikke er særlig konstant hos individer over tid altså at individer ikke var særlig tilbøjelige til at besvare spørgsmålet ens i begge bølger.
-
-Bemærk til gengæld hvordan variable, som er mere statiske, f.eks. parti og indkomst får lidt større standardfejl fordi modellen korrigerer for clustering.
-]
-
-.pull-right[
-```{r}
-include_graphics("media/panel7.png")
-```
-]
+- Tilføjes i Stata med optionen **cluster(enhedsvariabel)**, dvs. ", cluster(MNO)" 
 
 ---
 
-# Sammenligning
+# Finale: Sammenligning af tre modeller
+
+*Beta-koefficienter* og *p-værdier* fra tre modeller med alle kontrolvariable samt (1) **enheds-fixed effects**, (2) **two-way fixed effects** og (3) **two-way fixed effects med klyngerobuste standardfejl** på enhedsniveau
 
 .pull-left[
 
-- Hvor stor en forskel tids-fixed effects og klyngerobuste standardfejl gør, afhænger af den konkrete undersøgte sammenhæng og de konkrete data (det samme gælder i øvrigt også enheds-fixed effects og kontrolvariable)
+Hvor stor en forskel tids-fixed effects og klyngerobuste standardfejl gør, **afhænger af den konkrete undersøgelse**
 
-- Her gør det næsten ingen forskel. Det er en god ting &rarr; indikerer at sammenhængen er robust over for disse udvidede modeller
+**Her gør det praktisk talt ingen forskel**, hvilket i og for sig er en god ting &rarr; indikerer at sammenhængen er **robust**
 
-- 
+Bemærk at **klyngerobuste standardfejl** ikke ændrer ved estimaterne, men kun ved usikkerheden (standardfejl og p-værdier) 
 
 ]
 
@@ -756,64 +827,100 @@ include_graphics("media/panel8.png")
 ```
 ]
 
+???
+
+Tabellen er lavet med "estimates store modelnavn" efter kørslen af hver model og så:
+
+> estimates table [modelnavne], b(%7.3f) p(%7.3f) title("titel") varwidth(16) modelwidth(16) vsquish 
+
 ---
 
+# Opsummering - en samlet fremgangsmåde
 
+1. **Indsaml/find paneldata** (enheder observeret i flere perioder) - skal være i **langt format**
 
-# En samlet fremgangsmåde
+2. Fortæl Stata, at data er **paneldata**: "xtset enhedsvariabel tidsvariabel"
+    
+3. **Kør jeres regressionsanalyser**: "xtreg Y X Z1 Z2 Z3, fe"
+    
+4. Undersøg og demonstrér **robusthed** af resultater overfor forskellige specifikationer, herunder kontrol for *tidsvarierende* faktorer (vha. **tids-fixed effects**) og **klyngerobuste standardfejl**
 
-1. Indsaml data med enheder, der er observeret i flere perioder, dvs. **paneldata** (skal være i **langt format**)
-
-2. Fortæl Stata, at data er paneldata
-    - xtset enhedsvariabel tidsvariabel
-
-3. Kør jeres regressionsanalyser
-    - xtreg Y X Z1 Z2 Z3, fe
-
-4. Undersøg og demonstrér robusthed af resultater overfor forskellige specifikationer, herunder kontrol for *tidsvarierende* faktorer (vha. tids-fixed effects) og klyngerobuste standardfejl på enhedsniveau
     - xtreg Y X Z1 Z2 Z3 i.tidsvariabel, fe
+    
     - xtreg Y X Z1 Z2 Z3 i.tidsvariabel, fe cluster(enhedsvariabel)
+    
+5. Test **forudsætninger** som normalt med OLS baseret på genkørsel af model(ler)
 
-5. Test forudsætninger som normalt baseret på genkørsel med 
     - reg Y X Z1 Z2 Z3 i.tidsvariabel, absorb(i.enhedsvariabel)
+    
+    - samme antagelser som OLS plus **ingen autokorrelation**
+
+---
+
+# Ulemper ved paneldata
+
+1. Panel data med fixed effects-estimation løser mange af udfordringerne med **omitted variable bias (OVB)** og endogenitet, **men ikke alle**: 
+
+--
+
+    - med **two-way-fixed effects** kan vi eliminere OVB fra tidsinvariante variable og enhedsinvariante variable, men **ideosynkratisk OVB** (fra tids- og enhedsvariante faktorer) **skal stadig håndteres med alm. kontrol**, før vi kan kalde et estimat for en kausaleffekt
+    
+--
+
+    - vi kan ikke afhjælpe **omvendt kausalitet** med paneldata &rarr; (også) her må vi argumentere teoretisk
+  
+--
+
+    - (begge elimineres, hvis den uafhængige variabel tildeles tilfældigt &rarr; hint til eksperimenter i næste uge)
+    
+--
+
+2. Det kræver langt flere **ressourcer** og mere **tid** at indsamle paneldata end tværsnitsdata. Derfor er paneldata sværere at indsamle selv, mindre udbredt og **mindre tilgængeligt**
 
 ---
 
 # Higher-order fixed effects
 
-En sidenote, som kan være nice to know, og evt. anvendes ifm. bachelorprojekt:
+En nice-to-know sidenote (evt. relevant i bachelorprojekt)
 
-- I dag har vi kun berørt enheds-fixed effects i paneldataanalyse
+- Vi har kun berørt *enheds*-fixed effects
 
-- Man kan også tilføje rumlige fixed-effects på et højere niveau end enheds-niveauet
-    - også med tværsnitsdata (≠ paneldata)
+- Man kan også tilføje **rumlige fixed-effects på et højere niveau end enheds-niveauet** - også med tværsnitsdata (klar parallel til multilevel-analyse)
 
-- Hvis man f.eks. kigger på individer i forskellige lande, kan man tilføje fixed effects (og evt. klyngerobuste standardfejl) på lande-niveau
-
-- Klar parallel til multilevel-analyse
-
----
-
-# Ulemper ved paneldata(-analyse)
-
-Med panel data estimation med fixed effects løser mange af udfordringerne ved OVB: Men kun for de konstante (tidsinvariante) variable. Deraf navnet fixed effects. Træerne vokser altså ikke ind i den kausal-inferentielle himmel.
-
-Der er fortsat potentielle kilder til bias:
-
-- Udeladte variable som ikke er konstante på tværs af enheder eller tid.
-
-- Omvendt kausalitet - det kan ikke modelleres væk
-
-Tager meget længere tid at indsamle og er derfor lidt mindre udbredt og tilgængeligt
+- Eksempel: Hvis man undersøger en sammenhæng for **individer i forskellige lande**, kan man fx tilføje fixed effects (og klyngerobuste standardfejl) på lande-niveau og dermed håndtere alt det, der gør folk forskellige på tværs af lande
 
 ---
 
 # Dagens pointer
 
+- Paneldataanalyse handler først og fremmest om at kontrollere for en masse (observerede eller uobserverede) ting med et snuptag
+
+- Naturlige eksperimenter (IV, RD, mv.) giver os et passende sammenligningsgrundlag til at identificere kausale effekter
+
+- Observationelle tværsnitsanalyser (fx OLS) kan kun stræbe efter dette ved at kontrollere for alle faktorer, der påvirker X og Y &rarr; aldrig helt sikkert
+
+- **Paneldata** har den store fordel, at man kan udnytte kombinationen af rumlig og tidslig variation til at lave (two-way) fixed effects-modeller, der **eliminerer nogle typer omitted variable bias**
+    - herefter kun problemer med faktorer, der varierer mellem enheder *og* over tid
+    - klar forbedring fra OLS men ikke på niveau med naturlige eksperimenter
+
+- Fixed effects-modeller tilføjer dummyvariable for enheder og tid for at finde effekten af X på Y *inden for enhederne* (over tid) eller *difference-in-differences*
+    - husk desuden på forskellen mellem "effekten" af *at blive et demokrati* vs. *at være et demokrati*
+
 ---
 
 # Næste gang
 
+- Sidste holdtime <span style='font-size:30px;'>&#128553;</span>
+
+- Kausal inferens III: Eksperimentelle designs
+
+    - "Guldstandarden" inden for kausal inferens
+
+    - Vigtigt at få en fornemmelse for &rarr; idealet for de fleste tilgange til kausal inferens
+
+- Første vejledning (husk at tilmelde jer) 
+
 ---
+class: title-slide, center, middle
 
 # Tak for i dag!
