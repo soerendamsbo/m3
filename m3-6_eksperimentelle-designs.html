@@ -142,10 +142,10 @@ class: center, middle, inverse, title-slide
 
 # Vejledning
 
-- De første har haft deres første vejledning &amp;rarr; datoer: 16/4, 19/4, 23/4
+- Husk første vejledning på Zoom 16/4, 19/4 og 23/4
 
-- Husk at tilmelde jer i Google Sheets &amp;rarr; [http://kortlink.dk/2b3zy](https://docs.google.com/spreadsheets/d/1E81aUlid_0q6mMuxVZyLYhfcqZhQybu1pwlxlALtQn4/edit)
-    - de fleste har gjort det &amp;rarr; skriv til mig, hvis der ikke er flere tider
+- Tilmeld jer i Google Sheets &amp;rarr; [http://kortlink.dk/2b3zy](https://docs.google.com/spreadsheets/d/1E81aUlid_0q6mMuxVZyLYhfcqZhQybu1pwlxlALtQn4/edit)
+    - de fleste har allerede gjort det &amp;rarr; skriv til mig, hvis der ikke er flere tider
 
 - Anden vejledning &amp;rarr; samme format omkring uge 20 
 
@@ -157,7 +157,7 @@ class: center, middle, inverse, title-slide
 
 --
 
-- **Paneldata** er en datatype med gentagne observationer af mange enheder (fx survey to gange med samme respondenter)
+- **Paneldata** er en smart datatype med *gentagne observationer af mange enheder* (fx survey to gange med samme respondenter)
 
 --
 
@@ -197,7 +197,7 @@ class: center, middle, inverse, title-slide
 
 - At vide mere om nogle af de **faldgruber** (antagelser), man skal være opmærksom på, når man designer eksperimenter
 
-- At kunne analysere og fortolke resultaterne af et eksperiment (nemt)
+- At kunne analysere og fortolke resultaterne af et eksperiment
 
 ---
 
@@ -205,17 +205,17 @@ class: center, middle, inverse, title-slide
 
 Gerber, A. S., &amp; Green, D. P. (2012). Field experiments: Design, analysis, and interpretation. WW Norton.
 
-- Kapitel 1: Introduktion
+- Kapitel 1: Introduction
 
-- Kapitel 2: Kausal inferens og eksperimentering
+- Kapitel 2: Causal Inference and Experimentation
 
-Grundsten i moderne eksperimentel politologi og socialvidenskab (eksperiment- og kausal inferens-interesserede kan med fordel læse lidt videre)
+&amp;rarr; Grundsten i moderne eksperimentel politologi og socialvidenskab (eksperiment- og kausal inferens-interesserede kan med fordel læse lidt videre)
 
 ---
 
 # Hvad er et eksperiment*?
 
-*aka _randomized controlled trials_ (RCTs)
+*aka _randomized controlled trial_ (RCT)
 
 --
 
@@ -227,7 +227,7 @@ Grundsten i moderne eksperimentel politologi og socialvidenskab (eksperiment- og
 
     - Efter tildelingen af treatment måles et outcome (Y) i begge grupper
 
-    - Pga. randomiseringen er grupperne statistisk set. Treatment er den eneste forskel. **Derfor kan effekten af treatment estimeres som forskellen i de to gruppers outcome**
+    - Pga. randomiseringen er grupperne statistisk set ens og treatment er den eneste forskel. **Derfor kan effekten af treatment estimeres som forskellen i de to gruppers outcome**
     
     - Vi kan mao. helt eliminere endogenitetsbias &amp;rarr; stærk evidens for kausalitet
 
@@ -263,7 +263,7 @@ Som Gerber &amp; Green påpeger fordrer alle eksperimenttyper, at treatment tild
 
 ---
 
-# Et godt eksempel
+# Et eksempel på et politologisk eksperiment
 
 .pull-left[
 
@@ -297,7 +297,7 @@ Bailenson, JN, Iyengar, S., Yee, N., &amp; Collins, N. (2009). Facial similarity
 
 --
 
-- Potential outcomes er en måde at formalisere den kausale logik (hvad det reelt betyder, at X har en effekt på Y) 
+- Potential outcomes er en måde at formalisere den kausale logik
 
 --
 
@@ -308,7 +308,7 @@ Bailenson, JN, Iyengar, S., Yee, N., &amp; Collins, N. (2009). Facial similarity
 
 --
 
-- Hvert subjekt `\(i\)` har to potentielle udfald på outcome (den afhængige variabel) `\(Y_i\)`:
+- Hvert subjekt `\(i\)` har **to potentielle udfald af outcome** `\(Y_i\)`:
 
     - subjekt `\(i\)` viser sit treatede potential outcome `\(Y_i(1)\)`, hvis vi tildeler det et treatment, `\(D_i = 1\)`
 
@@ -380,7 +380,7 @@ Hvert subjekt har i teorien sin egen **treatmenteffekt** defineret ved:
 
 - Mere præcist betyder det, at der er lige stor sandsynlighed for at blive &quot;udtrukket&quot; til treatment for kvinder, mænd, unge, gamle, rige, fattige, høje, lave, hvide, sorte, universitetsuddannede, faglærte etc. etc. 
     - gælder alle observerbare såvel som uobserverbare karakteristika
-    - mao. er grupperne i forventningen ens &amp;rarr; statistisk set ens 
+    - betyder at grupperne i forventningen er ens &amp;rarr; *statistisk set* ens 
 
 --
 
@@ -389,7 +389,7 @@ Hvert subjekt har i teorien sin egen **treatmenteffekt** defineret ved:
 
 --
 
-- I økonometri-lingo er den **uafhængige variabel (*X*) uafhængig af fejlledet**, `\(\epsilon_i\)`. Mao. varierer `\(\epsilon_i\)` blot tilfældigt ift. `\(X_i\)` i modellen `\(Y_i = \alpha + \beta_1 X_i + \epsilon_i\)`
+- I økonometri-lingo er den **uafhængige variabel (*X*) uafhængig af fejlledet**, `\(\epsilon_i\)`. Mao. varierer `\(\epsilon_i\)` kun rent tilfældigt ift. `\(X_i\)` i modellen `\(Y_i = \alpha + \beta_1 X_i + \epsilon_i\)`
     - det betyder, at den uafhængige variabel per design er **eksogen** &amp;rarr; vi har elimineret **endogenitetsbias**
 
 ---
@@ -455,14 +455,14 @@ Vi antager en 20/80-fordeling af treatment- og kontrolgruppen:
 
 --
 
-- At vi kontrollerer for samtlige potentielt relevante variable:  
+- **At vi kontrollerer for samtlige potentielt relevante variable**
     - at alle relevante variable er observer*bare*
-    - at vi *faktisk* har observeret (målt) dem (vi har data)
+    - at vi faktisk *har* observeret (målt) dem &amp;rarr; vi har data
     - at der ikke findes yderligere relevante variable, som vi pt. ikke engang har fantasi til at forestille os 
 
 --
 
-- Meget stærk antagelse &amp;rarr; og vi kan aldrig være sikre! 
+- Meget **stærk antagelse** &amp;rarr; og vi kan aldrig være sikre! 
 
 --
 
@@ -485,25 +485,25 @@ _*nødvendige antagelser for at et eksperiment estimerer gennemsnitseffekten (AT
 
 # Antagelse 2: Ekskluderbarhed
 
-__Antagelse: Treatmenttildelingen påvirker kun Y gennem selve treatmentet__
+**Treatmenttildelingen påvirker kun Y gennem selve treatment**
 
 --
 
-- Truet når, der opstår forskelle mellem treatment- og kontrolgruppen, **udover selve treatment**, som kan påvirke outcome, fx hvis:
-    - treatment er &quot;bundled&quot;, dvs. indeholder flere X’er. F.eks. at få et brev, som opfordrer en til at stemme. Her modtager treatmentgruppen både et brev og informationen i brevet
-    - subjekter er bevidste om deres treatmentstatus og kan handle på den
-    - outcome måles forskelligt i de to grupper
+- Truet når der opstår forskelle mellem treatment- og kontrolgruppen, **udover selve treatment**, som kan påvirke outcome, fx hvis:
+    - **treatment er &quot;bundled&quot;**, dvs. indeholder flere X’er. F.eks. at få et brev, som opfordrer en til at stemme. Her modtager treatmentgruppen både et brev og informationen i brevet
+    - **subjekter er bevidste** om deres treatmentstatus og kan handle på den
+    - **outcome måles forskelligt** i de to grupper
 
 --
 
 - Antagelsen om ekskluderbarhed er grunden til, at vi eksempelvis:
-    - sørger for at subjekter og forskere ikke kender treatmentstatus &amp;rarr; (double) blinding
-    - tildeler kontrolgruppen et placebo (fx kalktabletter eller en &quot;neutral&quot; besked)
-    - generelt undersøger alle subjekter under nogenlunde samme betingelser (fx tidspunkt, vejr)
+    - sørger for at subjekter og forskere ikke kender treatmentstatus &amp;rarr; (double) **blinding**
+    - tildeler kontrolgruppen et **placebo** (fx kalktabletter eller en &quot;neutral&quot; besked)
+    - generelt undersøger alle subjekter under nogenlunde **samme betingelser** (fx tidspunkt, vejr)
 
 --
 
-- Vi kan visualisere problemet i en kausalmodel...
+- Vi kan **visualisere** problemet i en kausalmodel...
 
 ???
 
@@ -513,23 +513,23 @@ Brud på eksluderbarhedsantagelsen betyder ikke nødvendigvis, at det vi finder 
 
 # Antagelse 3: Non-interferens
 
-**Antagelse: Ingen subjekter må påvirkes af _andre subjekters_ treatmentstatus - ingen spill-over mellem subjekter**
+**Ingen subjekter påvirkes af andre subjekters treatmentstatus (ingen spill-over mellem subjekter)**
 
 --
 
 - Truet når der er spill-over mellem subjekter, fx hvis:
 
-    - Subjekter kender andre subjekters treatmentstatus
+    - Subjekter kender andre subjekters **treatmentstatus**
     
     - Treatment kan &quot;smitte&quot; fra treatede til untreatede (og subjekterne er tidsligt og rumligt i nærheden af hinanden)
 
 --
 
-- Endnu en grund til blinding (og evt. at adskille subjekter i rum/tid)
+- Endnu en god grund til **blinding** (og evt. at adskille subjekter i rum/tid)
 
 --
 
-- Også dette kan vi visualisere i en kausalmodel...
+- Også dette kan vi **visualisere** i en kausalmodel...
 
 ---
 
@@ -539,15 +539,15 @@ Brud på eksluderbarhedsantagelsen betyder ikke nødvendigvis, at det vi finder 
 
 --
 
-- Den unbiased **effekt** af et treatment estimeres simpelthen som forskellen i gennemsnittet af outcome mellem treatment- og kontrolgruppen (*difference-in-means*)
+- **Effekten** af et treatment estimeres simpelthen som **forskellen i gennemsnittet af outcome mellem treatment- og kontrolgruppen** (*difference-in-means*)
 
 --
 
-- Men vi vil også gerne vide noget om præcisionen eller usikkerheden i estimatet
+- Men vi vil også gerne vide noget om **præcisionen eller usikkerheden** i estimatet
 
 --
 
-- Vi kunne for eksempel lave en **t-test** (&quot;ttest outcome, by(treatmentgruppe)&quot;), men et langt mere fleksibelt værktøj er ... &amp;#129345;
+    - Vi kunne for eksempel lave en **t-test** (&quot;ttest outcome, by(treatmentgruppe)&quot;), men et langt mere fleksibelt værktøj er ... &amp;#129345;
 
 --
 
@@ -572,15 +572,15 @@ class: title-slide, center, middle
 
 **Dansk surveyeksperiment af holdning til invandring/multikulturalisme som funktion af priming af (anti-)racisme og politisk korrekthed**
 
-Stimuli (_splitku5_) er tre tilfældigt tildelte vignetter:
+**Stimuli** (_splitku5_) er tre tilfældigt tildelte vignetter:
 
-&gt; Vignette 1 [**kontrolgruppen**]: &quot;Danmark bliver i disse år et mere etnisk og religiøst mangfoldigt samfund. Der er delte meninger om, hvorvidt det udgør et problem eller en mulighed&quot;
+&gt; **Vignette 1** [*kontrolgruppen*]: &quot;Danmark bliver i disse år et mere etnisk og religiøst mangfoldigt samfund. Der er delte meninger om, hvorvidt det udgør et problem eller en mulighed&quot;
 
-&gt; Vignette 2 [**treatment 1**]: &quot;Danmark bliver i disse år et mere etnisk og religiøst mangfoldigt samfund. Der er delte meninger om, hvorvidt det udgør et problem eller en mulighed. __Nogle siger, at der er ”politisk korrekt” at kalde mangfoldighed en mulighed__&quot;
+&gt; **Vignette 2** [*treatment 1*]: &quot;Danmark bliver i disse år et mere etnisk og religiøst mangfoldigt samfund. Der er delte meninger om, hvorvidt det udgør et problem eller en mulighed. __Nogle siger, at der er ”politisk korrekt” at kalde mangfoldighed en mulighed__&quot;
 
-&gt; Vignette 3 [**treatment 2**]: &quot;Danmark bliver i disse år et mere etnisk og religiøst mangfoldigt samfund. Der er delte meninger om, hvorvidt det udgør et problem eller en mulighed. __Nogle siger, at det er racistisk at kalde mangfoldighed et problem__&quot;
+&gt; **Vignette 3** [*treatment 2*]: &quot;Danmark bliver i disse år et mere etnisk og religiøst mangfoldigt samfund. Der er delte meninger om, hvorvidt det udgør et problem eller en mulighed. __Nogle siger, at det er racistisk at kalde mangfoldighed et problem__&quot;
 
-Outcome (*ku5*) er holdning til mangfoldighed:
+**Outcome** (*ku5*) er holdning til mangfoldighed:
 
 - &quot;Hvad med dig? Betragter du mangfoldighed mest som **et problem eller mest som en mulighed**?&quot; [1-5]
 
@@ -609,19 +609,27 @@ Jeg har tilføjet lidt flere spørgsmål til **øvelsesopgave 9.1 og 9.2** (tre 
 3. Hvad er idéen med at give kontrolgruppen &quot;neutral&quot; information frem for blot at undlade at give dem en vignette?
     - tænk på antagelsen om ekskluderbarhed (at randomiseringen *kun* virker gennem treatment) 
 
+???
+
+&gt; **Vignette 1** [*kontrolgruppen*]: &quot;Danmark bliver i disse år et mere etnisk og religiøst mangfoldigt samfund. Der er delte meninger om, hvorvidt det udgør et problem eller en mulighed&quot;
+
+&gt; **Vignette 2** [*treatment 1*]: &quot;Danmark bliver i disse år et mere etnisk og religiøst mangfoldigt samfund. Der er delte meninger om, hvorvidt det udgør et problem eller en mulighed. __Nogle siger, at der er ”politisk korrekt” at kalde mangfoldighed en mulighed__&quot;
+
+&gt; **Vignette 3** [*treatment 2*]: &quot;Danmark bliver i disse år et mere etnisk og religiøst mangfoldigt samfund. Der er delte meninger om, hvorvidt det udgør et problem eller en mulighed. __Nogle siger, at det er racistisk at kalde mangfoldighed et problem__&quot;
+
 ---
 
 # Øvelsesopgave 9.2: Randomisering og balancetest
 
 1. Det er ikke muligt at undersøge statistisk, om randomiseringen - grundstenen i et eksperiment - er *lykkedes*. Hvorfor?
 
-2. Men vi kan lave en **balancetest**, der viser, om grupperne empirisk set er ens (balancerede) på en række baggrundsvariable, fx køn (*gender*), alder (*age*), uddannelse (*profile_education*) og pre-treatment holdning (*ku1*)
+2. Men vi kan lave en **balancetest**, dvs. en statistisk test af, om grupperne empirisk set er nogenlunde ens (balancerede) på en række baggrundsvariable, fx køn (*gender*), alder (*age*), uddannelse (*profile_education*) og pre-treatment holdning (*ku1*)
 
-3. Hvis vi lavede en **regression af treatment på de fire baggrundsvariable** (obs! treatment er Y), og vi fandt en **statistisk signifikant sammenhæng mellem alder og treatment**, 
+3. Hvis vi lavede en **regression af treatment på de fire baggrundsvariable** (obs.: her er treatment den *afhængige* variabel), og vi fandt en **statistisk signifikant sammenhæng mellem alder og treatment**, 
 
-    a. *hvad ville dette så fortælle os* om sammensætningen af vores treatment- vs. kontrolgrupper?
+    a. hvad ville dette så fortælle os om sammensætningen af vores treatment- vs. kontrolgrupper?
     
-    b. ville vi kunne se, om randomiseringen var succesfuld? 
+    b. ville vi kunne vurdere, om randomiseringen var succesfuld? 
 
 ---
 
@@ -629,9 +637,9 @@ Jeg har tilføjet lidt flere spørgsmål til **øvelsesopgave 9.1 og 9.2** (tre 
 
 .pull-left[
 
-- Vi skal have fat i **difference-in-means** &amp;rarr; den estimerede effekt er simpelthen forskellen i gennemsnit mellem hver treatmentgruppe og kontrolgruppen
+- Effekten af hvert treatment er simpelthen **forskellen i gennemsnittene** mellem hver treatmentgruppe og kontrolgruppen (*difference-in-means*)
 
-- **Hvordan finder vi fx effekten af at blive treated med vignette 3?**
+- **Hvordan finder vi frem til effekten af at blive treated med vignette 2?**
 
 ]
 
@@ -663,6 +671,8 @@ Jeg har tilføjet lidt flere spørgsmål til **øvelsesopgave 9.1 og 9.2** (tre 
 
 **OLS**
 
+&gt; **reg ku5 i.splitku5**
+
 - Hvordan ser **estimaterne** ud ift. vores egne beregninger?
 
 - Er effekterne **statistisk signifikante**?
@@ -679,7 +689,7 @@ Jeg har tilføjet lidt flere spørgsmål til **øvelsesopgave 9.1 og 9.2** (tre 
 
 ***
 
-**En sidste pointe om kontrolvariable i eksperimenter.** Man kan godt medtage en eller flere **kontrolvariable** i sin regression, selvom det er et eksperiment uden OVB. Dette kan øge **præcisionen** af estimaterne (mindre standardfejl) uden at tilføre bias, især **hvis grupperne er ubalancerede** (uens trods den tilfældige fordeling). Man skal dog for det første **undgå at kontrollere for faktorer, der selv kan være påvirket af treatment** (&amp;rarr; *post-treatment bias*). For det andet skal man ikke bruge det til **p-hacking**. Ideelt set planlægger man på forhånd, hvilke kontrolvariable man evt. vil inddrage, og uanset hvad **fremlægger man også den &quot;rene&quot; analyse** uden kontrolvariable (*se eksempel i do-fil*)
+**En sidste pointe om kontrolvariable i eksperimenter.** Man kan godt medtage en eller flere **kontrolvariable** i sin regression, selvom det er et eksperiment. Dette kan øge **præcisionen** af estimaterne (mindre standardfejl) uden at tilføre (eller mindske) bias - især **hvis grupperne er ubalancerede** (uens trods den tilfældige fordeling). Man skal dog for det første **undgå at kontrollere for faktorer, der selv kan være påvirket af treatment** (&amp;rarr; *post-treatment bias*). For det andet skal man ikke bruge det til **p-hacking**. Ideelt set planlægger man på forhånd, hvilke kontrolvariable man evt. vil inddrage, og uanset hvad **fremlægger man også den &quot;rene&quot; analyse** uden kontrolvariable (*se eksempel i do-fil*)
 
 ---
 class: middle, inverse
@@ -699,35 +709,38 @@ class: middle, inverse
 - Andet
 
 ---
+class: inverse
 
 # Dagens pointer
 
-- Eksperimenter er med god grund guldstandarden for kausal inferens
+- Eksperimenter er med god grund guldstandarden inden for kausal inferens
 
 - Når vi bestemmer, hvem der får treatment, ud fra et tilfældighedsprincip, afskærer vi alle confounders fra at påvirke X og eliminerer dermed både **omitted variable bias** og **omvendt kausalitet**
 
 - Vi er derfor så sikre, man kan være, på, at **vi har isoleret kausaleffekten X &amp;rarr; Y** eller den gennemsnitlige `\(\tau_i\)` (Average Treatment Effect, ATE)
 
-- **Eksperimenter er designbaseret inferens** - en tilgang til kausal inferens, der er langt overlegen ift. modelbaseret inferens (kontrolvariabel-tankegangen) 
+- **Eksperimenter er designbaseret inferens** - en tilgang til kausal inferens, der er langt overlegen ift. modelbaseret inferens (kontrolvariabel-tankegangen). 
+    - der findes mange **typer af eksperimenter** med fordele og ulemper, men de deler alle den samme logik 
 
-- Tre vigtige **antagelser** for eksperimentet: (1) Tilfældig tildeling af treatment, (2) ekskluderbarhed, (3) non-interferens
+- **Tre vigtige antagelser** for eksperimentet: (1) Tilfældig tildeling af treatment, (2) ekskluderbarhed, (3) non-interferens
 
-- **Analysen** er nem &amp;rarr; typisk laver vi blot **OLS** med outcome som Y og treatmentgruppe (kategorisk) som X
+- **Analysen er nem** &amp;rarr; typisk laver vi blot **OLS** med outcome som Y og treatmentgruppe som (kategorisk) X
 
 ---
+class: middle, inverse
 
 # Næste gang
 
-- Nej &amp;#127774;
+- **Nej desværre** &lt;span style=&quot;font-size:50px;&quot;&gt;&amp;#127774;&lt;/p&gt;
 
-- Jeg skriver til jer på Absalon omkring **anden vejledning og spørgetime**
+- Jeg skriver til jer på **Absalon** omkring **anden vejledning og spørgetime**
 
 - God fornøjelse med resten af kurset og god arbejdslyst! 
 
 ---
 class: title-slide, center, middle
 
-# Tak for denne gang (ses til vejledning)
+# Tak for denne gang (ses til vejledning) &amp;#128155;
 
 &lt;iframe src=&quot;https://giphy.com/embed/UQaRUOLveyjNC&quot; width=&quot;480&quot; height=&quot;200&quot; frameBorder=&quot;0&quot; class=&quot;giphy-embed&quot; allowFullScreen&gt;&lt;/iframe&gt;
     </textarea>
