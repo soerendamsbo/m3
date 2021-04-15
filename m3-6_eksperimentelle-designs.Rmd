@@ -337,7 +337,7 @@ Vi antager en 20/80-fordeling af treatment- og kontrolgruppen:
 
 --
 
-- **Simpel randomisering** betyder blot, at der er 20 % sandsynlighed for at hvert subjekt placeres i kontrolgruppen, men reelt kan det (tilfældigvis) ende med at være 12, 17 eller 25   
+- **Simpel randomisering** betyder blot, at der er 20 % sandsynlighed for at hvert subjekt placeres i treatmentgruppen, men reelt kan det (tilfældigvis) ende med at være 12, 17 eller 25   
 
 --
 
@@ -623,7 +623,7 @@ class: inverse
 
 - Vi er derfor så sikre, man kan være, på, at **vi har isoleret kausaleffekten X &rarr; Y** eller den gennemsnitlige $\tau_i$ (Average Treatment Effect, ATE)
 
-- **Eksperimenter er designbaseret inferens** - en tilgang til kausal inferens, der er langt overlegen ift. modelbaseret inferens (kontrolvariabel-tankegangen). 
+- **Eksperimenter er designbaseret inferens** - en tilgang til kausal inferens, der er langt overlegen ift. modelbaseret inferens (kontrolvariabel-tankegangen) 
     - der findes mange **typer af eksperimenter** med fordele og ulemper, men de deler alle den samme logik 
 
 - **Tre vigtige antagelser** for eksperimentet: (1) Tilfældig tildeling af treatment, (2) ekskluderbarhed, (3) non-interferens
