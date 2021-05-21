@@ -2,7 +2,7 @@
 title: "Spørgetime"
 subtitle: |
   | Metode 3
-  | [.white[Link til slides: kortlink.dk/2bp5h]](https://soerendamsbo.github.io/m3/m3-6_eksperimentelle-designs.html)
+  | [.white[Link til slides: kortlink.dk/2bp5h]](https://soerendamsbo.github.io/m3/m3-99_sporgetime.html)
 author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
 institute: Institut for Statskundskab<br>Københavns Universitet
 date: "25. maj 2021"
