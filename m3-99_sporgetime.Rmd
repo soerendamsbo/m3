@@ -2,7 +2,7 @@
 title: "Spørgetime"
 subtitle: |
   | Metode 3
-  | [.white[Link til slides: kortlink.dk/2acdu]](https://soerendamsbo.github.io/m3/m3-6_eksperimentelle-designs.html)
+  | [.white[Link til slides: kortlink.dk/2bp5h]](https://soerendamsbo.github.io/m3/m3-6_eksperimentelle-designs.html)
 author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
 institute: Institut for Statskundskab<br>Københavns Universitet
 date: "25. maj 2021"
@@ -16,6 +16,7 @@ output:
       highlightLines: true
       countincrementalSlides: false
 ---
+class: middle
 
 ```{r, include=F}
 pacman::p_load(tidyverse, knitr, ggdag, lubridate, kableExtra, xaringanExtra)
@@ -30,7 +31,22 @@ Sys.setlocale(locale = "da_DK.UTF-8")
 xaringanExtra::use_tile_view()
 ```
 
-# Et par pointer og råd
+# Dagsorden
+
+
+*45 min. (plus-minus)*
+
+<br>
+
+1. Et par gode råd
+
+2. Spørgsmål fra Google Docs
+
+3. Evt. andre spørgsmål
+
+---
+
+# Et par gode råd
 
 --
 
@@ -62,5 +78,25 @@ class: inverse, center, middle
 
 Spørgsmål 1
 
+---
 
+# Evt. andre spørgsmål
 
+---
+class: title-slide
+
+.pull-left[
+
+<iframe src="https://giphy.com/embed/xUn3C8WqEzUEeQoRa0" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+<iframe src="https://giphy.com/embed/dC2eiTl83ted3x2ZvS" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+]
+
+.pull-right[
+
+<iframe src="https://giphy.com/embed/26xBFigHfSls66eMU" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+<iframe src="https://giphy.com/embed/WpayJC5JHOJ3JDMdle" width="320" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+]
