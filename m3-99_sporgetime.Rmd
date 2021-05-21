@@ -1,0 +1,66 @@
+---
+title: "Spørgetime"
+subtitle: |
+  | Metode 3
+  | [.white[Link til slides: kortlink.dk/2acdu]](https://soerendamsbo.github.io/m3/m3-6_eksperimentelle-designs.html)
+author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
+institute: Institut for Statskundskab<br>Københavns Universitet
+date: "25. maj 2021"
+output:
+  xaringan::moon_reader:
+    css: "style.css"
+    self_contained: true
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countincrementalSlides: false
+---
+
+```{r, include=F}
+pacman::p_load(tidyverse, knitr, ggdag, lubridate, kableExtra, xaringanExtra)
+
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align = "center", 
+                      fig.height=12,
+                      cache = TRUE)
+
+Sys.setlocale(locale = "da_DK.UTF-8")
+
+xaringanExtra::use_tile_view()
+```
+
+# Et par pointer og råd
+
+--
+
+1. **Nye ideer fra vejledning.** Ingen stress – meget af det er bare mine forslag (sjældent lig med deciderede krav) &rarr; fokusér på at komme i mål
+    
+--
+
+2. **Problemformuleringer.** De er alle fine, men jeg har alligevel kommenteret på PF hos de fleste, simpelthen fordi PF er (bør være) er **styrende for hele opgaven** og derfor en måde for mig at puffe jer i den rigtige retning. Også fordi det er mega vigtigt, I faktisk besvarer (og kan besvare) PF
+
+--
+
+3. **Metodiske svagheder.** I langt de fleste tilfælde kan svagheder ved metoden/analysen vendes til styrker ved *opgaven* ved, at I hiver disse frem i lyset og viser, at I har forståelse for svaghederne (evt. hvad de skyldes, hvad de potentielt har af konsekvenser, hvordan de kunne være undgået)
+
+--
+
+4. Fokus på **den røde tråd** fra indledning og PF og hele vejen igennem opgaven &rarr; dermed også fokus på *teksten*, der så vidt muligt er et samlet argument, en samlet historie. Selvstændighed og lidt kreativitet er godt &rarr; egne velbegrundede metodiske valg.
+
+--
+
+5. Sørg for, at I, groft forenklet, fortæller, **hvad** I undersøger, **hvorfor** (motivation), **hvordan** (metode) og med **hvilke resultater** (med hvilke forbehold). Og hvad man kunne man have gjort bedre/anderledes?     
+
+---
+class: inverse, center, middle
+
+# Spørgsmål
+
+---
+class: inverse, center, middle
+
+Spørgsmål 1
+
+
+
