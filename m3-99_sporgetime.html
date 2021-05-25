@@ -57,11 +57,11 @@ class: middle
 
 --
 
-4. Fokus på **den røde tråd** fra indledning og PF og hele vejen igennem opgaven &amp;rarr; dermed også fokus på *teksten*, der så vidt muligt er et samlet argument, en samlet historie. Selvstændighed og lidt kreativitet er godt &amp;rarr; egne velbegrundede metodiske valg.
+4. Fokus på **den røde tråd** fra indledning og PF og hele vejen igennem opgaven &amp;rarr; dermed også fokus på *teksten*, der så vidt muligt er et samlet argument, en samlet historie. Selvstændighed og lidt kreativitet er godt &amp;rarr; egne velbegrundede metodiske valg
 
 --
 
-5. Sørg for, at I, groft forenklet, fortæller, **hvad** I undersøger, **hvorfor** (motivation), **hvordan** (metode) og med **hvilke resultater** (med hvilke forbehold). Og hvad man kunne man have gjort bedre/anderledes?     
+5. Sørg for, at I, groft forenklet, fortæller, **hvad** I undersøger, **hvorfor** (motivation), **hvordan** (metode) og med **hvilke resultater** (og hvilke forbehold). Samt hvad man kunne man have gjort bedre/anderledes?     
 
 ---
 class: inverse, center, middle
@@ -69,13 +69,112 @@ class: inverse, center, middle
 # Spørgsmål
 
 ---
-class: inverse, center, middle
+class: inverse, middle
 
-Spørgsmål 1
+## 1
+
+Vi laver multilevel analyse. Vi er i tvivl, om vi skal forholde os til standard deviation i de forskellige modeller? Eller om man ikke behøver at sige noget om det.
+
+--
+&lt;br&gt;&lt;br&gt;
+Dette første spørgsmål er jeg ikke sikker på, at jeg forstår. **Standardafvigelse** er et mål for spredningen af en variabel/fordeling (og standard*fejl* er et estimat for standardafvigelsen af stikprøvemålsfordelingen). Det skal man mao. nok ikke forholde sig til 
 
 ---
+class: inverse, middle
 
-# Evt. andre spørgsmål
+## 2
+
+For at vurdere, om effekten af x på y er betinget af z (interaktion), kigger man så blot på, om interaktionsleddet er signifikant?
+
+--
+&lt;br&gt;&lt;br&gt;
+Ja! Evt. suppleret med **marginsplot** (*er der en effekt for de respektive niveauer af z*). Lidt mere avanceret med **kategoriske variable** pga. flere koefficienter (flere konklusioner)  
+
+---
+class: inverse, middle
+
+## 3
+
+Hvordan fortolker man på interaktionsleddet i en cross-level interaktion med to intervalskalerede variable (x på level 1 og x på level 2)? Hvis interaktionsleddet er 0.18, betyder det så, at effekten af x på y stiger med 0.18, når x2 stiger med 1?
+
+--
+&lt;br&gt;&lt;br&gt;
+Ja! Det lyder helt rigtigt. Teknisk set samme fortolkning som &quot;single-level-interaktion&quot;, dog substantielt set lidt anderledes, fordi den ene variabel er en feature ved **konteksten**   
+
+---
+class: inverse, middle
+
+## 4
+
+Spørgsmål om __diskursanalyse__: Hvis vi undersøger danske børn og mødre i syriske fangelejre som Andet, og Danmark som Selvet, skal vi så betragte både danske børn og mødre i syriske fangelejre samt Danmark som subjektpositioner?
+
+--
+&lt;br&gt;&lt;br&gt;
+Umiddelbart lyder det helt rigtigt, ja - **den danske stat** konstrueres som politisk subjekt (**subjektposition**). Men husk at det I siste ende er jer, der skal bruge (overtage) begreberne, så det skal give mening for jer (og jeg forstår godt, hvis det kan virke lidt kunstigt at have subjekter på helt forskellige niveauer)
+
+---
+class: inverse, middle
+
+## 5
+
+Spørgsmål til **multilevel**: vi skal jo ikke teste normalfordelte fejlled, homoskedasticitet, linearitet osv., men skal vi lige nævne, at vi bare antager, at alt er opfyldt?
+
+--
+&lt;br&gt;&lt;br&gt;
+Ja, det er en meget god idé. Grunden til, at vi ikke tester det er, dels at det er svært, men også at det ofte er pænt opfyldt med **store stikprøver**, hvilket man ofte har, når man arbejder med multileveldata (i hvert fald individer-lande)
+
+---
+class: inverse, middle
+
+## 6
+
+Spørgsmål til **multilevel**: som forudsætningstest nævnes, at vi skal lave en lrtest. Vi er dog forvirrede over, hvilke modeller der her skal sammenlignes?
+
+--
+&lt;br&gt;&lt;br&gt;
+**lrtest** giver mest mening, når man har to modeller, som substantielt set afspejler det samme. Det eneste direkte eksempel fra pensum er, når man vil afgøre, **om man skal tilføje random slopes** for en (eller flere) af ens primære uafhængige niveau 1-variable. Jeg kan ikke umiddelbart finde på andre helt oplagte use cases, selvom testen teknisk set ville kunne sammenligne andre modelpar. Man laver modellen med og uden random effects (random slopes) - og gemmer med &quot;estimates store&quot; - og tester så, om random slopes giver et signifikant bedre fit
+
+---
+class: inverse, middle
+
+## 7
+
+Når man laver cross level interaktion: hvordan ved STATA, hvilken variabel der er x og hvilken, der er z? 
+
+--
+&lt;br&gt;&lt;br&gt;
+Godt spørgsmål! Det ved Stata ikke, det ved kun I. Der er ingen teknisk forskel. Det er et spørgsmål om fortolkning (afhænger af spørgsmålet, teorien, forskningsdesignet etc.). I 9 ud af 10 tilfælde (mindst) er der et helt klart x og et helt klart z
+
+---
+class: inverse, middle
+
+## 8
+
+Diskursanalyse - hvad hvis der ikke er en eksplicit differentiering i teksterne? Kan man arbejde med implicit differentiering? Eller konkluderer man bare, at der er linking, og ingen differentiering?
+
+--
+&lt;br&gt;&lt;br&gt;
+Ja, det synes jeg lyder som en god idé. Om det er helt kosher, jf. Lene Hansen, er jeg ikke sikker på, men jeg tror det egentlig, for så vidt at man har taget udgangspunkt i eksplicitte sproglige tegn. I hvert fald nok sjældent, at der slet ikke sker nogen differentiering (en årsag til dette kunne evt. være manglende bredde i materialet). Generelt: Brug begreberne og udvid dem evt. lidt, hvis det er nødvendigt og giver en bedre analyse
+
+---
+class: inverse, middle
+
+## 9
+
+Hvordan tolker man koefficienterne i STATA fra paneldata ud fra dummy variable (altså de røde og den lyserøde cirkler?)  
+
+--
+&lt;br&gt;&lt;br&gt;
+Generelt tolker man kun på &quot;**hovedeffekten**&quot; og fixed effects (dummier) mv. er kun med som **kontrol** for at øge plausibiliteten i, at X reelt kausalt påvirker Y (dvs. *hovedeffekten*). Hovedeffekten fortolkes som regel som, hvor meget Y vokser, når X vokser med +1 *(estimeret) inden for enhederne over tid*. Med tids-fixed effects bliver det til forskelle i forskelle (diff-in-diff), dvs. hvor meget *mere* Y vokser (inden for enheder over tid) for en gruppe vs. en anden, f.eks. Men stadig samme tekniske forståelse (X + 1 &amp;rarr; Y + beta), de afspejler bare forskellige ting
+
+
+
+
+
+---
+class: inverse, center, middle
+
+# Flere spørgsmål?
 
 ---
 class: title-slide
