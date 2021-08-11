@@ -1,0 +1,178 @@
+---
+title: "Multilevel analysis"
+subtitle: |
+  | Methods 3
+  | [.white[Link to slides: kortlink.dk/2cf8z]](https://soerendamsbo.github.io/m3/multilevel-analysis_short.html)
+author: Søren Damsbo-Svendsen<br>[.white[sdas@ifs.ku.dk]](mailto:sdas@ifs.ku.dk)
+institute: Department of Political Science<br>University of Copenhagen
+date: "Week 11"
+output:
+  xaringan::moon_reader:
+    css: "style.css"
+    self_contained: true
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countincrementalSlides: false
+---
+
+```{r, include=F}
+pacman::p_load(tidyverse, knitr, ggdag, lubridate, kableExtra)
+
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align = "center", 
+                      fig.height=12,
+                      cache = TRUE)
+
+Sys.setlocale(locale = "da_DK.UTF-8")
+```
+
+# Overview
+
+```{r plan}
+
+source("../print_plan.R")
+print_plan(11)
+```
+
+---
+
+# Recap from last time
+
+- We use **logistic regression** instead of OLS, **when Y is binary**, due to OLS' problems with functional form (linearity), error terms, absurd probabilities, etc.
+
+- In logistic regression there is not just a single effect of X &rarr; Y (depends on where on the X axis, we are looking)
+
+- The **beta-coefficient** shows the effect of X increasing by +1 on *the natural log to the odds* of Y=1
+    - impossible to understand intuitively - and **odds ratio** is not much better
+    
+- We interpret by using tricks
+    - **Average Marginal Effect** (AME): all marginal effects summed in an average
+    - **Marginal Effect at the Mean** (MEM): marginal effekt at the mean of X
+    - **Predicted probabilities** (the S-curve): probability that Y=1 for all levels of X
+
+---
+
+# Today's program
+
+- **Multilevel analysis** &rarr; new topic!
+
+- What is it, when and why do we use it?
+
+- How do we do multilevel analysis in **Stata** and interpret the output?
+    - Examples from Mehmetoglu & Jakobsen (2016)
+
+- **Problem set** in Stata 
+
+---
+
+# Today's aim
+
+- To get a **better understanding** of multilevel analysis
+    - which questions it addresses
+    - which problems it fixes
+    - which possibilities it opens
+
+- To train **doing and interpreting** in Stata
+
+---
+
+# Readings
+
+Hox, J. J. (2010). *Multilevel analysis: techniques and applications* (2. edition). Routledge. Kapitel 1
+
+Mehmetoglu, M., & Jakobsen, T. G. (2016). *Applied statistics using Stata: a guide for the social sciences*. Sage. Chapter 9
+
+---
+
+# What is multilevel analysis?
+
+<br>We can look at is as yet another **extension of OLS**:
+
+> "Multilevel analysis can be seen as a generalization of OLS regression to accommodate the complexities of estimating regression models with two or more levels" .right[(Mehmetoglu & Jakobsen, 2016, p. 197)]
+
+--
+
+**Multilevel research**
+
+> "The general concept is that **individuals interact with the social contexts** to which they belong, that individual persons are inﬂuenced by the social groups or contexts to which they belong, and that those groups are in turn inﬂuenced by the individuals who make up that group. The individuals and the social groups are conceptualized as a **hierarchical system of individuals nested within groups**, with individuals and groups defined at **separate levels** of this hierarchical system [...] This leads to research into the **relationships between variables characterizing individuals and variables characterizing groups**, a kind of research that is generally referred to as **multilevel research**" .right[(Hox, 2010, p. 1)]
+
+---
+
+# Why multilevel analysis?
+
+- When our data has a hierarchical structure, it creates both problems and opportunities
+
+--
+
+- **Methodological reason: Statistical and causal inference**
+
+    - We want to have **correct standard errors** (uncertainty), so we do not get too high/low **p-values** and draw wrong conclusions
+    
+    - We want to be able to include group-level variables, which both affect X and Y (on level 1), to mitigate *omitted variable bias*
+
+--
+
+- **Substantial/theoretical reason: Knowledge on multilevel dynamics and context effects**
+
+    - We can be substantially interested in context effects, including
+        - direct effect of level 2 variable (X) on level 1 variable (Y)
+        - cross-level interactions (*how the context conditions level 1 effects*)
+    
+    - We can work with multilevel questions/hypotheses/problems
+
+---
+
+# Key concepts
+
+- **Levels**
+    - level 1 = the "lowest" level ≈ individuals
+    - level 2 = group level = clusters = something that *contains* level 1 observationer ≈ landeniveau
+    
+- **Multilevel analysis** = multilevel model = multilevel regression
+
+- **Intercept** = Y intercept =  constant = $\beta_0$ = $\alpha$
+    - **varying intercept** = random intercept ≈ different group-averages 
+
+- **Slope** = effect = (beta)coefficient = $\beta_1$    
+    - **varying slope** = random effect (RE) = random coefficient ≈ different effects across groups
+	
+---
+
+# Questions
+
+- Break-out for 10 minutes
+
+- Discuss as many questions as possible
+
+- Afterwards we will hear answers to **question 1 from group 1/6**, to **question 2 from group 2/7**, to **question 3 from group 3/8**, to **question 4 from group 4/9**, and to **question 5 from group 5/10**
+
+***
+
+--
+
+1. What is a multilevel problem? Make up and example of an ML problem or an ML hypothesis (check out Hox, 2010, pp. 6-7)
+
+2. What separates multilevel analysis from regular regression? (does not need to be technical)
+
+3. Give a few examples of data with a multilevel structure
+
+4. What is meant by "aggregation" and "disaggregation"? (see Hox, 2010, pp. 2-4)
+
+5. What is *the statistical problem* in aggregating or disaggregating data? What happens to the *N*? (see Hox, 2010, p. 3)
+
+???
+
+"A multilevel problem is a problem that concerns the relationships between variables that are measured at a number of different hierarchical levels" (Hox, 2010, p. 4)
+
+Moving variables between levels: 
+
+**Aggregation**: "variables at a lower level are moved to a higher level, for instance by assigning to the schools the school mean of the pupils’ intelligence scores"
+
+**Disaggregation**: "moving variables to a lower level, for instance by assigning to all pupils in the schools a variable that indicates the denomination of the school they belong to"
+    
+---
+class: middle, center
+
+# The End
